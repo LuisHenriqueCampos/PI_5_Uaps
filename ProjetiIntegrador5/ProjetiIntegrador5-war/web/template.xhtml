@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html   xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:ui="http://java.sun.com/jsf/facelets"
+        xmlns:h="http://java.sun.com/jsf/html"
+        xmlns:p="http://primefaces.org/ui">
+    
+    <h:head>
+        <title>Centor de Saúde</title >
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <style type="text/css">
+            .ui-layout-north{
+                z-index: 20 !important;
+                overflow: visible !important;
+            }
+            .ui-layout-north .ui-layout-unit-content{
+                overflow: visible !important;
+            }
+
+        </style>
+    </h:head> 
+    <h:body>
+        <p:ajaxStatus onstart="statusDialog.show();" onsuccess="statusDialog.hide();" />
+        <p:dialog modal="true" widgetVar="statusDialog" header="Carregando" draggable="false" closable="false">
+            <p:graphicImage value="conteudo/imagem/ajax-loading-bar-19.gif" />
+        </p:dialog>
+        
+        
+        <p:layout fullPage="true">
+            <p:layoutUnit position="north" size="130">
+                
+                <h:outputLink value="#{request.contextPath}/index.html">
+                    
+                    <h:graphicImage value="/imagens/java_ee.png" />
+                    
+                </h:outputLink>
+                
+                <h:form>
+                    
+                    <p:menubar >
+                        
+                        <p:submenu label="Cadastros">
+                            
+                            <p:menuitem value="Posto de Saúde" url="/postosaude/index.html"/>
+                            <p:menuitem value="Área" url="/area/index.html"/>
+                            <p:menuitem value="Bairro" url="/bairro/index.html"/>
+                            <p:menuitem value="Micro-Área" url="/microarea/index.html"/>
+                            <p:menuitem value="Paciente" url="#"/>
+                            <p:menuitem value="Familia" url="/familia/index.html"/>
+                            <p:menuitem value="Endereço" url="/endereco/index.html"/>
+                            <p:menuitem value="Médico / Enfermeira" url="#"/>
+                            <p:menuitem value="Agente de Saúde" url="#"/>
+                            
+                        </p:submenu>
+                        
+                        <p:submenu label="Encaminhamento">
+                            <p:menuitem value="Registro" url="/aluno/index.html"/>
+                            <p:menuitem value="Busca" url="/situacaoMatricula/index.html"/>
+                        </p:submenu>
+                        
+                        <p:submenu label="Relatórios">
+                            
+                            <p:menuitem value="Aluno" url="/aluno/index.html"/>
+                            <p:menuitem value="Professor" url="#"/>
+                            <p:menuitem value="Situação Matrícula" url="/situacaoMatricula/index.html"/>
+                                                        
+                        </p:submenu>
+                    </p:menubar>
+                    
+                </h:form>
+
+            </p:layoutUnit>
+            <p:layoutUnit position="south" size="100">
+            Rodapé
+            </p:layoutUnit>
+            <p:layoutUnit position="center">
+                <ui:insert name="container">
+                    Conteudo
+                </ui:insert>
+            </p:layoutUnit>
+        </p:layout>
+        
+    </h:body>
+</html>

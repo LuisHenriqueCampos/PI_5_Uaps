@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<ui:fragment xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    
+    <h:form id="formCadastro">
+        <p:panel header="Micro-Área" id="painelCadastro">
+            <p:growl />
+            <h:inputHidden value="#{microareaManagedBean.microarea.idMicroArea}" />
+            
+            <h:panelGrid columns="2">
+                <h:outputLabel value="Micro-Área: " />
+                <p:inputText value="#{microareaManagedBean.microarea.descricao}" />
+                
+                <h:outputLabel value="Área" />
+                <h:selectOneMenu value="#{areaManagedBean.area.idPostoSaude.nomePosto}" id="postosaudeList">
+                    <f:selectItem itemLabel="Selecione..." />
+                    <f:selectItems value="#{areaManagedBean.listaPostosaude()}" var="posto" itemLabel="#{posto.nomePosto}" itemValue="#{posto}" />
+                </h:selectOneMenu>
+                
+            </h:panelGrid>
+            <p:commandButton value="Procurar" icon="ui-icon-search" />
+            <p:commandButton value="Salvar" icon="ui-icon-disk" actionListener="#{bairroManagedBean.salvar()}" update="painelCadastro"/>
+            <p:commandButton value="Novo" icon="ui-icon-plus" actionListener="#{bairroManagedBean.novo()}" update="painelCadastro" />
+            
+        </p:panel>
+    </h:form>
+</ui:fragment>
