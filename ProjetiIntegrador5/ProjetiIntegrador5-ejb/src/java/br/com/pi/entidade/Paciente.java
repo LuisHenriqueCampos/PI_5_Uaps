@@ -76,7 +76,7 @@ public class Paciente implements Serializable {
     private Collection<Encaminhamento> encaminhamentoCollection;
     @JoinColumn(name = "IdPessoaPaciente", referencedColumnName = "IdPessoa", insertable = false, updatable = false)
     @OneToOne(optional = false)
-    private Pessoa pessoa;
+    private Pessoaa pessoa;
     @JoinColumn(name = "IdSexo", referencedColumnName = "IdSexo")
     @ManyToOne(optional = false)
     private Sexo idSexo;
@@ -155,11 +155,11 @@ public class Paciente implements Serializable {
         this.encaminhamentoCollection = encaminhamentoCollection;
     }
 
-    public Pessoa getPessoa() {
+    public Pessoaa getPessoa() {
         return pessoa;
     }
 
-    public void setPessoa(Pessoa pessoa) {
+    public void setPessoa(Pessoaa pessoa) {
         this.pessoa = pessoa;
     }
 

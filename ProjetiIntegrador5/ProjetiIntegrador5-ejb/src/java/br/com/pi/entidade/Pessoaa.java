@@ -11,6 +11,7 @@ import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -29,37 +30,35 @@ import javax.xml.bind.annotation.XmlRootElement;
 @Entity
 @Table(name = "pessoa")
 @XmlRootElement
-@NamedQueries({
-    @NamedQuery(name = "Pessoa.findAll", query = "SELECT p FROM Pessoa p"),
-    @NamedQuery(name = "Pessoa.findByIdPessoa", query = "SELECT p FROM Pessoa p WHERE p.idPessoa = :idPessoa"),
-    @NamedQuery(name = "Pessoa.findByNome", query = "SELECT p FROM Pessoa p WHERE p.nome = :nome")})
-public class Pessoa implements Serializable {
+public class Pessoaa implements Serializable {
     private static final long serialVersionUID = 1L;
+    
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Basic(optional = false)
-    @Column(name = "IdPessoa")
+    @Column(name = "IdPessoa",nullable = false)
     private Integer idPessoa;
-    @Basic(optional = false)
-    @NotNull
+    
     @Size(min = 1, max = 50)
     @Column(name = "Nome")
     private String nome;
+    
     @OneToOne(cascade = CascadeType.ALL, mappedBy = "pessoa")
     private Agentesaude agentesaude;
-    @OneToOne(cascade = CascadeType.ALL, mappedBy = "pessoa")
+    
+    @OneToOne(cascade = CascadeType.ALL, mappedBy = "pessoa",fetch = FetchType.LAZY)
     private Medicoenfermeira medicoenfermeira;
+    
     @OneToOne(cascade = CascadeType.ALL, mappedBy = "pessoa")
     private Paciente paciente;
 
-    public Pessoa() {
+    public Pessoaa() {
     }
 
-    public Pessoa(Integer idPessoa) {
+    public Pessoaa(Integer idPessoa) {
         this.idPessoa = idPessoa;
     }
 
-    public Pessoa(Integer idPessoa, String nome) {
+    public Pessoaa(Integer idPessoa, String nome) {
         this.idPessoa = idPessoa;
         this.nome = nome;
     }
@@ -114,10 +113,10 @@ public class Pessoa implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Pessoa)) {
+        if (!(object instanceof Pessoaa)) {
             return false;
         }
-        Pessoa other = (Pessoa) object;
+        Pessoaa other = (Pessoaa) object;
         if ((this.idPessoa == null && other.idPessoa != null) || (this.idPessoa != null && !this.idPessoa.equals(other.idPessoa))) {
             return false;
         }

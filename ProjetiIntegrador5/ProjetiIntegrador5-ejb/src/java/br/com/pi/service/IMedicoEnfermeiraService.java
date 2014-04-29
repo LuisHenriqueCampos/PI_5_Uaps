@@ -13,5 +13,6 @@ public interface IMedicoEnfermeiraService extends ICrudGeneric<Medicoenfermeira>
     public String excluir(Medicoenfermeira Idobj);    
     public Medicoenfermeira obter(Integer IdObj);
     public List<Medicoenfermeira> listar();
+    public List<Medicoenfermeira> listarPorAtribuicao(String atribuicao);
     
 }

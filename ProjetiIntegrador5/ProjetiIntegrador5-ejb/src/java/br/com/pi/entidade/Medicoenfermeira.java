@@ -16,12 +16,9 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
@@ -33,39 +30,38 @@ import javax.xml.bind.annotation.XmlTransient;
 @Entity
 @Table(name = "medicoenfermeira")
 @XmlRootElement
-@NamedQueries({
-    @NamedQuery(name = "Medicoenfermeira.findAll", query = "SELECT m FROM Medicoenfermeira m"),
-    @NamedQuery(name = "Medicoenfermeira.findByIdPessoaMedicoEnfermeira", query = "SELECT m FROM Medicoenfermeira m WHERE m.idPessoaMedicoEnfermeira = :idPessoaMedicoEnfermeira"),
-    @NamedQuery(name = "Medicoenfermeira.findByRegistro", query = "SELECT m FROM Medicoenfermeira m WHERE m.registro = :registro")})
 public class Medicoenfermeira implements Serializable {
     private static final long serialVersionUID = 1L;
+    
     @Id
     @Basic(optional = false)
-    @NotNull
-    @Column(name = "IdPessoaMedicoEnfermeira")
+    @Column(name = "IdPessoaMedicoEnfermeira", insertable = false, updatable = false)
     private Integer idPessoaMedicoEnfermeira;
-    @Basic(optional = false)
-    @NotNull
+    
     @Lob
     @Size(min = 1, max = 16777215)
     @Column(name = "Assinatura")
     private String assinatura;
-    @Basic(optional = false)
-    @NotNull
+   
     @Column(name = "Registro")
     private int registro;
+   
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "medicoenfermeiraidEnfermeira")
     private Collection<Area> areaCollection;
+    
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "medicoenfermeiraidMedico")
     private Collection<Area> areaCollection1;
+    
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idPessoaMedicoEnfermeira")
     private Collection<Encaminhamento> encaminhamentoCollection;
+    
     @JoinColumn(name = "IdAtribuicao", referencedColumnName = "IdAtribuicao")
-    @ManyToOne(optional = false)
+    @ManyToOne(optional = false, cascade = CascadeType.ALL)
     private Atribuicao idAtribuicao;
-    @JoinColumn(name = "IdPessoaMedicoEnfermeira", referencedColumnName = "IdPessoa", insertable = false, updatable = false)
-    @OneToOne(optional = false)
-    private Pessoa pessoa;
+    
+    @JoinColumn(name = "IdPessoaMedicoEnfermeira", referencedColumnName = "IdPessoa")
+    @OneToOne(optional = false, cascade = CascadeType.ALL)
+    private Pessoaa pessoa;
 
     public Medicoenfermeira() {
     }
@@ -139,11 +135,11 @@ public class Medicoenfermeira implements Serializable {
         this.idAtribuicao = idAtribuicao;
     }
 
-    public Pessoa getPessoa() {
+    public Pessoaa getPessoa() {
         return pessoa;
     }
 
-    public void setPessoa(Pessoa pessoa) {
+    public void setPessoa(Pessoaa pessoa) {
         this.pessoa = pessoa;
     }
 

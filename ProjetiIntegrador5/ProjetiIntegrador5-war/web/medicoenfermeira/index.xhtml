@@ -1,0 +1,105 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="../template.xhtml">
+
+        <ui:define name="container">
+            <p:growl/><br/>
+            <h:form>
+                
+                <p:panel header="Consultar Medico / Enfermeira">
+                    <p:growl/>
+                    <h:panelGrid columns="2" cellpadding="5">
+                        
+                        <h:outputLabel value="Atribuição:"/>
+                        <p:inputText value="#{medicoEnfermeiraManagedBean.atribuicaoConsulta}" size="60"/>
+                    
+                    </h:panelGrid>
+                    
+                    <h:panelGrid columns="3" cellpadding="5">
+                        
+                        <p:commandButton
+                            value="Procurar"
+                            icon="ui-icon-search" 
+                            actionListener="#{medicoEnfermeiraManagedBean.pesquisar()}" 
+                            update="painelMenf" />
+                        
+                        <p:button
+                            icon="ui-icon-trash"
+                            value="Limpar"
+                            outcome="index.html" />
+                                  
+
+                        <p:button  
+                            icon="ui-icon-plus" 
+                            value="Novo"
+                            outcome="formulario.html"/>
+                    </h:panelGrid>
+
+                </p:panel>
+
+                <p:contextMenu for="tabela">   
+                    <p:menuitem value="Excluir" icon="ui-icon-close" 
+                                actionListener="#{medicoEnfermeiraManagedBean.excluir()}" 
+                                update="painelMenf" />
+
+                    <p:menuitem value="Editar" icon="ui-icon-pencil"
+                                ajax="false"
+                                action="#{medicoEnfermeiraManagedBean.editar()}"/> 
+                </p:contextMenu>  
+
+                <br/>
+                <p:outputPanel id="painelMenf">
+                    <p:growl/>
+
+                    <p:dataTable value="#{medicoEnfermeiraManagedBean.medicoenfermeiras}"
+                                 var="menf"
+                                 id="tabela"
+                                 rendered="#{medicoEnfermeiraManagedBean.medicoenfermeiras != null}"
+                                 paginator="true"
+                                 rows="5"
+                                 emptyMessage="Nenhum Registro Encontrado"
+                                 rowKey="#{menf.pessoa.idPessoa}" 
+                                 selection="#{medicoEnfermeiraManagedBean.medicoenfermeiraSelecionado}"
+                                 selectionMode="single">
+
+                        <p:column headerText="Código" style="width: 2%">
+                            #{menf.pessoa.idPessoa}
+                        </p:column>
+
+                        <p:column headerText="Atribuicao/Nome" style="width: 48%">
+                            #{menf.pessoa.nome} - #{menf.idAtribuicao.descricao}
+                        </p:column> 
+                        
+                        <p:column headerText="Número de Registro" style="width: 25%">
+                            #{menf.registro}
+                        </p:column>
+                        
+                        <p:column headerText="Assinatura" style="width: 25%">
+                            #{menf.assinatura}
+                        </p:column>
+                        
+                                              
+                        
+                    </p:dataTable>
+                
+                 </p:outputPanel>
+            </h:form>
+
+                
+                
+                
+               
+               
+
+        </ui:define>
+    </ui:composition>
+    
+    
+
+
+</html>

@@ -16,36 +16,70 @@ import javax.persistence.TypedQuery;
 
 /**
  *
- * @author petrovick
+ * @author Luis
  */
 @Stateless
-public class MedicoEnfermeiraService implements IMedicoEnfermeiraService
-{
+public class MedicoEnfermeiraService implements IMedicoEnfermeiraService{
+    
     @PersistenceContext
-    EntityManager em;
+    private EntityManager em;
 
     @Override
-    public String salvar(Medicoenfermeira entity) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public List<Medicoenfermeira> listar() {
+        TypedQuery<Medicoenfermeira> meQuery = em
+                .createQuery("SELECT m FROM Medicoenfermeira m ORDER BY m.pessoa.nome",Medicoenfermeira.class);
+        return meQuery.getResultList();
     }
 
     @Override
-    public String excluir(Medicoenfermeira Idobj) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public String salvar(Medicoenfermeira entity) {
+        
+        TypedQuery<Medicoenfermeira> meQuery = em
+                .createQuery("SELECT m FROM Medicoenfermeira m WHERE m.registro = :parametro",Medicoenfermeira.class);
+        meQuery.setParameter("parametro", entity.getRegistro());
+        
+        try{
+            entity.getPessoa().setMedicoenfermeira(entity);
+            
+            if(entity.getPessoa().getIdPessoa() != null){
+                em.merge(entity);
+            }else if(entity.getPessoa().getIdPessoa() == null && meQuery.getResultList().isEmpty()){
+                em.persist(entity);
+            }else{
+                return "Este registro já foi cadastrado";
+            }
+        }catch(Exception ex){
+            ex.printStackTrace();
+            return ex.getMessage();
+        }
+        return null;
+    }
+
+    @Override
+    public String excluir(Medicoenfermeira IdObj) {
+        try{
+            Medicoenfermeira medicoenfermeira = em.find(Medicoenfermeira.class, IdObj.getPessoa().getIdPessoa());
+            em.remove(medicoenfermeira);
+        }catch(Exception ex){
+            ex.printStackTrace();
+            return ex.getMessage();
+        }
+        return null;
     }
 
     @Override
     public Medicoenfermeira obter(Integer IdObj) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+        return em.find(Medicoenfermeira.class, IdObj);
+    }    
 
     @Override
-    public List<Medicoenfermeira> listar()
-    {
-        TypedQuery<Medicoenfermeira> medicoenfermeiraQuery = em.createQuery("select m from Medicoenfermeira m", Medicoenfermeira.class);
-        return medicoenfermeiraQuery.getResultList();
+    public List<Medicoenfermeira> listarPorAtribuicao(String atribuicao) {
+        atribuicao = atribuicao == null ? "":atribuicao;
         
+        TypedQuery<Medicoenfermeira> meQuery = em
+                .createQuery("SELECT DISTINCT m FROM Medicoenfermeira m WHERE m.pessoa.nome like :desc",Medicoenfermeira.class);
+        meQuery.setParameter("desc", "%"+atribuicao+"%");
+        return meQuery.getResultList();
     }
-    
     
 }

@@ -5,7 +5,7 @@ import javax.ejb.EJB;
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Named;
 import br.com.pi.entidade.Paciente;
-import br.com.pi.entidade.Pessoa;
+import br.com.pi.entidade.Pessoaa;
 import br.com.pi.entidade.Sexo;
 import br.com.pi.service.IPacienteService;
 import java.util.List;
@@ -25,7 +25,7 @@ public class PacienteManagedBean
     public PacienteManagedBean()
     {
         paciente = new Paciente();
-        paciente.setPessoa(new Pessoa());
+        paciente.setPessoa(new Pessoaa());
         paciente.setIdSexo(new Sexo());
         paciente.setIdFamilia(new Familia());
     }

@@ -42,7 +42,7 @@ public class Agentesaude implements Serializable {
 */
     @OneToOne
     @JoinColumn(name = "IdPessoaAgenteSaude")
-    private Pessoa pessoa;
+    private Pessoaa pessoa;
     
     @JoinColumn(name = "IdMicroArea", referencedColumnName = "IdMicroArea")
     @ManyToOne(optional = false)
@@ -76,11 +76,11 @@ public class Agentesaude implements Serializable {
         this.matricula = matricula;
     }
 
-    public Pessoa getPessoa() {
+    public Pessoaa getPessoa() {
         return pessoa;
     }
 
-    public void setPessoa(Pessoa pessoa) {
+    public void setPessoa(Pessoaa pessoa) {
         this.pessoa = pessoa;
     }
 
