@@ -1,4 +1,4 @@
-package br.com.pi.managedbean;
+package managedbean;
 
 import br.com.pi.service.IPostosaudeService;
 import javax.ejb.EJB;
@@ -6,6 +6,7 @@ import javax.enterprise.context.RequestScoped;
 import javax.inject.Named;
 import br.com.pi.entidade.Postosaude;
 import java.util.List;
+import util.MenssagemUtil;
 
 /**
  *
@@ -31,13 +32,27 @@ public class PostoSaudeManagedBean
     }
     
     public void excluir()
-    {
-        postoService.excluir(postoSaude);
+    {   
+        String erro = postoService.excluir(postosaudeSelecionado);
+        
+        if(erro == null){
+            MenssagemUtil.addMensagemInfo("Posto de Saúde excluído com sucesso!");
+        }else{
+            MenssagemUtil.addMensagemError(erro);
+        }
     }
     
     public void salvar()
     {
-        postoService.salvar(postoSaude);
+        String erro = postoService.salvar(postoSaude);
+        
+        if(erro == null){
+            MenssagemUtil.addMensagemInfo("Posto de Saúde salvo com sucesso!");
+            this.postoSaude = new Postosaude();
+        }else{
+            MenssagemUtil.addMensagemError(erro);
+        }
+        
     }
     
     public void novo()

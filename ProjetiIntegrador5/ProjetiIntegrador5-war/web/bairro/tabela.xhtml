@@ -5,6 +5,7 @@
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:p="http://primefaces.org/ui"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <br/>
     <h:form id="formTabela">
         <p:contextMenu for="tabela">
             <p:menuitem value="Excluir" icon="ui-icon-close" actionListener="#{bairroManagedBean.excluir()}" update="painelCliente" />
@@ -14,14 +15,14 @@
             <p:growl />
             <p:dataTable value="#{bairroManagedBean.todos()}"
                 var="bairro" id="tabela" 
-                paginator="true" rows="10" 
+                paginator="true" rows="5" 
                 emptyMessage="Nenhum bairro cadastrado" 
                 rowKey="#{bairro.idBairro}" 
                 selection="#{bairroManagedBean.bairroSelecionado}" 
                 selectionMode="single">
                 
-                <p:column headerText="Código: " style="width: 20%">#{bairro.idBairro}</p:column>
-                <p:column headerText="Bairro: " style="width: 80%">#{bairro.bairro}</p:column>
+                <p:column headerText="Código: " style="width: 10%">#{bairro.idBairro}</p:column>
+                <p:column headerText="Bairro: " style="width: 90%">#{bairro.bairro}</p:column>
             </p:dataTable>
         </p:panel>
     </h:form>

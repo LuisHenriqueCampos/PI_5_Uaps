@@ -38,7 +38,8 @@ public class EnderecoService implements IEnderecoService
         
         try
         {
-            em.remove(Idobj);
+            Endereco end = em.find(Endereco.class, Idobj.getIdEndereco());
+            em.remove(end);
         }
         catch(Exception ex)
         {

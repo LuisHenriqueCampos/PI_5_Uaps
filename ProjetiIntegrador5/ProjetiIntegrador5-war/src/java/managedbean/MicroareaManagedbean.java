@@ -20,30 +20,37 @@ public class MicroareaManagedbean
     private Microarea microarea;
     private Microarea microareaSelecionada;
     
+    public MicroareaManagedbean()
+    {
+        microarea = new Microarea();
+        microarea.setIdArea(new Area());
+    }
+    
     public void excluir()
     {
-        
+        microareaService.excluir(microareaSelecionada);
     }
     
     public void salvar()
     {
-        
+        System.out.println("AreaID:" + microarea.getIdArea());
+        microareaService.salvar(microarea);
     }
     
     public void editar()
     {
-        
+        microarea = microareaSelecionada;
+    }
+    
+    public void novo()
+    {
+        microarea = new Microarea();
+        microarea.setIdArea(new Area());
     }
     
     public List<Microarea> todos()
     {
         return microareaService.listar();
-    }
-    
-    public MicroareaManagedbean()
-    {
-        microarea = new Microarea();
-        microarea.setIdArea(new Area());
     }
 
     public Microarea getMicroarea() {

@@ -36,11 +36,22 @@ public class EnderecoManagedBean
     
     public List<Endereco> todos()
     {
-        return enderecoService.listar();
+        List<Endereco> l = enderecoService.listar();
+        for(Endereco ll : l)
+            System.out.println("ID: " + ll.getIdEndereco() + "Rua:" + ll.getRua());
+        return l;
+    }
+    
+    public void excluir()
+    {
+        enderecoService.excluir(enderecoSelecionado);
     }
     
     public void salvar()
     {
+        System.out.println("Endereco Id:" + endereco.getIdEndereco());
+        System.out.println("Endereco Rua:" + endereco.getRua());
+        
         enderecoService.salvar(endereco);
     }
     
@@ -55,6 +66,9 @@ public class EnderecoManagedBean
     
     public void editar()
     {
+        System.out.println("Endereco Id:" + enderecoSelecionado.getIdEndereco());
+        System.out.println("Endereco Rua:" + enderecoSelecionado.getRua());
+        
         this.endereco = enderecoSelecionado;
     }
     

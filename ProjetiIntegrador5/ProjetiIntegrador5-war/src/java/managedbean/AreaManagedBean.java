@@ -38,17 +38,30 @@ public class AreaManagedBean
     
     public List<Area> todos()
     {
-        return null;
+        List<Area> ll = areaService.listar();
+        for(Area lll : ll)
+            System.out.println("\n\n\n\nID:" + lll.getIdArea() + " " + lll.getDescricao());
+        return ll;
     }
     
-    public List<Area> salvar()
+    public void salvar()
     {
-        return null;
+        areaService.salvar(area);
     }
     
-    public List<Area> novo()
+    public void novo()
     {
-        return null;
+        area = new Area();
+    }
+    
+    public void editar()
+    {
+        area = areaSelecionada;
+    }
+
+    public void excluir()
+    {
+        areaService.excluir(areaSelecionada);
     }
 
     public Area getArea() {

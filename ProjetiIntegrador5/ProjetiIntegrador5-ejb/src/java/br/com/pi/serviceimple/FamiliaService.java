@@ -23,16 +23,14 @@ public class FamiliaService implements IFamiliaService
     {
         try
         {
-            System.out.println("Entrou");
             em.merge(entity);
-            System.out.println("Passou");
+            return null;
         }
         catch(Exception ex)
         {
             ex.printStackTrace();
             return ex.getMessage();
         }
-        return null;
     }
 
     @Override
@@ -40,11 +38,10 @@ public class FamiliaService implements IFamiliaService
     {
         try
         {
-            Familia f = em.find(Familia.class, Idobj);
+            Familia f = em.find(Familia.class, Idobj.getIdFamilia());
             em.remove(f);
             return null;
-        }
-        catch(Exception ex)
+        }catch(Exception ex)
         {
             return ex.getMessage();
         }
@@ -60,6 +57,21 @@ public class FamiliaService implements IFamiliaService
     public List<Familia> listar() {
         TypedQuery<Familia> familiaQuery = em.createQuery("select f from Familia f", Familia.class);
         return familiaQuery.getResultList();
+    }
+
+    @Override
+    public List<Familia> listarFamiliaParaAutoComplete(String familia)
+    {
+        try
+        {
+            TypedQuery<Familia> familiaQuery = em.createQuery("select f from Familia f where f.idFamilia = :idFamilia", Familia.class);
+            familiaQuery.setParameter("idFamilia", Integer.parseInt(familia));
+            return familiaQuery.getResultList();
+        }catch(NumberFormatException ex)
+        {
+            ex.printStackTrace();
+            return null;
+        }
     }
     
 }

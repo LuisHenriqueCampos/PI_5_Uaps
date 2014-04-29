@@ -7,7 +7,7 @@
              xmlns:f="http://xmlns.jcp.org/jsf/core">
     
     <h:form id="formCadastro">
-        <p:panel header="Posto de saúde" id="painelCadastro">
+        <p:panel header="Familia" id="painelCadastro">
             <p:growl />
             <h:inputHidden value="#{familiaManagedBean.familia.idFamilia}" />
             
@@ -20,7 +20,7 @@
                 
                 <h:outputLabel value="Endereço:*"/>
                 <h:selectOneMenu converter="enderecoConverter" value="#{familiaManagedBean.familia.idEndereco}">
-                    <f:selectItem itemLabel="Selecione um papel" itemValue="" />
+                    <f:selectItem itemLabel="Selecione um endereço" itemValue="" />
                     <f:selectItems value="#{enderecoManagedBean.todos()}" var="p" itemValue="#{p}" itemLabel="#{p.rua}" />
                 </h:selectOneMenu>
                 

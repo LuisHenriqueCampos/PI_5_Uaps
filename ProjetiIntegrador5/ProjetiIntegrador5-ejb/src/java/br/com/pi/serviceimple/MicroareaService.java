@@ -23,7 +23,9 @@ public class MicroareaService  implements IMicroareaService
     public String salvar(Microarea entity) {
         try
         {
+            System.out.println("Entrou no salvar");
             em.merge(entity);
+            System.out.println("Salvou");
         }
         catch(Exception ex)
         {

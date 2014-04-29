@@ -16,8 +16,7 @@
     <class>br.com.pi.entidade.Pessoa</class>
     <class>br.com.pi.entidade.Postosaude</class>
     <class>br.com.pi.entidade.Sexo</class>
-    <class>br.com.pi.entidade.Tipoencaminhamento</class>
-    
+    <class>br.com.pi.entidade.Tipoencaminhamento</class>    
     
     <properties>
         <property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver" />

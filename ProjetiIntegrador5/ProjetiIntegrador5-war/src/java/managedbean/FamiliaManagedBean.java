@@ -6,11 +6,13 @@ import javax.ejb.EJB;
 import javax.inject.Named;
 import br.com.pi.entidade.Familia;
 import java.util.List;
+import javax.enterprise.context.RequestScoped;
 /**
  *
  * @author petrovick
  */
 @Named(value = "familiaManagedBean")
+@RequestScoped
 public class FamiliaManagedBean
 {
     @EJB
@@ -32,7 +34,7 @@ public class FamiliaManagedBean
     
     public void excluir()
     {
-        familiaService.excluir(familia);
+        familiaService.excluir(familiaSelecionada);
     }
     
     public void novo()
@@ -43,6 +45,7 @@ public class FamiliaManagedBean
     
     public void editar()
     {
+        System.out.println("Id:" + familiaSelecionada.getIdFamilia() + "Rua:"+ familiaSelecionada.getComplemento());
         familia = familiaSelecionada;
     }
     

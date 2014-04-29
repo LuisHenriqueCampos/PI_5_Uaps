@@ -10,20 +10,27 @@ and open the template in the editor.
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:p="http://primefaces.org/ui"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
-    
+    <br/>
     <h:form id="formCadastro">
         <p:panel header="Bairro" id="painelCadastro">
             <p:growl />
             <h:inputHidden value="#{bairroManagedBean.bairro.idBairro}" />
             
-            <h:panelGrid columns="2">
+            <h:panelGrid columns="2" cellpadding="8">
                 <h:outputLabel value="Nome: " />
                 <p:inputText value="#{bairroManagedBean.bairro.bairro}" />
                 
             </h:panelGrid>
             <p:commandButton value="Procurar" icon="ui-icon-search" />
-            <p:commandButton value="Salvar" icon="ui-icon-disk" actionListener="#{bairroManagedBean.salvar()}" update="painelCadastro"/>
-            <p:commandButton value="Novo" icon="ui-icon-plus" actionListener="#{bairroManagedBean.novo()}" update="painelCadastro" />
+           
+            <p:commandButton value="Salvar" icon="ui-icon-disk" 
+                             actionListener="#{bairroManagedBean.salvar()}" 
+                             update="painelCadastro,:formTabela:tabela"/>
+            
+            <p:commandButton value="Novo" icon="ui-icon-plus" 
+                             actionListener="#{bairroManagedBean.novo()}"
+                             process="@this"
+                             update="@form" />
             
         </p:panel>
     </h:form>

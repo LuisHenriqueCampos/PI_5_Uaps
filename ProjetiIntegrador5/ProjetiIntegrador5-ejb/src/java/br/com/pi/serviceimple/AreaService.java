@@ -37,7 +37,8 @@ public class AreaService implements IAreaService
         
         try
         {
-            em.remove(Idobj);
+            Area a = em.find(Area.class, Idobj.getIdArea());
+            em.remove(a);
         }
         catch(Exception ex)
         {

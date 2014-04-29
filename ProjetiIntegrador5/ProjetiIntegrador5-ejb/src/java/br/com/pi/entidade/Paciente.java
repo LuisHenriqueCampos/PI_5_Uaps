@@ -49,24 +49,24 @@ public class Paciente implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Basic(optional = false)
+//    @Basic(optional = false)
     @Column(name = "IdPessoaPaciente")
     private Integer idPessoaPaciente;
-    @Basic(optional = false)
-    @NotNull
+//    @Basic(optional = false)
+//    @NotNull
     @Column(name = "DataNascimento")
     @Temporal(TemporalType.DATE)
     private Date dataNascimento;
     @Basic(optional = false)
-    @NotNull
+//    @NotNull
     @Size(min = 1, max = 80)
     @Column(name = "NomeMae")
     private String nomeMae;
     @Size(max = 80)
     @Column(name = "NomePai")
     private String nomePai;
-    @Basic(optional = false)
-    @NotNull
+//    @Basic(optional = false)
+//    @NotNull
     @Column(name = "Cns")
     private long cns;
     @Size(max = 11)

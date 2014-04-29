@@ -20,16 +20,16 @@ and open the template in the editor.
                 <h:outputLabel value="Micro-Área: " />
                 <p:inputText value="#{microareaManagedBean.microarea.descricao}" />
                 
-                <h:outputLabel value="Área" />
-                <h:selectOneMenu value="#{areaManagedBean.area.idPostoSaude.nomePosto}" id="postosaudeList">
-                    <f:selectItem itemLabel="Selecione..." />
-                    <f:selectItems value="#{areaManagedBean.listaPostosaude()}" var="posto" itemLabel="#{posto.nomePosto}" itemValue="#{posto}" />
+                <h:outputLabel value="Área:" />
+                <h:selectOneMenu converter="areaConverter" value="#{microareaManagedBean.microarea.idArea}" >
+                    <f:selectItem itemLabel="Area..." itemValue=""/>
+                    <f:selectItems value="#{areaManagedBean.todos()}" var="area" itemLabel="#{area.descricao}" itemValue="#{area}" />
                 </h:selectOneMenu>
                 
             </h:panelGrid>
             <p:commandButton value="Procurar" icon="ui-icon-search" />
-            <p:commandButton value="Salvar" icon="ui-icon-disk" actionListener="#{bairroManagedBean.salvar()}" update="painelCadastro"/>
-            <p:commandButton value="Novo" icon="ui-icon-plus" actionListener="#{bairroManagedBean.novo()}" update="painelCadastro" />
+            <p:commandButton value="Salvar" icon="ui-icon-disk" actionListener="#{microareaManagedBean.salvar()}" update="painelCadastro"/>
+            <p:commandButton value="Novo" icon="ui-icon-plus" actionListener="#{microareaManagedBean.novo()}" update="painelCadastro" />
             
         </p:panel>
     </h:form>

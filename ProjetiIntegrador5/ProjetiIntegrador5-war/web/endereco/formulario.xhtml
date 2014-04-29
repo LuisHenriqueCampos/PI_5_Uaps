@@ -14,7 +14,7 @@ and open the template in the editor.
     <h:form id="formPesquisa">
         <p:panel header="Endereço" id="painelCadastro">
             <p:growl />
-            
+            <h:inputHidden value="#{enderecoManagedBean.endereco.idEndereco}" />
             <h:panelGrid columns="2">
                 <h:outputLabel value="Rua: " />
                 <p:inputText value="#{enderecoManagedBean.endereco.rua}" />

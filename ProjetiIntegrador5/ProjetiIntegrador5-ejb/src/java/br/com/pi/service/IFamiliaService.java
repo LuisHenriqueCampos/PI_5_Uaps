@@ -19,4 +19,5 @@ public interface IFamiliaService extends ICrudGeneric<Familia>
     public String excluir(Familia Idobj);    
     public Familia obter(Integer IdObj);
     public List<Familia> listar();
+    public List<Familia> listarFamiliaParaAutoComplete(String familia);
 }

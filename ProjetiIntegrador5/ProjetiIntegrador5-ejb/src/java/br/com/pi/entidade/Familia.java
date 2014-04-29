@@ -42,11 +42,11 @@ public class Familia implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Basic(optional = false)
+//    @Basic(optional = false)
     @Column(name = "IdFamilia")
     private Integer idFamilia;
-    @Basic(optional = false)
-    @NotNull
+//    @Basic(optional = false)
+//    @NotNull
     @Size(min = 1, max = 10)
     @Column(name = "Descricao")
     private String descricao;

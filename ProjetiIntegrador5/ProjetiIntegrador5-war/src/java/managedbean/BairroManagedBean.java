@@ -8,6 +8,7 @@ import javax.inject.Named;
 import br.com.pi.service.*;
 import br.com.pi.entidade.*;
 import java.util.List;
+import util.MenssagemUtil;
 /**
  *
  * @author petrovick
@@ -28,16 +29,24 @@ public class BairroManagedBean
     
     public void editar()
     {
-        
+        bairro = bairroSelecionado;        
     }
     
     public void novo()
     {
-        
+        bairro = new Bairro();
     }
     
     public void salvar()
     {
+        String erro = bairroService.salvar(bairro);
+        
+        if(erro == null){
+            MenssagemUtil.addMensagemInfo("Bairro salvo com sucesso!");
+            this.bairro = new Bairro();
+        }else{
+            MenssagemUtil.addMensagemError(erro);
+        }
         
     }
     
@@ -48,6 +57,12 @@ public class BairroManagedBean
     
     public void excluir()
     {
+        String erro = bairroService.excluir(bairroSelecionado);
+        
+        if(erro == null)
+            MenssagemUtil.addMensagemInfo("Bairro excluído com sucesso!");
+        else
+            MenssagemUtil.addMensagemError(erro);
         
     }
     

@@ -40,7 +40,5 @@ public class enderecoConverter implements Converter
             return null;
         Endereco end = (Endereco) value;
         return end.getIdEndereco().toString();
-    }
-    
-    
+    } 
 }

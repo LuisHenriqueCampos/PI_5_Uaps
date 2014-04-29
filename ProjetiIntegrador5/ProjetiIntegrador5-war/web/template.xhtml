@@ -23,16 +23,15 @@
     <h:body>
         <p:ajaxStatus onstart="statusDialog.show();" onsuccess="statusDialog.hide();" />
         <p:dialog modal="true" widgetVar="statusDialog" header="Carregando" draggable="false" closable="false">
-            <p:graphicImage value="conteudo/imagem/ajax-loading-bar-19.gif" />
+            <p:graphicImage value="/imagens/ajaxloadingbar.gif" />
         </p:dialog>
-        
         
         <p:layout fullPage="true">
             <p:layoutUnit position="north" size="130">
                 
                 <h:outputLink value="#{request.contextPath}/index.html">
                     
-                    <h:graphicImage value="/imagens/java_ee.png" />
+                    <h:graphicImage value="/imagens/logo.jpg" />
                     
                 </h:outputLink>
                 
@@ -46,9 +45,10 @@
                             <p:menuitem value="Área" url="/area/index.html"/>
                             <p:menuitem value="Bairro" url="/bairro/index.html"/>
                             <p:menuitem value="Micro-Área" url="/microarea/index.html"/>
-                            <p:menuitem value="Paciente" url="#"/>
+                            <p:menuitem value="Paciente" url="/paciente/index.html"/>
                             <p:menuitem value="Familia" url="/familia/index.html"/>
                             <p:menuitem value="Endereço" url="/endereco/index.html"/>
+                            <p:menuitem value="Encaminhamento" url="/encaminhamento/index.html"/>
                             <p:menuitem value="Médico / Enfermeira" url="#"/>
                             <p:menuitem value="Agente de Saúde" url="#"/>
                             
@@ -71,9 +71,7 @@
                 </h:form>
 
             </p:layoutUnit>
-            <p:layoutUnit position="south" size="100">
-            Rodapé
-            </p:layoutUnit>
+            
             <p:layoutUnit position="center">
                 <ui:insert name="container">
                     Conteudo

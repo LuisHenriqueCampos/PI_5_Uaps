@@ -30,7 +30,10 @@ public class BairroService implements IBairroService
     public String salvar(Bairro entity) {
         try
         {
-            em.merge(entity);
+            if(entity.getIdBairro() != null)
+                em.merge(entity);
+            else
+                em.persist(entity);
         }
         catch(Exception ex)
         {
@@ -45,7 +48,8 @@ public class BairroService implements IBairroService
     {
         try
         {
-            em.remove(Idobj);
+            Bairro bairro = em.find(Bairro.class, Idobj.getIdBairro());
+            em.remove(bairro);
         }
         catch(Exception ex)
         {
@@ -63,7 +67,7 @@ public class BairroService implements IBairroService
 
     @Override
     public List<Bairro> listar() {
-        TypedQuery<Bairro> bairroQuery = em.createQuery("select a from Bairro a", Bairro.class);
+        TypedQuery<Bairro> bairroQuery = em.createQuery("select a from Bairro a ORDER BY a.bairro", Bairro.class);
         return bairroQuery.getResultList();
     }
 }

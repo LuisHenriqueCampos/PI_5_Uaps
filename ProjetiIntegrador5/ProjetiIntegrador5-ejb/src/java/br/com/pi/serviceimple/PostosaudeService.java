@@ -44,7 +44,8 @@ public class PostosaudeService implements IPostosaudeService
         
         try
         {
-            em.remove(Idobj);
+            Postosaude posto = em.find(Postosaude.class, Idobj.getIdPostoSaude());
+            em.remove(posto);
         }
         catch(Exception ex)
         {
