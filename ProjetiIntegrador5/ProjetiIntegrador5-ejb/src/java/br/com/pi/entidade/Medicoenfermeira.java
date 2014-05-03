@@ -56,7 +56,7 @@ public class Medicoenfermeira implements Serializable {
     private Collection<Encaminhamento> encaminhamentoCollection;
     
     @JoinColumn(name = "IdAtribuicao", referencedColumnName = "IdAtribuicao")
-    @ManyToOne(optional = false, cascade = CascadeType.ALL)
+    @ManyToOne(optional = false)
     private Atribuicao idAtribuicao;
     
     @JoinColumn(name = "IdPessoaMedicoEnfermeira", referencedColumnName = "IdPessoa")
@@ -64,16 +64,8 @@ public class Medicoenfermeira implements Serializable {
     private Pessoaa pessoa;
 
     public Medicoenfermeira() {
-    }
-
-    public Medicoenfermeira(Integer idPessoaMedicoEnfermeira) {
-        this.idPessoaMedicoEnfermeira = idPessoaMedicoEnfermeira;
-    }
-
-    public Medicoenfermeira(Integer idPessoaMedicoEnfermeira, String assinatura, int registro) {
-        this.idPessoaMedicoEnfermeira = idPessoaMedicoEnfermeira;
-        this.assinatura = assinatura;
-        this.registro = registro;
+        pessoa = new Pessoaa();
+        
     }
 
     public Integer getIdPessoaMedicoEnfermeira() {
