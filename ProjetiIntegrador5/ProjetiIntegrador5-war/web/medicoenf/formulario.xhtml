@@ -10,29 +10,32 @@ and open the template in the editor.
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:p="http://primefaces.org/ui"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <br/>
     <h:form id="formCadastro">
         <p:panel header="Médico Enfermeira" id="painelCadastro">
             <p:growl/>
             <h:inputHidden value="#{medicoEnfermeiraManagedBean.medicoEnfermeira.pessoa.idPessoa}" />
             
             <h:panelGrid columns="2" cellpadding="8">
-                <h:outputLabel value="Assinatura: " />
-                <p:inputText  value="#{medicoEnfermeiraManagedBean.medicoEnfermeira.assinatura}" />
                 
-                <h:outputLabel value="Nome: " />
+                 <h:outputLabel value="Nome: " />
                 <p:inputText  value="#{medicoEnfermeiraManagedBean.medicoEnfermeira.pessoa.nome}" />
                 
                 <h:outputLabel value="Registro: " />
                 <p:inputText value="#{medicoEnfermeiraManagedBean.medicoEnfermeira.registro}" />
                 
-                <h:selectOneMenu converter="atribuicaoConverter" value="#{medicoEnfermeiraManagedBean.medicoEnfermeira.idAtribuicao}">
-                    <f:selectItem itemLabel="Selecione uma Atribuição:" itemValue="" />
+                <h:outputLabel value="Assinatura: " />
+                <p:inputText  value="#{medicoEnfermeiraManagedBean.medicoEnfermeira.assinatura}" />
+                
+                <h:outputLabel value="Atribuição:* " />
+                <h:selectOneMenu converter="atribuicaoConverter" 
+                                 value="#{medicoEnfermeiraManagedBean.medicoEnfermeira.idAtribuicao}">
+                    <f:selectItem itemLabel="Selecione uma Atribuição" itemValue="" />
                     <f:selectItems value="#{atribuicaoManagedBean.todos()}" var="atr" itemLabel="#{atr.descricao}" itemValue="#{atr}" />
                 </h:selectOneMenu>
                 
                 
                 </h:panelGrid>
-                <p:commandButton value="Procurar" icon="ui-icon-search" />
 
                 <p:commandButton value="Salvar" icon="ui-icon-disk" 
                                  actionListener="#{medicoEnfermeiraManagedBean.salvar()}"

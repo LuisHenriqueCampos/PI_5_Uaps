@@ -22,19 +22,44 @@ and open the template in the editor.
                         actionListener="#{medicoEnfermeiraManagedBean.editar()}"  
                         update=":formCadastro:painelCadastro"/>
         </p:contextMenu>
-        <p:panel header="Médico/Enfermeira cadastradas" id="painelTabela">
+        
+        <p:fieldset legend="Médicos / Enfermeiras" toggleable="true" toggleSpeed="400" collapsed="true" >
+        
+        <p:panel  id="painelTabela">
             <p:growl />
             <p:dataTable value="#{medicoEnfermeiraManagedBean.listar()}"
                 var="med" id="tabela" 
-                paginator="true" rows="10" 
+                paginator="true" rows="10" paginatorPosition="bottom" 
                 emptyMessage="Nenhum Medico/Enfermeira cadastrado" 
                 rowKey="#{med.pessoa.idPessoa}" 
                 selection="#{medicoEnfermeiraManagedBean.medicoenfermeiraSelecionado}" 
                 selectionMode="single">
                 
-                <p:column headerText="IdMedico: " style="width: 10%" filterBy="idPessoaMedicoEnfermeira" filterMatchMode="contains" >#{med.pessoa.idPessoa}</p:column>
-                <p:column headerText="Assinatura: " style="width: 90%" filterBy="assinatura" filterMatchMode="contains">#{med.assinatura}</p:column>
+                <p:column headerText="Código " 
+                          style="width: 10%"  >
+                    #{med.pessoa.idPessoa}
+                </p:column>
+                
+                <p:column headerText="Nome" 
+                          style="width: 35%" filterBy="pessoa.nome" 
+                          filterMatchMode="contains">
+                    #{med.pessoa.nome}
+                </p:column>
+                
+                <p:column headerText="Atribuição" 
+                          style="width: 25%" filterBy="idAtribuicao.descricao" 
+                          filterMatchMode="contains">
+                    #{med.idAtribuicao.descricao}
+                </p:column>
+                
+                 <p:column headerText="Número do Registro " 
+                          style="width: 30%" filterBy="registro" 
+                          filterMatchMode="contains">
+                    #{med.registro}
+                </p:column>
+            
             </p:dataTable>
         </p:panel>
+        </p:fieldset>    
     </h:form>
 </ui:fragment>
