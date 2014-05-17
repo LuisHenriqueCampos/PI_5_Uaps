@@ -1,10 +1,7 @@
 package br.com.pi.report;
 
-import br.com.pi.entidade.Postosaude;
+import br.com.pi.entidade.Familia;
 import br.com.pi.util.PdfPageHelper;
-import java.io.ByteArrayOutputStream;
-import java.util.List;
-
 import com.itextpdf.text.BaseColor;
 import com.itextpdf.text.Document;
 import com.itextpdf.text.Element;
@@ -16,12 +13,17 @@ import com.itextpdf.text.Phrase;
 import com.itextpdf.text.pdf.PdfPCell;
 import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfWriter;
+import java.io.ByteArrayOutputStream;
+import java.util.List;
 
-public class ReportPostoSaude {
-
+/**
+ *
+ * @author petrovick
+ */
+public class ReportFamilia {
     private ByteArrayOutputStream output;
     
-    public String gerar(String caminho, List<Postosaude> postos)
+    public String gerar(String caminho, List<Familia> familias)
     {
         String erro = null;
 
@@ -33,12 +35,12 @@ public class ReportPostoSaude {
             PdfWriter writer = PdfWriter.getInstance(document, output);
 
             PdfPageHelper helper = new PdfPageHelper(caminho);
-            helper.setTitle("Relatório Quadro de Professores/ Disciplinas");
+            helper.setTitle("Relatório de Família");
 
             writer.setPageEvent(helper);
             document.open();
 
-            gerarRelatorio(postos, document);
+            gerarRelatorio(familias, document);
             document.close();
         }
         
@@ -54,16 +56,16 @@ public class ReportPostoSaude {
         return output;
     }
 
-    private void gerarRelatorio(List<Postosaude> postos, Document document) throws Exception {
+    private void gerarRelatorio(List<Familia> familias, Document document) throws Exception {
 
         Font fontTexto = FontFactory.getFont("Arial", 12);
         Font fontTitulo = FontFactory.getFont("Arial", 12, Font.BOLD);
 
-        String[] cabecalhos = {"IdPosto","Nome"};
+        String[] cabecalhos = {"Codigo Familia","Descriçao","Complemento","Endereço"};
 
         PdfPTable table = new PdfPTable(cabecalhos.length);
         table.setWidthPercentage(100);
-        table.setWidths(new float[]{15,30});
+        //table.setWidths(new float[]{15});
         table.setHeaderRows(1);
 
         for (String cabecalho : cabecalhos)
@@ -74,18 +76,24 @@ public class ReportPostoSaude {
             table.addCell(cell);
         }
 
-        for (Postosaude posto : postos)
+        for (Familia familia : familias)
         {
-            PdfPCell cellIdPosto = new PdfPCell(new Phrase(posto.getIdPostoSaude().toString()));
-            PdfPCell cellNomePosto = new PdfPCell(new Phrase(posto.getNomePosto(), fontTexto));
-            table.addCell(cellIdPosto);
-            table.addCell(cellNomePosto);
+            PdfPCell cellCodigoFamilia = new PdfPCell(new Phrase(familia.getIdFamilia().toString()));
+            PdfPCell cellDescricao = new PdfPCell(new Phrase(familia.getDescricao()));
+            PdfPCell cellComplemento = new PdfPCell(new Phrase(familia.getComplemento()));
+            PdfPCell cellEndereco = new PdfPCell(new Phrase("Rua: " + familia.getIdEndereco().getRua() + ", Cep: " + familia.getIdEndereco().getCep() + ", Bairro: " + familia.getIdEndereco().getIdBairro().getBairro()));
+            table.addCell(cellCodigoFamilia);
+            table.addCell(cellDescricao);
+            table.addCell(cellComplemento);
+            table.addCell(cellEndereco);
         }
 
         document.add(table);
 
-        Paragraph paragraph = new Paragraph("Possui " + postos.size() + "postos cadastradas.", fontTitulo);
+        Paragraph paragraph = new Paragraph("Possui " + familias.size() + " familias cadastradas.", fontTitulo);
 
         document.add(paragraph);
+
     }
+
 }

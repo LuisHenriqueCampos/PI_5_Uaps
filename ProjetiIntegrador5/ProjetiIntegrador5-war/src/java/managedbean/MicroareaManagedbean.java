@@ -1,4 +1,4 @@
-package br.com.pi.managedbean;
+package managedbean;
 
 import br.com.pi.entidade.Area;
 import br.com.pi.service.IMicroareaService;
@@ -6,7 +6,14 @@ import javax.ejb.EJB;
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Named;
 import br.com.pi.entidade.Microarea;
+import br.com.pi.report.ReportFamilia;
+import br.com.pi.report.ReportMicroarea;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 import java.util.List;
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
+import javax.servlet.http.HttpServletResponse;
 /**
  *
  * @author petrovick
@@ -19,6 +26,8 @@ public class MicroareaManagedbean
     IMicroareaService microareaService;
     private Microarea microarea;
     private Microarea microareaSelecionada;
+    
+    private ReportMicroarea reportMicroarea;
     
     public MicroareaManagedbean()
     {
@@ -51,6 +60,33 @@ public class MicroareaManagedbean
     public List<Microarea> todos()
     {
         return microareaService.listar();
+    }
+    
+    public void gerar() throws IOException
+    {
+        String caminho = FacesContext.getCurrentInstance().getExternalContext().getRealPath("/");
+        
+        reportMicroarea = new ReportMicroarea();
+        
+        String erro = reportMicroarea.gerar(caminho,todos());
+
+        if (erro == null)
+        {
+            ByteArrayOutputStream bytes = reportMicroarea.getOutput();
+            HttpServletResponse res = (HttpServletResponse) FacesContext.getCurrentInstance().getExternalContext().getResponse();
+            res.setContentType("application/pdf");
+            res.setHeader("Content-disposition", "inline;filename=relatorio.pdf");
+            res.getOutputStream().write(bytes.toByteArray());
+            res.getCharacterEncoding();
+            FacesContext.getCurrentInstance().responseComplete();
+
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Relatório gerado com sucesso!", null));
+        }
+        
+        else
+        {
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, erro, null));
+        }
     }
 
     public Microarea getMicroarea() {

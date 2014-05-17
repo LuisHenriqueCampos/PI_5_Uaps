@@ -1,10 +1,7 @@
 package br.com.pi.report;
 
-import br.com.pi.entidade.Postosaude;
+import br.com.pi.entidade.Microarea;
 import br.com.pi.util.PdfPageHelper;
-import java.io.ByteArrayOutputStream;
-import java.util.List;
-
 import com.itextpdf.text.BaseColor;
 import com.itextpdf.text.Document;
 import com.itextpdf.text.Element;
@@ -16,12 +13,18 @@ import com.itextpdf.text.Phrase;
 import com.itextpdf.text.pdf.PdfPCell;
 import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfWriter;
+import java.io.ByteArrayOutputStream;
+import java.util.List;
 
-public class ReportPostoSaude {
-
+/**
+ *
+ * @author petrovick
+ */
+public class ReportMicroarea
+{
     private ByteArrayOutputStream output;
     
-    public String gerar(String caminho, List<Postosaude> postos)
+    public String gerar(String caminho, List<Microarea> microareas)
     {
         String erro = null;
 
@@ -33,12 +36,12 @@ public class ReportPostoSaude {
             PdfWriter writer = PdfWriter.getInstance(document, output);
 
             PdfPageHelper helper = new PdfPageHelper(caminho);
-            helper.setTitle("Relatório Quadro de Professores/ Disciplinas");
+            helper.setTitle("Relatório de Microarea");
 
             writer.setPageEvent(helper);
             document.open();
 
-            gerarRelatorio(postos, document);
+            gerarRelatorio(microareas, document);
             document.close();
         }
         
@@ -54,16 +57,16 @@ public class ReportPostoSaude {
         return output;
     }
 
-    private void gerarRelatorio(List<Postosaude> postos, Document document) throws Exception {
+    private void gerarRelatorio(List<Microarea> microareas, Document document) throws Exception {
 
         Font fontTexto = FontFactory.getFont("Arial", 12);
         Font fontTitulo = FontFactory.getFont("Arial", 12, Font.BOLD);
 
-        String[] cabecalhos = {"IdPosto","Nome"};
-
+        String[] cabecalhos = {"Codigo","Descrição","Area"};
+        
         PdfPTable table = new PdfPTable(cabecalhos.length);
         table.setWidthPercentage(100);
-        table.setWidths(new float[]{15,30});
+        //table.setWidths(new float[]{15});
         table.setHeaderRows(1);
 
         for (String cabecalho : cabecalhos)
@@ -74,18 +77,22 @@ public class ReportPostoSaude {
             table.addCell(cell);
         }
 
-        for (Postosaude posto : postos)
-        {
-            PdfPCell cellIdPosto = new PdfPCell(new Phrase(posto.getIdPostoSaude().toString()));
-            PdfPCell cellNomePosto = new PdfPCell(new Phrase(posto.getNomePosto(), fontTexto));
-            table.addCell(cellIdPosto);
-            table.addCell(cellNomePosto);
+        for (Microarea microarea : microareas) {
+            PdfPCell cellCodigoMicroarea = new PdfPCell(new Phrase(microarea.getIdMicroArea().toString(), fontTexto));
+            PdfPCell cellDescricaoMicroarea = new PdfPCell(new Phrase(microarea.getDescricao(), fontTexto));
+            PdfPCell cellAreaMicroarea = new PdfPCell(new Phrase(microarea.getIdArea().getDescricao(), fontTexto));
+            
+            table.addCell(cellCodigoMicroarea);
+            table.addCell(cellDescricaoMicroarea);
+            table.addCell(cellAreaMicroarea);
         }
 
         document.add(table);
 
-        Paragraph paragraph = new Paragraph("Possui " + postos.size() + "postos cadastradas.", fontTitulo);
+        Paragraph paragraph = new Paragraph("Possui " + microareas.size() + " microareas  cadastradas.", fontTitulo);
 
         document.add(paragraph);
+
     }
+
 }

@@ -61,9 +61,29 @@
                         </p:submenu>
                         
                         <p:submenu label="Relatórios">
-                            <p:menuitem value="Professor" url="#"/>
-                            <p:menuitem value="Situação Matrícula" url="/situacaoMatricula/index.html"/>
-                                                        
+                            <p:menuitem>
+                                <h:commandLink value="Posto de Saúde" actionListener="#{postoSaudeManagedBean.gerar()}"/>
+                            </p:menuitem>
+                            
+                            <p:menuitem>
+                                <h:commandLink value="Encaminhamento" actionListener="#{encaminhamentoManagedBean.gerar()}"/>
+                            </p:menuitem>
+                            
+                            <p:menuitem>
+                                <h:commandLink value="Família" actionListener="#{familiaManagedBean.gerar()}"/>
+                            </p:menuitem>
+                            
+                            <p:menuitem>
+                                <h:commandLink value="Medico/Enfermeira" actionListener="#{medicoEnfermeiraManagedBean.gerar()}"/>
+                            </p:menuitem>
+                            
+                            <p:menuitem>
+                                <h:commandLink value="Microarea" actionListener="#{microareaManagedBean.gerar()}"/>
+                            </p:menuitem>
+                            
+                            <p:menuitem>
+                                <h:commandLink value="Paciente" actionListener="#{pacienteManagedBean.gerar()}"/>
+                            </p:menuitem>
                         </p:submenu>
                     </p:menubar>
                     

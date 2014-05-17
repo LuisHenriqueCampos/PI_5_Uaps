@@ -4,11 +4,17 @@ import br.com.pi.entidade.Atribuicao;
 import br.com.pi.service.IMedicoEnfermeiraService;
 import br.com.pi.entidade.Medicoenfermeira;
 import br.com.pi.entidade.Pessoaa;
+import br.com.pi.report.ReportFamilia;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 import java.util.List;
 import javax.ejb.EJB;
 import javax.enterprise.context.RequestScoped;
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
 import javax.inject.Named;
-
+import javax.servlet.http.HttpServletResponse;
+import br.com.pi.report.ReportMedico;
 /**
  *
  * @author Luis
@@ -22,6 +28,8 @@ public class MedicoEnfermeiraManagedBean
     private Medicoenfermeira medicoEnfermeira;
     private List<Medicoenfermeira> medicoEnfermeiras;
     private Medicoenfermeira medicoenfermeiraSelecionado;
+    
+    private ReportMedico reportMedico;
     
     public MedicoEnfermeiraManagedBean()
     {
@@ -61,6 +69,34 @@ public class MedicoEnfermeiraManagedBean
         return medicoEnfermeiraService.listar();
     }
 
+    public void gerar() throws IOException
+    {
+        String caminho = FacesContext.getCurrentInstance().getExternalContext().getRealPath("/");
+        
+        reportMedico = new ReportMedico();
+        
+        String erro = reportMedico.gerar(caminho,listar());
+        
+        if (erro == null)
+        {
+            ByteArrayOutputStream bytes = reportMedico.getOutput();
+            HttpServletResponse res = (HttpServletResponse) FacesContext.getCurrentInstance().getExternalContext().getResponse();
+            res.setContentType("application/pdf");
+            res.setHeader("Content-disposition", "inline;filename=relatorio.pdf");
+            res.getOutputStream().write(bytes.toByteArray());
+            res.getCharacterEncoding();
+            FacesContext.getCurrentInstance().responseComplete();
+
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Relatório gerado com sucesso!", null));
+        }
+        
+        else
+        {
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, erro, null));
+        }
+    }
+    
+    
     public Medicoenfermeira getMedicoEnfermeira() {
         return medicoEnfermeira;
     }

@@ -22,7 +22,6 @@ public class EncaminhamentoService implements IEncaminhamentoService
     {
         try
         {
-            
             em.merge(entity);
             System.out.println("Salvou");
             return null;
@@ -63,5 +62,4 @@ public class EncaminhamentoService implements IEncaminhamentoService
         TypedQuery<Encaminhamento> typedQuery = em.createQuery("select e from Encaminhamento e", Encaminhamento.class);
         return typedQuery.getResultList();
     }
-    
 }

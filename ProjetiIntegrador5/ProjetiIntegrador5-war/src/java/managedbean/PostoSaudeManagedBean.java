@@ -97,8 +97,6 @@ public class PostoSaudeManagedBean {
     {
         String caminho = FacesContext.getCurrentInstance().getExternalContext().getRealPath("/");
         
-        System.out.println("\n\n\n\n**********CAMINHO = " + caminho);
-        
         reportPostoSaude = new ReportPostoSaude();
         
         String erro = reportPostoSaude.gerar(caminho,todos());
@@ -108,7 +106,7 @@ public class PostoSaudeManagedBean {
             ByteArrayOutputStream bytes = reportPostoSaude.getOutput();
             HttpServletResponse res = (HttpServletResponse) FacesContext.getCurrentInstance().getExternalContext().getResponse();
             res.setContentType("application/pdf");
-            res.setHeader("Content-disposition", "inline;filename=alunos.pdf");
+            res.setHeader("Content-disposition", "inline;filename=relatorio.pdf");
             res.getOutputStream().write(bytes.toByteArray());
             res.getCharacterEncoding();
             FacesContext.getCurrentInstance().responseComplete();
