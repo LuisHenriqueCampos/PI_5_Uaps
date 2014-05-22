@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<ui:fragment xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:form id="formCadastro">
+        <p:panel header="Encaminhamento" id="painelCadastro">
+            <p:growl />
+            <h:inputHidden value="#{encaminhamentoManagedBean.encaminhamento.idEncaminhamento}"/>
+            <h:panelGrid columns="2">
+                <h:outputLabel value="Data Encaminhamento" />
+                <p:calendar value="#{encaminhamentoManagedBean.encaminhamento.dataEncaminhamento}" pattern="dd/MM/yyyy HH:mm" /> 
+                <h:outputLabel value="Especialista:" />
+                <h:selectOneMenu converter="especialidadeConverter" value="#{encaminhamentoManagedBean.encaminhamento.idEspecialidade}">
+                    <f:selectItem itemLabel="Selecione um especialista:" itemValue="" />
+                    <f:selectItems value="#{espcialidadeEncaminhamentoManagedBean.listar()}" var="esp" itemLabel="#{esp.descricao}" itemValue="#{esp}" />
+                </h:selectOneMenu>
+                
+                <h:outputLabel value="Tipo de Encaminhamento:" />
+                <h:selectOneMenu converter="tipoEncaminhamentoConverter" value="#{encaminhamentoManagedBean.encaminhamento.idEspecialidade}">
+                    <f:selectItem itemLabel="Tipo do Encaminhamento:" itemValue="" />
+                    <f:selectItems value="#{tipoEncaminhamentoManagedBean.listar()}" var="tp" itemLabel="#{tp.descricao}" itemValue="#{tp}" />
+                </h:selectOneMenu>
+                
+                <h:outputLabel value="Paciente: " />
+                <h:selectOneMenu converter="pacienteConverter" value="#{encaminhamentoManagedBean.encaminhamento.idPessoaPaciente}">
+                    <f:selectItem itemLabel="Tipo do Paciente:" itemValue="" />
+                    <f:selectItems value="#{pacienteManagedBean.listar()}" var="pac" itemLabel="#{pac.pessoa.nome}" itemValue="#{pac}" />
+                </h:selectOneMenu>
+                
+                
+                <h:outputLabel value="Med/Enformeira:" />
+                <h:selectOneMenu converter="medicoenfermeiraConverter" value="#{encaminhamentoManagedBean.encaminhamento.idPessoaMedicoEnfermeira}">
+                    <f:selectItem itemLabel="Selecione o Medico/Enfermeira" itemValue="" />
+                    <f:selectItems value="#{medicoEnfermeiraManagedBean.listar()}" var="med" itemLabel="#{med.assinatura}" itemValue="#{med}" />
+                </h:selectOneMenu>
+                
+                <p:commandButton
+                        value="Salvar"
+                        icon="ui-icon-disk"
+                        actionListener="#{encaminhamentoManagedBean.save()}"
+                        update=""/>
+            </h:panelGrid>
+        </p:panel>
+    </h:form>
+    
+</ui:fragment>

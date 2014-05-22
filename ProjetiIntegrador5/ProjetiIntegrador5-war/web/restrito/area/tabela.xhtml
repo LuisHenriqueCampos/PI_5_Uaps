@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<ui:fragment xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:form id="formTabela">
+        <p:contextMenu for="tabela">
+            <p:menuitem value="Excluir" icon="ui-icon-close" actionListener="#{areaManagedBean.excluir()}" update="painelEndereco" />
+            <p:menuitem value="Editar" icon="ui-icon-pencil" actionListener="#{areaManagedBean.editar()}" update=":formPesquisa:painelCadastro" />
+        </p:contextMenu>
+        <p:panel header="Endereco cadastrados" id="painelEndereco">
+            <p:growl />
+            <p:dataTable value="#{areaManagedBean.todos()}"
+                var="area" id="tabela" 
+                paginator="true" rows="10" 
+                emptyMessage="Nenhum endereço cadastrado" 
+                rowKey="#{area.idArea}" 
+                selection="#{areaManagedBean.areaSelecionada}" 
+                selectionMode="single">
+                
+                <p:column headerText="Área: " style="width: 20%">#{area.descricao}</p:column>
+                <p:column headerText="Posto de Saúde: " style="width: 20%">#{area.idPostoSaude.nomePosto}</p:column>
+                <p:column headerText="Médico: " style="width: 20%">#{area.medicoenfermeiraidMedico.assinatura}</p:column>
+                <p:column headerText="Enfermeira: " style="width: 20%">#{area.medicoenfermeiraidEnfermeira.assinatura}</p:column>
+            </p:dataTable>
+        </p:panel>
+    </h:form>
+</ui:fragment>

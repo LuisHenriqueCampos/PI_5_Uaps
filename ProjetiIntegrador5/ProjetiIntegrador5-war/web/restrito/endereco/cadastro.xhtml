@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <ui:composition template="../template.xhtml">
+        <ui:define name="container">
+    
+            <h:form id="formCadastro">
+                <p:panel header="Endereço" id="painelCadastro">
+                    <p:growl />
+                   <!-- <h:inputHidden value="" /> -->
+
+                    <h:panelGrid columns="2">
+                        <h:outputLabel value="Rua: " />
+                        <p:inputText value="#{enderecoCadastroManagedBean.endereco.rua}" />
+
+                        <h:outputLabel value="CEP: " />
+                        <p:inputText value="#{enderecoCadastroManagedBean.endereco.cep}" />
+
+
+                        <h:outputLabel value="Área:" />
+                        <h:selectOneMenu value="#{enderecoCadastroManagedBean.area}" >
+                            <f:selectItem itemLabel="Selecione..." />
+                            <f:selectItem itemValue="01" itemLabel="01" value="#{enderecoCadastroManagedBean.area}"  />
+                            <f:selectItem itemValue="02" itemLabel="02" value="#{enderecoCadastroManagedBean.area}" /> 
+                        </h:selectOneMenu>
+
+                        <h:outputLabel value="Micro - Área:" />
+                        <h:selectOneMenu value="#{enderecoCadastroManagedBean.microArea}" >
+                            <f:selectItem itemLabel="Selecione..." />
+                            <f:selectItem itemValue="04" itemLabel="04" value="#{enderecoCadastroManagedBean.microArea}"  />
+                            <f:selectItem itemValue="05" itemLabel="05" value="#{enderecoCadastroManagedBean.microArea}" /> 
+                        </h:selectOneMenu>
+
+                    </h:panelGrid>
+
+                   <p:commandButton value="Salvar" icon="ui-icon-plus" actionListener="#{enderecoCadastroManagedBean.novo()}" update="painelCadastro" />
+                   <p:commandButton value="Novo" icon="ui-icon-save" actionListener="#{enderecoCadastroManagedBean.salvar()}" update="painelCadastro" />
+                   <h:button value="Voltar" outcome="/endereco/index.html" />
+
+                </p:panel>
+            </h:form>
+        </ui:define>
+    </ui:composition>
+</html>

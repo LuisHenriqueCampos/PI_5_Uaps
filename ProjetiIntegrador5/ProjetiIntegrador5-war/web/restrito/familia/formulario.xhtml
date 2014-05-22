@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<ui:fragment xmlns="http://www.w3.org/1999/xhtml"
+             xmlns:ui="http://java.sun.com/jsf/facelets"
+             xmlns:h="http://java.sun.com/jsf/html"
+             xmlns:p="http://primefaces.org/ui"
+             xmlns:f="http://xmlns.jcp.org/jsf/core">
+    
+    <h:form id="formCadastro">
+        <p:panel header="Familia" id="painelCadastro">
+            <p:growl />
+            <h:inputHidden value="#{familiaManagedBean.familia.idFamilia}" />
+            
+            <h:panelGrid columns="2">
+                <h:outputLabel value="Nome:" />
+                <p:inputText value="#{familiaManagedBean.familia.descricao}" />
+                
+                <h:outputLabel value="Complemento:" />
+                <p:inputText value="#{familiaManagedBean.familia.complemento}" />
+                
+                <h:outputLabel value="Endereço:*"/>
+                <h:selectOneMenu converter="enderecoConverter" value="#{familiaManagedBean.familia.idEndereco}">
+                    <f:selectItem itemLabel="Selecione um endereço" itemValue="" />
+                    <f:selectItems value="#{enderecoManagedBean.todos()}" var="p" itemValue="#{p}" itemLabel="#{p.rua}" />
+                </h:selectOneMenu>
+                
+            </h:panelGrid>
+            <p:commandButton value="Procurar" icon="ui-icon-search" />
+            <p:commandButton value="Salvar" icon="ui-icon-disk" actionListener="#{familiaManagedBean.salvar()}" update="painelCadastro" />
+            <p:commandButton value="Novo" icon="ui-icon.plus" actionListener="#{familiaManagedBean.novo()}" update="painelCadastro"/>
+        </p:panel>
+    </h:form>
+</ui:fragment>

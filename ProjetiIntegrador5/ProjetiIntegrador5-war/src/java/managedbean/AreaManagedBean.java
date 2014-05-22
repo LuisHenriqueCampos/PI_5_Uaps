@@ -46,6 +46,7 @@ public class AreaManagedBean
     
     public void salvar()
     {
+        System.out.println("*****************\n\n\n\n\n");
         areaService.salvar(area);
     }
     

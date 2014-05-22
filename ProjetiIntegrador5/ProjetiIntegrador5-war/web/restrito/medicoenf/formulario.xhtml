@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<ui:fragment xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <br/>
+    <h:form id="formCadastro">
+        <p:panel header="Médico Enfermeira" id="painelCadastro">
+            <p:growl/>
+            <h:inputHidden value="#{medicoEnfermeiraManagedBean.medicoEnfermeira.pessoa.idPessoa}" />
+            
+            <h:panelGrid columns="2" cellpadding="8">
+                
+                 <h:outputLabel value="Nome: " />
+                <p:inputText  value="#{medicoEnfermeiraManagedBean.medicoEnfermeira.pessoa.nome}" />
+                
+                <h:outputLabel value="Registro: " />
+                <p:inputText value="#{medicoEnfermeiraManagedBean.medicoEnfermeira.registro}" />
+                
+                <h:outputLabel value="Assinatura: " />
+                <p:inputText  value="#{medicoEnfermeiraManagedBean.medicoEnfermeira.assinatura}" />
+                
+                <h:outputLabel value="Atribuição:* " />
+                <h:selectOneMenu converter="atribuicaoConverter" 
+                                 value="#{medicoEnfermeiraManagedBean.medicoEnfermeira.idAtribuicao}">
+                    <f:selectItem itemLabel="Selecione uma Atribuição" itemValue="" />
+                    <f:selectItems value="#{atribuicaoManagedBean.todos()}" var="atr" itemLabel="#{atr.descricao}" itemValue="#{atr}" />
+                </h:selectOneMenu>
+                
+                
+                </h:panelGrid>
+
+                <p:commandButton value="Salvar" icon="ui-icon-disk" 
+                                 actionListener="#{medicoEnfermeiraManagedBean.salvar()}"
+                                 update="painelCadastro,:formTabela:tabela"/>
+
+                <p:commandButton value="Novo" icon="ui-icon-plus" 
+                                 actionListener="#{medicoEnfermeiraManagedBean.novo()}"
+                                 process="@this"
+                                 update="@form" />
+        </p:panel>
+    </h:form>
+    <br/>
+</ui:fragment>
+

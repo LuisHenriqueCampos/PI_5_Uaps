@@ -42,7 +42,21 @@ public class EncaminhamentoManagedBean
         try
         {
             System.out.println("Salvar no controller");
-            //encaminhamentoService.salvar(encaminhamento);
+            encaminhamentoService.salvar(encaminhamento);
+            System.out.println("Salvou");
+        }
+        catch(Exception ex)
+        {
+            System.out.println("" + ex.getMessage());
+        }
+    }
+    
+    public void save()
+    {
+        try
+        {
+            System.out.println("Salvar no controller");
+            
             System.out.println("Salvou");
         }
         catch(Exception ex)

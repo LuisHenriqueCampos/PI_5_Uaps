@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<ui:fragment xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:form id="formTabela">
+        <p:contextMenu for="tabela">
+            <p:menuitem value="Excluir" 
+                        icon="ui-icon-close" 
+                        actionListener="#{medicoEnfermeiraManagedBean.excluir()}" 
+                        update="painelTabela" />
+            
+            <p:menuitem value="Editar" 
+                        icon="ui-icon-pencil" 
+                        actionListener="#{medicoEnfermeiraManagedBean.editar()}"  
+                        update=":formCadastro:painelCadastro"/>
+        </p:contextMenu>
+        
+        <p:fieldset legend="Médicos / Enfermeiras" toggleable="true" toggleSpeed="400" collapsed="true" >
+        
+        <p:panel  id="painelTabela">
+            <p:growl />
+            <p:dataTable value="#{medicoEnfermeiraManagedBean.listar()}"
+                var="med" id="tabela" 
+                paginator="true" rows="10" paginatorPosition="bottom" 
+                emptyMessage="Nenhum Medico/Enfermeira cadastrado" 
+                rowKey="#{med.pessoa.idPessoa}" 
+                selection="#{medicoEnfermeiraManagedBean.medicoenfermeiraSelecionado}" 
+                selectionMode="single">
+                
+                <p:column headerText="Código " 
+                          style="width: 10%"  >
+                    #{med.pessoa.idPessoa}
+                </p:column>
+                
+                <p:column headerText="Nome" 
+                          style="width: 35%" filterBy="pessoa.nome" 
+                          filterMatchMode="contains">
+                    #{med.pessoa.nome}
+                </p:column>
+                
+                <p:column headerText="Atribuição" 
+                          style="width: 25%" filterBy="idAtribuicao.descricao" 
+                          filterMatchMode="contains">
+                    #{med.idAtribuicao.descricao}
+                </p:column>
+                
+                 <p:column headerText="Número do Registro " 
+                          style="width: 30%" filterBy="registro" 
+                          filterMatchMode="contains">
+                    #{med.registro}
+                </p:column>
+            
+            </p:dataTable>
+        </p:panel>
+        </p:fieldset>    
+    </h:form>
+</ui:fragment>
