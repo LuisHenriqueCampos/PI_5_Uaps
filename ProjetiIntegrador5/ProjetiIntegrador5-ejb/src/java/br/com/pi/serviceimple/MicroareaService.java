@@ -40,7 +40,8 @@ public class MicroareaService  implements IMicroareaService
         
         try
         {
-            em.remove(Idobj);
+            Microarea m = obter(Idobj.getIdMicroArea());
+            em.remove(m);
         }
         catch(Exception ex)
         {

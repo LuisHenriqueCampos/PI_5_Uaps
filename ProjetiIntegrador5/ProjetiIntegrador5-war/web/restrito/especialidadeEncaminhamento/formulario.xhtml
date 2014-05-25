@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<ui:fragment xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <br/>
+    <h:form id="formCadastro">
+        <p:panel header="Especialidade" id="painelCadastro">
+            <p:growl />
+            <h:inputHidden value="#{especialidadeEncaminhamentoManagedBean.especialidade.idEspecialidade}" />
+            
+            <h:panelGrid columns="2" cellpadding="8" >
+                <h:outputLabel value="Atribuição*: " />
+                <p:inputText value="#{especialidadeEncaminhamentoManagedBean.especialidade.descricao}" size="40"/>
+                
+            </h:panelGrid>
+            <!--<p:commandButton value="Procurar" icon="ui-icon-search" />-->
+            <p:commandButton value="Salvar" icon="ui-icon-disk" 
+                             actionListener="#{especialidadeEncaminhamentoManagedBean.salvar()}" 
+                             update="painelCadastro,:formTabela:tabela"
+                             process="@this"/>
+            
+            <p:button value="Novo" icon="ui-icon-plus" outcome="index.html" />
+            
+        </p:panel>
+    </h:form><br/>
+</ui:fragment>

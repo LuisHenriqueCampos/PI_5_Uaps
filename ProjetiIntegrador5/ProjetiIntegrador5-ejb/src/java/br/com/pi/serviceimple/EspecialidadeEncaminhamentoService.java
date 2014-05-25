@@ -20,17 +20,38 @@ public class EspecialidadeEncaminhamentoService implements IEspecialidadeEncamin
 
     @Override
     public String salvar(EspecialidadeEncaminhamento entity) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        try{
+            if(entity.getIdEspecialidade() != null){
+                em.merge(entity);
+            }
+            else{
+                em.persist(entity);
+            }
+        }catch(Exception ex){
+            ex.printStackTrace();
+            return ex.getMessage();
+        }
+        return null;
     }
 
     @Override
     public String excluir(EspecialidadeEncaminhamento Idobj) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        
+        try
+        {
+            EspecialidadeEncaminhamento e = obter(Idobj.getIdEspecialidade());
+            em.remove(e);
+            return null;
+        }catch(Exception ex)
+        {
+            ex.printStackTrace();
+            return ex.getMessage();
+        }
     }
 
     @Override
     public EspecialidadeEncaminhamento obter(Integer IdObj) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return em.find(EspecialidadeEncaminhamento.class, IdObj);
     }
 
     @Override

@@ -6,18 +6,12 @@ import javax.enterprise.context.RequestScoped;
 import javax.inject.Named;
 import br.com.pi.entidade.Postosaude;
 import br.com.pi.report.ReportPostoSaude;
-import java.awt.event.ActionEvent;
 import java.io.ByteArrayOutputStream;
-import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.*;
-import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpServletResponse;
-import org.primefaces.model.DefaultStreamedContent;
-import org.primefaces.model.StreamedContent;
 import util.MenssagemUtil;
 
 /**

@@ -20,17 +20,34 @@ public class TipoEncaminhamentoService implements ITipoEncaminhamentoService
 
     @Override
     public String salvar(Tipoencaminhamento entity) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        try
+        {
+            em.merge(entity);
+        }catch(Exception e)
+        {
+            e.printStackTrace();
+            return e.getMessage();
+        }
+        return null;
     }
 
     @Override
     public String excluir(Tipoencaminhamento Idobj) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        try
+        {
+            Tipoencaminhamento tp = obter(Idobj.getIdtipoEncaminhamento());
+            em.remove(tp.getIdtipoEncaminhamento());
+        }catch(Exception ex)
+        {
+            ex.printStackTrace();;
+            return ex.getMessage();
+        }
+        return null;
     }
 
     @Override
-    public Tipoencaminhamento obter(Integer IdObj) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public Tipoencaminhamento obter(Short IdObj) {
+        return em.find(Tipoencaminhamento.class, IdObj);
     }
 
     @Override

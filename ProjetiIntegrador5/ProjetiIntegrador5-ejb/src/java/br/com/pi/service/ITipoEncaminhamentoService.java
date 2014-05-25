@@ -18,6 +18,11 @@ public interface ITipoEncaminhamentoService extends ICrudGeneric<Tipoencaminhame
 {
     public String salvar(Tipoencaminhamento entity);
     public String excluir(Tipoencaminhamento Idobj);    
-    public Tipoencaminhamento obter(Integer IdObj);
+    public Tipoencaminhamento obter(Short IdObj);
+    default Tipoencaminhamento obter(Integer i)
+    {
+        System.out.println("nao usar");
+        return null;
+    }
     public List<Tipoencaminhamento> listar();
 }

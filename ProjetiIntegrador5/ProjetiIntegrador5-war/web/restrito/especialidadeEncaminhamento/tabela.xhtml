@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<ui:fragment xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    
+    <h:form id="formTabela">
+        <p:contextMenu for="tabela">
+            <p:menuitem value="Excluir" icon="ui-icon-close" 
+                        actionListener="#{especialidadeEncaminhamentoManagedBean.excluir()}" 
+                        update="painelAtribuicao" />
+            
+            <p:menuitem value="Editar" icon="ui-icon-pencil" 
+                        actionListener="#{especialidadeEncaminhamentoManagedBean.editar()}" 
+                        update=":formCadastro:painelCadastro" />
+        </p:contextMenu>
+        
+        <p:fieldset legend="Atribuições" toggleable="true" toggleSpeed="400" collapsed="true" >
+            
+        <p:panel  id="painelAtribuicao">
+            <p:growl />
+            <p:dataTable value="#{especialidadeEncaminhamentoManagedBean.listar()}"
+                var="esp" 
+                id="tabela" 
+                paginator="true" rows="10" 
+                emptyMessage="Nenhuma Especilidade Cadastrada" 
+                rowKey="#{esp.idEspecialidade}" 
+                selection="#{especialidadeEncaminhamentoManagedBean.especialidadeSelecionado}" 
+                selectionMode="single" >
+                
+                <p:column headerText="Código" style="width: 10%" sortBy="#{esp.descricao}">
+                    #{esp.idEspecialidade}
+                </p:column>
+                
+                <p:column headerText="Especialidade" style="width: 90%" filterBy="#{esp.descricao}" filterMatchMode="contains" sortBy="#{esp.descricao}">
+                    #{esp.descricao}
+                </p:column>
+            </p:dataTable>
+        </p:panel>
+        </p:fieldset>    
+    </h:form>
+</ui:fragment>
