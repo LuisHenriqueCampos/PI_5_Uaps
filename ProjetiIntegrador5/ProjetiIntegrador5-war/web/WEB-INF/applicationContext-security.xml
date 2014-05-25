@@ -20,6 +20,28 @@
         
         <intercept-url pattern="/restrito/**"
                        access="ROLE_ADMIN" />
+        <intercept-url pattern="/restrito/area/**"
+                        access="ROLE_ADMIN" />
+        <intercept-url pattern="/restrito/atribuicao/**"
+                       access="ROLE_ADMIN" />
+        <intercept-url pattern="/restrito/bairro/**"
+                       access="ROLE_ADMIN" />
+        <intercept-url pattern="/restrito/encaminhamento/**"
+                         access="ROLE_ADMIN" />
+        <intercept-url pattern="/restrito/endereco/**"
+                         access="ROLE_ADMIN" />
+        <intercept-url pattern="/restrito/familia/**"
+                         access="ROLE_ADMIN" />
+        <intercept-url pattern="/restrito/medicoenf/**"
+                         access="ROLE_ADMIN" />
+        <intercept-url pattern="/restrito/microarea/**"
+                         access="ROLE_ADMIN" />
+        <intercept-url pattern="/restrito/paciente/**"
+                         access="ROLE_ADMIN" />
+        <intercept-url pattern="/restrito/postosaude/**"
+                         access="ROLE_ADMIN" />
+        <intercept-url pattern="/restrito/relatorioParcial/**"
+                         access="ROLE_ADMIN" />
         
         <form-login         always-use-default-target="true"
                             default-target-url="/restrito/index.html"

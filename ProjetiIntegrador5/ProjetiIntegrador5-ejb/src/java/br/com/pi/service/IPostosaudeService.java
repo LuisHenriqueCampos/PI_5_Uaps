@@ -13,4 +13,5 @@ public interface IPostosaudeService  extends ICrudGeneric<Postosaude>
     public String excluir(Postosaude Idobj);    
     public Postosaude obter(Integer IdObj);
     public List<Postosaude> listar();
+    public List<Postosaude> listarRel(String pesq);
 }

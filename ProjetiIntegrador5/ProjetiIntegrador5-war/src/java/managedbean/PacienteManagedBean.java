@@ -11,6 +11,7 @@ import br.com.pi.report.ReportPaciente;
 import br.com.pi.service.IPacienteService;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
@@ -29,6 +30,9 @@ public class PacienteManagedBean
     private Paciente pacienteSelecionado;
     
     private ReportPaciente reportPaciente;
+    private List<Paciente> listaPaciente;
+    private String pacPesq;
+    
     
     public PacienteManagedBean()
     {
@@ -36,6 +40,8 @@ public class PacienteManagedBean
         paciente.setPessoa(new Pessoaa());
         paciente.setIdSexo(new Sexo());
         paciente.setIdFamilia(new Familia());
+        listaPaciente = new ArrayList<>();
+        pacPesq = "";
     }
     
     public void salvar()
@@ -55,6 +61,33 @@ public class PacienteManagedBean
         return pacienteService.listar();
     }
     
+    public List<Paciente> listarRel()
+    {
+        System.out.println("Entrou");
+        //pacPesq = pacPesq == null ? "" : pacPesq;
+        //if(pacPesq.length() == 1)
+        //{
+            System.out.println("Entrou no método");
+            listaPaciente = pacienteService.listarRel(pacPesq);
+            //listaPaciente = listaPaciente.stream().filter(x -> x.getPessoa().getNome().contains("An")).map(x -> x).collect(Collectors.toList());
+        //}
+        /*
+        else if(pacPesq.length() > 1)
+        {
+            return listaPaciente.stream()
+                    .filter(x -> x.getPessoa().getNome().contains(pacPesq))
+                    .map(x -> x).collect(Collectors.toList());
+            //listaPaciente = listaPaciente.stream().filter(x -> x.getPessoa().getNome().contains(pacPesq)).map(x -> x).collect(Collectors.toList());
+        }*/
+        
+        System.out.println("Passou");
+        for(Paciente p : listaPaciente)
+        {
+            System.out.println("" + p.getPessoa().getNome());
+        }
+        return listaPaciente;
+    }
+    
     public void excluir()
     {
         pacienteService.excluir(pacienteSelecionado);
@@ -68,6 +101,33 @@ public class PacienteManagedBean
     public void novo()
     {
         this.paciente = new Paciente();
+    }
+    
+    public void gerarRelatorioFiltrado() throws IOException
+    {
+        String caminho = FacesContext.getCurrentInstance().getExternalContext().getRealPath("/");
+        
+        reportPaciente = new ReportPaciente();
+        
+        String erro = reportPaciente.gerar(caminho,listarRel());
+
+        if (erro == null)
+        {
+            ByteArrayOutputStream bytes = reportPaciente.getOutput();
+            HttpServletResponse res = (HttpServletResponse) FacesContext.getCurrentInstance().getExternalContext().getResponse();
+            res.setContentType("application/pdf");
+            res.setHeader("Content-disposition", "inline;filename=relatorio.pdf");
+            res.getOutputStream().write(bytes.toByteArray());
+            res.getCharacterEncoding();
+            FacesContext.getCurrentInstance().responseComplete();
+
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Relatório gerado com sucesso!", null));
+        }
+        
+        else
+        {
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, erro, null));
+        }
     }
 
     public void gerar() throws IOException
@@ -111,5 +171,21 @@ public class PacienteManagedBean
 
     public void setPacienteSelecionado(Paciente pacienteSelecionado) {
         this.pacienteSelecionado = pacienteSelecionado;
+    }
+
+    public List<Paciente> getListaPaciente() {
+        return listaPaciente;
+    }
+
+    public void setListaPaciente(List<Paciente> listaPaciente) {
+        this.listaPaciente = listaPaciente;
+    }
+
+    public String getPacPesq() {
+        return pacPesq;
+    }
+
+    public void setPacPesq(String pacPesq) {
+        this.pacPesq = pacPesq;
     }
 }

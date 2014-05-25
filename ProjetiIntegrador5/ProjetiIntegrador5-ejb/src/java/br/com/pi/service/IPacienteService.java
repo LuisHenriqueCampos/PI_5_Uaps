@@ -19,4 +19,5 @@ public interface IPacienteService extends ICrudGeneric<Paciente>
     public String excluir(Paciente Idobj);    
     public Paciente obter(Integer IdObj);
     public List<Paciente> listar();
+    public List<Paciente> listarRel(String pesq);
 }

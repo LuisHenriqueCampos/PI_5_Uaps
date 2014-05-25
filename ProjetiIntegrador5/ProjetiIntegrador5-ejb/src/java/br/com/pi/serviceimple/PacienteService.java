@@ -60,6 +60,14 @@ public class PacienteService implements IPacienteService
         TypedQuery pacQuery = em.createQuery("select p from Paciente p", Paciente.class);
         return pacQuery.getResultList();
     }
+
+    @Override
+    public List<Paciente> listarRel(String pesq)
+    {
+        TypedQuery<Paciente> pacQuery = em.createQuery("select p from Paciente p where p.pessoa.nome like :nome", Paciente.class);
+        pacQuery.setParameter("nome", "%" + pesq + "%");
+        return pacQuery.getResultList();
+    }
     
     
 }

@@ -1,9 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package br.com.pi.serviceimple;
 
 import br.com.pi.service.IPostosaudeService;
@@ -65,6 +59,20 @@ public class PostosaudeService implements IPostosaudeService
     public List<Postosaude> listar() {
         TypedQuery<Postosaude> postosaudeQuery = em.createQuery("select a from Postosaude a", Postosaude.class);
         return postosaudeQuery.getResultList();
+    }
+
+    @Override
+    public List<Postosaude> listarRel(String pesq)
+    {
+        System.out.println("->" + pesq);
+        TypedQuery<Postosaude> posQuery = em.createQuery("select pos from Postosaude pos where pos.nomePosto like :posnome", Postosaude.class);
+        posQuery.setParameter("posnome", "%" + pesq + "%");
+        List<Postosaude> ppp = posQuery.getResultList();
+        for(Postosaude pp : ppp)
+        {
+            System.out.println("::::" + pp.getNomePosto());
+        }
+        return ppp;
     }
     
 }

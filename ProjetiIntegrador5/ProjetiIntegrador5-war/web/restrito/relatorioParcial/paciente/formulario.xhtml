@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<ui:fragment xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:form id="formCadastro">
+        <p:panel header="Cadastro de Paciente" id="painelCadastro">
+            <p:growl />
+            <h:inputHidden value="#{pacienteManagedBean.paciente.idPessoaPaciente}" />
+                <h:panelGrid columns="2">
+                    <h:outputLabel value="Nome: " />
+                    <p:inputText value="#{pacienteManagedBean.pacPesq}" />
+                    
+                    <p:commandButton
+                        value="Salvar"
+                        icon="ui-icon-disk"
+                        update="painelCadastro,:formTabela:tabela"/>
+                    <h:commandLink value="Relatório"
+                                   actionListener="#{pacienteManagedBean.gerarRelatorioFiltrado()}"/>
+                </h:panelGrid>
+            
+                           
+        </p:panel>
+    </h:form>
+</ui:fragment>

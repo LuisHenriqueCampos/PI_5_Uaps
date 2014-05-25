@@ -84,7 +84,13 @@
                                 <h:commandLink value="Paciente" actionListener="#{pacienteManagedBean.gerar()}"/>
                             </p:menuitem>
                         </p:submenu>
+                        <p:submenu label="Relatório Pesquisa">
+                            <p:menuitem value="Posto de Saúde" url="/restrito/relatorioParcial/postosaude/index.html"/>
+                            <p:menuitem value="Paciente" url="/restrito/relatorioParcial/paciente/index.html"/>
+                        </p:submenu>
                     </p:menubar>
+                    
+                    
                     
                 </h:form>
 

@@ -26,7 +26,7 @@
                 
             </h:panelGrid>
             <p:commandButton value="Procurar" icon="ui-icon-search" />
-            <p:commandButton value="Salvar" icon="ui-icon-disk" actionListener="#{familiaManagedBean.salvar()}" update="painelCadastro" />
+            <p:commandButton value="Salvar" icon="ui-icon-disk" actionListener="#{familiaManagedBean.salvar()}" update="painelCadastro,:formTabela:tabela" />
             <p:commandButton value="Novo" icon="ui-icon.plus" actionListener="#{familiaManagedBean.novo()}" update="painelCadastro"/>
         </p:panel>
     </h:form>
