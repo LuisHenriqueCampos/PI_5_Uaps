@@ -1,4 +1,4 @@
-package br.com.pi.managedbean;
+package managedbean;
 
 import javax.ejb.EJB;
 import javax.enterprise.context.RequestScoped;
@@ -9,10 +9,6 @@ import br.com.pi.entidade.Postosaude;
 import br.com.pi.service.IAreaService;
 import java.util.List;
 
-/**
- *
- * @author petrovick
- */
 @Named(value = "areaManagedBean")
 @RequestScoped
 public class AreaManagedBean
@@ -39,14 +35,11 @@ public class AreaManagedBean
     public List<Area> todos()
     {
         List<Area> ll = areaService.listar();
-        for(Area lll : ll)
-            System.out.println("\n\n\n\nID:" + lll.getIdArea() + " " + lll.getDescricao());
         return ll;
     }
     
     public void salvar()
     {
-        System.out.println("*****************\n\n\n\n\n");
         areaService.salvar(area);
     }
     
@@ -80,5 +73,4 @@ public class AreaManagedBean
     public void setAreaSelecionada(Area areaSelecionada) {
         this.areaSelecionada = areaSelecionada;
     }
-    
 }

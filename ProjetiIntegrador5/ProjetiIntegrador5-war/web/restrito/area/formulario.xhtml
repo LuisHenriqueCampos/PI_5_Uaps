@@ -31,22 +31,26 @@ and open the template in the editor.
                 <h:outputLabel value="Enfermeira: " />
                 <h:selectOneMenu converter="pessoaConverter" value="#{areaManagedBean.area.medicoenfermeiraidEnfermeira.pessoa}">
                     <f:selectItem itemLabel="Selecione a enfermeira:" itemValue="" />
-                    <f:selectItems value="#{medicoEnfermeiraManagedBean.listar()}" var="enf" itemLabel="#{enf.assinatura}" itemValue="#{enf}" />
+                    <f:selectItems value="#{medicoEnfermeiraManagedBean.listar()}" var="enf" itemLabel="#{enf.pessoa.nome}" itemValue="#{enf.pessoa}" />
                 </h:selectOneMenu>
 
                 <h:outputLabel value="Medico: " />
                 <h:selectOneMenu converter="pessoaConverter" value="#{areaManagedBean.area.medicoenfermeiraidMedico.pessoa}">
                     <f:selectItem itemLabel="Selecione o medico: " itemValue="" />
-                    <f:selectItems value="#{medicoEnfermeiraManagedBean.listar()}" var="med" itemLabel="#{med.assinatura}" itemValue="#{med}" />
+                    <f:selectItems value="#{medicoEnfermeiraManagedBean.listar()}" var="med" itemLabel="#{med.pessoa.nome}" itemValue="#{med.pessoa}" />
                 </h:selectOneMenu>
                 
-            
             </h:panelGrid>
 
             <p:commandButton value="Procurar" icon="ui-icon-search" />
-            <p:commandButton value="Salvar" icon="ui-icon-search" actionListener="#{areaManagedBean.salvar()}" />
-            <p:commandButton value="Novo" icon="ui-icon-search" actionListener="#{areaManagedBean.novo()}" />
             
+            <p:commandButton
+                        value="Salvar"
+                        icon="ui-icon-disk"
+                        actionListener="#{areaManagedBean.salvar()}"
+                        update="painelCadastro,:formTabela:tabela"/>
+            
+            <p:commandButton value="Novo" icon="ui-icon-search" actionListener="#{areaManagedBean.novo()}" />
             
         </p:panel>
     </h:form>
