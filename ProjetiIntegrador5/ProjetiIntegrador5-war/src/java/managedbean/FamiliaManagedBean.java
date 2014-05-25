@@ -54,7 +54,6 @@ public class FamiliaManagedBean
     
     public void editar()
     {
-        System.out.println("Id:" + familiaSelecionada.getIdFamilia() + "Rua:"+ familiaSelecionada.getComplemento());
         familia = familiaSelecionada;
     }
     

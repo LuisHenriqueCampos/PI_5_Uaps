@@ -37,7 +37,7 @@ public class PacienteService implements IPacienteService
     {
         try
         {
-            Paciente p = em.find(Paciente.class, Idobj);
+            Paciente p = em.find(Paciente.class, Idobj.getIdPessoaPaciente());
             em.remove(p);
             return null;
         }

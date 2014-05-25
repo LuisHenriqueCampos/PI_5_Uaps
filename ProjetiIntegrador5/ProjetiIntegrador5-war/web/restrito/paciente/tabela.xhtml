@@ -12,8 +12,8 @@ and open the template in the editor.
       xmlns:f="http://xmlns.jcp.org/jsf/core">
     <h:form id="formTabela">
         <p:contextMenu for="tabela">
-            <p:menuitem value="Excluir" icon="ui-icon-close" actionListener="#{familiaManagedBean.excluir()}" update="painelCliente" />
-            <p:menuitem value="Editar" icon="ui-icon-pencil" actionListener="#{familiaManagedBean.editar()}" update=":formCadastro:painelCadastro" />
+            <p:menuitem value="Excluir" icon="ui-icon-close" actionListener="#{pacienteManagedBean.excluir()}" update="painelCliente" />
+            <p:menuitem value="Editar" icon="ui-icon-pencil" actionListener="#{pacienteManagedBean.editar()}" update=":formCadastro:painelCadastro" />
         </p:contextMenu>
         <p:panel header="Famílias cadastradas" id="painelCliente">
             <p:growl />

@@ -49,6 +49,7 @@ public class PacienteManagedBean
         try
         {
             pacienteService.salvar(paciente);
+            novo();
         }
         catch(Exception ex)
         {

@@ -14,7 +14,7 @@
                     <p:inputText value="#{pacienteManagedBean.paciente.pessoa.nome}" />
                     <h:outputLabel value="CNS: "/>
                     <p:inputText value="#{pacienteManagedBean.paciente.cns}" />
-                    <h:outputLabel value="Data " />
+                    <h:outputLabel value="Data de Nascimento: " />
                     <p:calendar value="#{pacienteManagedBean.paciente.dataNascimento}" pattern="dd/MM/yyyy HH:mm" /> 
                     
                     <h:outputLabel value="Nome da mãe:" />
@@ -35,7 +35,7 @@
                     <h:outputLabel value="Familia*"/>
                     <h:selectOneMenu converter="familiaConverter" value="#{pacienteManagedBean.paciente.idFamilia}">
                             <f:selectItem itemLabel="Seleciona a Familia: " itemValue="" />
-                            <f:selectItems value="#{familiaManagedBean.listar()}" var="m" itemValue="#{m}" itemLabel="#{m.descricao}" />
+                            <f:selectItems value="#{familiaManagedBean.listar()}" var="f" itemValue="#{f}" itemLabel="#{f.descricao}" />
                     </h:selectOneMenu>
 
                     <p:commandButton
@@ -43,10 +43,12 @@
                         icon="ui-icon-disk"
                         actionListener="#{pacienteManagedBean.salvar()}"
                         update="painelCadastro,:formTabela:tabela"/>
-
                     
-                    
-                    
+                    <p:commandButton
+                        value="Novo"
+                        icon="ui-icon-disk"
+                        actionListener="#{pacienteManagedBean.novo()}"
+                        update="painelCadastro,:formTabela:tabela"/>
                 </h:panelGrid>
                            
         </p:panel>
