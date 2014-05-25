@@ -41,9 +41,8 @@ public class EncaminhamentoManagedBean
     {
         try
         {
-            System.out.println("Salvar no controller");
             encaminhamentoService.salvar(encaminhamento);
-            System.out.println("Salvou");
+            novo();
         }
         catch(Exception ex)
         {
@@ -72,7 +71,7 @@ public class EncaminhamentoManagedBean
     
     public void excluir()
     {
-        encaminhamentoService.excluir(encaminhamento);
+        encaminhamentoService.excluir(encaminhamentoSelecionado);
     }
     
     public void novo()

@@ -15,12 +15,12 @@ and open the template in the editor.
             <p:menuitem value="Excluir" icon="ui-icon-close" actionListener="#{pacienteManagedBean.excluir()}" update="painelCliente" />
             <p:menuitem value="Editar" icon="ui-icon-pencil" actionListener="#{pacienteManagedBean.editar()}" update=":formCadastro:painelCadastro" />
         </p:contextMenu>
-        <p:panel header="Famílias cadastradas" id="painelCliente">
+        <p:panel header="Pacientes cadastradas" id="painelCliente">
             <p:growl />
             <p:dataTable value="#{pacienteManagedBean.listar()}"
                 var="paciente" id="tabela" 
                 paginator="true" rows="10" 
-                emptyMessage="Nenhuma família cadastrada." 
+                emptyMessage="Nenhum Paciente cadastrado." 
                 rowKey="#{paciente.idPessoaPaciente}" 
                 selection="#{pacienteManagedBean.pacienteSelecionado}" 
                 selectionMode="single">

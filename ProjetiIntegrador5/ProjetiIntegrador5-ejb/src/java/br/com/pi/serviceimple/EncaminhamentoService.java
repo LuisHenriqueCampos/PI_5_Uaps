@@ -8,27 +8,22 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 
-/**
- *
- * @author petrovick
- */
 @Stateless
 public class EncaminhamentoService implements IEncaminhamentoService
 {
     @PersistenceContext
     EntityManager em;
+    
     @Override
     public String salvar(Encaminhamento entity)
     {
         try
         {
             em.merge(entity);
-            System.out.println("Salvou");
             return null;
         }
         catch(Exception ex)
         {
-            System.out.println("Deu erro ao salvar");
             ex.printStackTrace();
             return ex.getMessage();
         }

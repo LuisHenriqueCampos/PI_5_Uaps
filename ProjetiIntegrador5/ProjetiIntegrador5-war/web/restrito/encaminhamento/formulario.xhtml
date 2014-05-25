@@ -9,40 +9,48 @@
         <p:panel header="Encaminhamento" id="painelCadastro">
             <p:growl />
             <h:inputHidden value="#{encaminhamentoManagedBean.encaminhamento.idEncaminhamento}"/>
+            
             <h:panelGrid columns="2">
                 <h:outputLabel value="Data Encaminhamento" />
                 <p:calendar value="#{encaminhamentoManagedBean.encaminhamento.dataEncaminhamento}" pattern="dd/MM/yyyy HH:mm" /> 
-                <h:outputLabel value="Especialista:" />
+                
+                <h:outputLabel value="Especialidade:" />
                 <h:selectOneMenu converter="especialidadeConverter" value="#{encaminhamentoManagedBean.encaminhamento.idEspecialidade}">
                     <f:selectItem itemLabel="Selecione um especialista:" itemValue="" />
-                    <f:selectItems value="#{espcialidadeEncaminhamentoManagedBean.listar()}" var="esp" itemLabel="#{esp.descricao}" itemValue="#{esp}" />
+                    <f:selectItems value="#{especialidadeEncaminhamentoManagedBean.listar()}" var="esp" itemLabel="#{esp.descricao}" itemValue="#{esp}" />
                 </h:selectOneMenu>
                 
                 <h:outputLabel value="Tipo de Encaminhamento:" />
-                <h:selectOneMenu converter="tipoEncaminhamentoConverter" value="#{encaminhamentoManagedBean.encaminhamento.idEspecialidade}">
+                <h:selectOneMenu converter="tipoEncaminhamentoConverter" value="#{encaminhamentoManagedBean.encaminhamento.idtipoEncaminhamento}">
                     <f:selectItem itemLabel="Tipo do Encaminhamento:" itemValue="" />
                     <f:selectItems value="#{tipoEncaminhamentoManagedBean.listar()}" var="tp" itemLabel="#{tp.descricao}" itemValue="#{tp}" />
                 </h:selectOneMenu>
                 
                 <h:outputLabel value="Paciente: " />
                 <h:selectOneMenu converter="pacienteConverter" value="#{encaminhamentoManagedBean.encaminhamento.idPessoaPaciente}">
-                    <f:selectItem itemLabel="Tipo do Paciente:" itemValue="" />
+                    <f:selectItem itemLabel="Paciente:" itemValue="" />
                     <f:selectItems value="#{pacienteManagedBean.listar()}" var="pac" itemLabel="#{pac.pessoa.nome}" itemValue="#{pac}" />
                 </h:selectOneMenu>
                 
-                
-                <h:outputLabel value="Med/Enformeira:" />
-                <h:selectOneMenu converter="medicoenfermeiraConverter" value="#{encaminhamentoManagedBean.encaminhamento.idPessoaMedicoEnfermeira}">
-                    <f:selectItem itemLabel="Selecione o Medico/Enfermeira" itemValue="" />
-                    <f:selectItems value="#{medicoEnfermeiraManagedBean.listar()}" var="med" itemLabel="#{med.assinatura}" itemValue="#{med}" />
+                <h:outputLabel value="Medico ou Enformeira:" />
+                <h:selectOneMenu converter="pessoaConverter" value="#{encaminhamentoManagedBean.encaminhamento.idPessoaMedicoEnfermeira.pessoa}">
+                    <f:selectItem itemLabel="Selecione o Medico ou Enfermeira" itemValue="" />
+                    <f:selectItems value="#{medicoEnfermeiraManagedBean.listar()}" var="med" itemLabel="#{med.pessoa.nome}" itemValue="#{med.pessoa}" />
                 </h:selectOneMenu>
                 
-                <p:commandButton
+            </h:panelGrid>
+            
+            <p:commandButton
                         value="Salvar"
                         icon="ui-icon-disk"
-                        actionListener="#{encaminhamentoManagedBean.save()}"
-                        update=""/>
-            </h:panelGrid>
+                        actionListener="#{encaminhamentoManagedBean.salvar()}"
+                        update="painelCadastro,:formTabela:tabela"/>
+                
+                <p:commandButton
+                        value="Novo"
+                        icon="ui-icon-disk"
+                        actionListener="#{encaminhamentoManagedBean.novo()}"
+                        update="painelCadastro,:formTabela:tabela"/>
         </p:panel>
     </h:form>
     
