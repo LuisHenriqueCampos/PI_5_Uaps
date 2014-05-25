@@ -50,7 +50,8 @@ and open the template in the editor.
                         actionListener="#{areaManagedBean.salvar()}"
                         update="painelCadastro,:formTabela:tabela"/>
             
-            <p:commandButton value="Novo" icon="ui-icon-search" actionListener="#{areaManagedBean.novo()}" />
+            <p:commandButton value="Novo" icon="ui-icon-search" actionListener="#{areaManagedBean.novo()}"
+                        update="painelCadastro,:formTabela:tabela"/>
             
         </p:panel>
     </h:form>
