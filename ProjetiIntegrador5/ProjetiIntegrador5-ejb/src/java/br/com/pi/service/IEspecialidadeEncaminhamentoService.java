@@ -13,11 +13,11 @@ import java.util.List;
  *
  * @author petrovick
  */
-public interface IEspecialidadeEncaminhamentoService extends ICrudGeneric<EspecialidadeEncaminhamento>
+public interface IEspecialidadeEncaminhamentoService
 {
-    public String salvar(EspecialidadeEncaminhamento entity);
-    public String excluir(EspecialidadeEncaminhamento Idobj);    
-    public EspecialidadeEncaminhamento obter(Integer IdObj);
+    public String salvar(EspecialidadeEncaminhamento especialidadeEncaminhamento);
+    public String excluir(Integer idEspecialidade);    
+    public EspecialidadeEncaminhamento obter(Integer id);
     public List<EspecialidadeEncaminhamento> listar();
     
 }

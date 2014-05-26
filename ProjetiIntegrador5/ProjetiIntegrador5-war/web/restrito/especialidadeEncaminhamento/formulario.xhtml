@@ -21,11 +21,10 @@ and open the template in the editor.
                 <p:inputText value="#{especialidadeEncaminhamentoManagedBean.especialidade.descricao}" size="40"/>
                 
             </h:panelGrid>
-            <!--<p:commandButton value="Procurar" icon="ui-icon-search" />-->
+            
             <p:commandButton value="Salvar" icon="ui-icon-disk" 
                              actionListener="#{especialidadeEncaminhamentoManagedBean.salvar()}" 
-                             update="painelCadastro,:formTabela:tabela"
-                             process="@this"/>
+                             update="painelCadastro,:formTabela:tabela"/>
             
             <p:button value="Novo" icon="ui-icon-plus" outcome="index.html" />
             

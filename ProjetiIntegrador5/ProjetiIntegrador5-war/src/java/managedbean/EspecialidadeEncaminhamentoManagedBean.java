@@ -8,10 +8,7 @@ import br.com.pi.entidade.EspecialidadeEncaminhamento;
 import java.util.List;
 import util.MenssagemUtil;
 
-/**
- *
- * @author petrovick
- */
+
 @Named(value = "especialidadeEncaminhamentoManagedBean")
 @RequestScoped
 public class EspecialidadeEncaminhamentoManagedBean
@@ -22,35 +19,38 @@ public class EspecialidadeEncaminhamentoManagedBean
     private EspecialidadeEncaminhamento especialidadeSelecionado;
     
     public EspecialidadeEncaminhamentoManagedBean()  {
-        novo();
-    }  
-    public List<EspecialidadeEncaminhamento> listar() {
+        especialidade = new EspecialidadeEncaminhamento();
+    }
+    
+    public List<EspecialidadeEncaminhamento> todos() {
         return especialidadeService.listar();
     }
+    
     public void salvar() {
-        System.out.println("desc" + especialidade.getDescricao());
-        System.out.println("Id" + especialidade.getIdEspecialidade());
-        
         String erro = especialidadeService.salvar(especialidade);
-        if(erro == null)
-        {
+        
+        if(erro == null){
             MenssagemUtil.addMensagemInfo("Salvo com sucesso");
-            novo();
-        }
-        else
+            this.especialidade = new EspecialidadeEncaminhamento();
+        }else{
             MenssagemUtil.addMensagemError(erro);
-                
+        }                
     }
+    
     public void editar() {
         especialidade = especialidadeSelecionado;
     }
+    
     public void excluir() {
-        String erro = especialidadeService.excluir(especialidadeSelecionado);
-        if(erro == null)
-            MenssagemUtil.addMensagemInfo("Salvo com sucesso");
-        else
+        String erro = especialidadeService.excluir(especialidadeSelecionado.getIdEspecialidade());
+        
+        if(erro == null){
+             MenssagemUtil.addMensagemInfo("Salvo com sucesso");
+        }else{
             MenssagemUtil.addMensagemError(erro);
+        }
     }
+    
     public void novo() {
         especialidade = new EspecialidadeEncaminhamento();
     }
@@ -70,6 +70,5 @@ public class EspecialidadeEncaminhamentoManagedBean
     public void setEspecialidadeSelecionado(EspecialidadeEncaminhamento especialidadeSelecionado) {
         this.especialidadeSelecionado = especialidadeSelecionado;
     }
-    
     
 }

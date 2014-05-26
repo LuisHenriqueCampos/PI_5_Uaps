@@ -19,13 +19,13 @@ public class EspecialidadeEncaminhamentoService implements IEspecialidadeEncamin
     EntityManager em;
 
     @Override
-    public String salvar(EspecialidadeEncaminhamento entity) {
+    public String salvar(EspecialidadeEncaminhamento especialidadeEncaminhamento) {
         try{
-            if(entity.getIdEspecialidade() != null){
-                em.merge(entity);
+            if(especialidadeEncaminhamento.getIdEspecialidade() != null){
+                em.merge(especialidadeEncaminhamento);
             }
             else{
-                em.persist(entity);
+                em.persist(especialidadeEncaminhamento);
             }
         }catch(Exception ex){
             ex.printStackTrace();
@@ -35,11 +35,11 @@ public class EspecialidadeEncaminhamentoService implements IEspecialidadeEncamin
     }
 
     @Override
-    public String excluir(EspecialidadeEncaminhamento Idobj) {
+    public String excluir(Integer idEspecialidade) {
         
         try
         {
-            EspecialidadeEncaminhamento e = obter(Idobj.getIdEspecialidade());
+            EspecialidadeEncaminhamento e = obter(idEspecialidade);
             em.remove(e);
             return null;
         }catch(Exception ex)
@@ -50,14 +50,17 @@ public class EspecialidadeEncaminhamentoService implements IEspecialidadeEncamin
     }
 
     @Override
-    public EspecialidadeEncaminhamento obter(Integer IdObj) {
-        return em.find(EspecialidadeEncaminhamento.class, IdObj);
+    public EspecialidadeEncaminhamento obter(Integer id) {
+        EspecialidadeEncaminhamento especialidadeEncaminhamento = 
+                em.find(EspecialidadeEncaminhamento.class, id);
+        return especialidadeEncaminhamento;
     }
 
     @Override
     public List<EspecialidadeEncaminhamento> listar()
     {
-        TypedQuery<EspecialidadeEncaminhamento> espQuery = em.createQuery("select esp from EspecialidadeEncaminhamento esp", EspecialidadeEncaminhamento.class);
+        TypedQuery<EspecialidadeEncaminhamento> espQuery = 
+                em.createQuery("SELECT esp FROM EspecialidadeEncaminhamento esp", EspecialidadeEncaminhamento.class);
         return espQuery.getResultList();
     }
     

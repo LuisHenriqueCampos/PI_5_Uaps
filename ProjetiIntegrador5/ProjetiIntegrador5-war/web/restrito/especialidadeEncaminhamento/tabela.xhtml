@@ -17,11 +17,11 @@
                         update=":formCadastro:painelCadastro" />
         </p:contextMenu>
         
-        <p:fieldset legend="Atribuições" toggleable="true" toggleSpeed="400" collapsed="true" >
+        <p:fieldset legend="Especialidades" toggleable="true" toggleSpeed="400" collapsed="true" >
             
         <p:panel  id="painelAtribuicao">
             <p:growl />
-            <p:dataTable value="#{especialidadeEncaminhamentoManagedBean.listar()}"
+            <p:dataTable value="#{especialidadeEncaminhamentoManagedBean.todos()}"
                 var="esp" 
                 id="tabela" 
                 paginator="true" rows="10" 

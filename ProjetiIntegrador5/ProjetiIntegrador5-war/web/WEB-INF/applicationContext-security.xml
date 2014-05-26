@@ -42,6 +42,8 @@
                          access="ROLE_ADMIN" />
         <intercept-url pattern="/restrito/relatorioParcial/**"
                          access="ROLE_ADMIN" />
+        <intercept-url pattern="/restrito/especialidadeEncaminhamento/**"
+                         access="ROLE_ADMIN" />
         
         <form-login         always-use-default-target="true"
                             default-target-url="/restrito/index.html"
