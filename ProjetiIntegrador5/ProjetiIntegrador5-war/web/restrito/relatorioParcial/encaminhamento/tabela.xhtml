@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<ui:fragment xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:form id="formTabela">
+        <p:panel header="Posto de saúde Cadastrados" id="painelCliente">
+            <p:growl />
+            <p:dataTable value="#{postoSaudeManagedBean.listarRel()}"
+                var="pos" id="tabela" 
+                paginator="true" rows="10" 
+                emptyMessage="Nenhum posto de saúde cadastrado.">
+                <p:column headerText="Código: " style="width: 30%">#{pos.idPostoSaude}</p:column>
+                <p:column headerText="Nome: " style="width: 70%">#{pos.nomePosto}</p:column>
+            </p:dataTable>
+        </p:panel>
+    </h:form>
+</ui:fragment>
