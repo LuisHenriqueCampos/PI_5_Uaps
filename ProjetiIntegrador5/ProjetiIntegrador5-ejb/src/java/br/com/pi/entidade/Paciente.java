@@ -50,7 +50,7 @@ public class Paciente implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
 //    @Basic(optional = false)
-    @Column(name = "IdPessoaPaciente")
+    @Column(name = "IdPessoaPaciente", insertable = false, updatable = false)
     private Integer idPessoaPaciente;
 //    @Basic(optional = false)
 //    @NotNull
@@ -74,8 +74,9 @@ public class Paciente implements Serializable {
     private String telefone;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idPessoaPaciente")
     private Collection<Encaminhamento> encaminhamentoCollection;
-    @JoinColumn(name = "IdPessoaPaciente", referencedColumnName = "IdPessoa", insertable = false, updatable = false)
-    @OneToOne(optional = false)
+    
+    @JoinColumn(name = "IdPessoaPaciente", referencedColumnName = "IdPessoa")
+    @OneToOne(optional = false, cascade = CascadeType.ALL)
     private Pessoaa pessoa;
     @JoinColumn(name = "IdSexo", referencedColumnName = "IdSexo")
     @ManyToOne(optional = false)

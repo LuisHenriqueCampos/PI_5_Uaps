@@ -4,6 +4,7 @@ import br.com.pi.entidade.Familia;
 import br.com.pi.entidade.Paciente;
 import br.com.pi.service.IFamiliaService;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -42,13 +43,14 @@ public class FamiliaService implements IFamiliaService
         {
             TypedQuery<Paciente> queryPaciente = em.createQuery("select p from Paciente p where p.idFamilia.idFamilia = :idFamilia", Paciente.class);
             queryPaciente.setParameter("idFamilia", Idobj.getIdFamilia());
-            String erros = "";
+            String erros = "Existe Paciente nesta família:\n";
             List<Paciente> pacientes = queryPaciente.getResultList();
+            System.out.println("numeros de pacientes com familia: " + Idobj.getIdFamilia() + " é: " + pacientes.size());
             if(pacientes.size() > 0)
             {
-               while(pacientes.iterator().hasNext())
+               for(Iterator<Paciente> iterator = pacientes.iterator(); iterator.hasNext(); ) 
                 {
-                    erros += pacientes.iterator().next().getPessoa().getNome() + "\n";
+                    erros += "-" + iterator.next().getPessoa().getNome() + "\n";
                 }
                 return erros;
             }
