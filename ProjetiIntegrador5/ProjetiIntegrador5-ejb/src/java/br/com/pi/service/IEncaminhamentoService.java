@@ -1,6 +1,7 @@
 package br.com.pi.service;
 
 import br.com.pi.entidade.Encaminhamento;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -13,5 +14,5 @@ public interface IEncaminhamentoService extends ICrudGeneric<Encaminhamento>
     public String excluir(Encaminhamento Idobj);    
     public Encaminhamento obter(Integer IdObj);
     public List<Encaminhamento> listar();
-    public List<Encaminhamento> listarRel(String dataInicio, String dataFim);
+    public List<Encaminhamento> listarRel(Date dataInicio, Date dataFim);
 }

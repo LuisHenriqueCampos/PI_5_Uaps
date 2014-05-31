@@ -37,6 +37,7 @@ public class BairroManagedBean
     {
         bairro = new Bairro();
         reportBairro = new ReportBairro();
+        bairroPesq = "";
     }
     
     public void editar()

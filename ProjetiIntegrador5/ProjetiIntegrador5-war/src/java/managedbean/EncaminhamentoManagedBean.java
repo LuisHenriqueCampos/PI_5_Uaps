@@ -40,6 +40,7 @@ public class EncaminhamentoManagedBean
     {
         novo();
         reportEncaminhamento = new ReportEncaminhamento();
+        
     }
     
     public void salvar()
@@ -154,8 +155,10 @@ public class EncaminhamentoManagedBean
         //if(pacPesq.length() == 1)
         //{
             System.out.println("Entrou no método");
-            listaEncaminhamento = encaminhamentoService.listarRel(pesquisaDataInicio.toString(), pesquisaDataFim.toString());
-            //listaPaciente = listaPaciente.stream().filter(x -> x.getPessoa().getNome().contains("An")).map(x -> x).collect(Collectors.toList());
+            System.out.println("Data Inicio:" + pesquisaDataInicio);
+            System.out.println("Data Fim   :" + pesquisaDataFim);
+            listaEncaminhamento = encaminhamentoService.listarRel(pesquisaDataInicio, pesquisaDataFim);
+            
         //}
         /*
         else if(pacPesq.length() > 1)

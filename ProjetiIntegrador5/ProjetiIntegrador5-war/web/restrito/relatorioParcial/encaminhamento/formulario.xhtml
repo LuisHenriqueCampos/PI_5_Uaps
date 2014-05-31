@@ -9,19 +9,19 @@
         <p:panel header="Pesquisa de Encaminhamento" id="painelCadastro">
             <p:growl />
             <h:inputHidden value="#{encaminhamentoManagedBean.encaminhamento.idEncaminhamento}" />
-                <h:panelGrid columns="2">
-                    <h:outputLabel value="Início: " />
-                    <p:calendar id="restricted" value="#{encaminhamentoManagedBean.pesquisaDataInicio}" mindate="4/1/14" maxdate="7/1/14"/>
- 
-                    <h:outputLabel value="Fim: " />
-                    <p:calendar id="restricted" value="#{encaminhamentoManagedBean.pesquisaDataFim}" mindate="4/1/14" maxdate="7/1/14"/>
+                <h:panelGrid columns="4">
+                    <h:outputLabel value="Pesquisar entre: " />
+                    <p:calendar value="#{encaminhamentoManagedBean.pesquisaDataInicio}" />
+                    
+                    <h:outputLabel value=" e " />
+                    <p:calendar value="#{encaminhamentoManagedBean.pesquisaDataFim}"/>
                     
                     <p:commandButton
                         value="Listar"
                         icon="ui-icon-disk"
                         update="painelCadastro,:formTabela:tabela"/>
                     <h:commandLink value="Relatório"
-                                   actionListener="#{enderecoManagedBean.gerarRelatorioFiltrado()}"/>
+                                   actionListener="#{encaminhamentoManagedBean.gerarRelatorioFiltrado()}"/>
                 </h:panelGrid>
             
                            

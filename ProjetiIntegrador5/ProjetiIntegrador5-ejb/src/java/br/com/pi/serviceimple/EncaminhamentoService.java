@@ -2,6 +2,7 @@ package br.com.pi.serviceimple;
 
 import br.com.pi.entidade.Encaminhamento;
 import br.com.pi.service.IEncaminhamentoService;
+import java.util.Date;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -59,7 +60,7 @@ public class EncaminhamentoService implements IEncaminhamentoService
     }
     
     @Override
-    public List<Encaminhamento> listarRel(String dataInicio, String dataFim)
+    public List<Encaminhamento> listarRel(Date dataInicio, Date dataFim)
     {
         TypedQuery<Encaminhamento> encQuery = em.createQuery("select e from Encaminhamento e where e.dataEncaminhamento between :dataInicio and :dataFim", Encaminhamento.class);
         encQuery.setParameter("dataInicio", dataInicio);

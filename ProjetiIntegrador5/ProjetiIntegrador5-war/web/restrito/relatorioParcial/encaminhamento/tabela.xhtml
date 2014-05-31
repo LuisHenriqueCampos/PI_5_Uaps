@@ -11,15 +11,20 @@ and open the template in the editor.
       xmlns:p="http://primefaces.org/ui"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
     <h:form id="formTabela">
-        <p:panel header="Clientes Cadastrados" id="painelCliente">
+        <p:panel header="Encaminhamentos Cadastrados" id="painelCliente">
             <p:growl />
             <p:dataTable value="#{encaminhamentoManagedBean.listarRel()}"
                 var="enc" id="tabela" 
                 paginator="true" rows="10" 
-                emptyMessage="Nenhum encaminhamento cadastrado.">
+                emptyMessage="Nenhum Encaminhamento cadastrado.">
                 
                 <p:column headerText="Código: " style="width: 5%">#{enc.idEncaminhamento}</p:column>
-                <p:column headerText="Motivo:  " style="width: 30%">#{enc.motivoEncaminhamento}</p:column>
+                <p:column headerText="Data Encaminhamento: " style="width: 5%">#{enc.dataEncaminhamento}</p:column>
+                <p:column headerText="Especialidade: " style="width: 10%">#{enc.idEspecialidade.descricao}</p:column>
+                <p:column headerText="Médico: " style="width: 10%">#{enc.idPessoaMedicoEnfermeira.assinatura}</p:column>
+                <p:column headerText="Paciente " style="width: 10%">#{enc.idPessoaPaciente.pessoa.nome}</p:column>
+                <p:column headerText="Tipo: " style="width: 10%">#{enc.idtipoEncaminhamento.descricao}</p:column>
+                <p:column headerText="Motivo: " style="width: 50%">#{enc.motivoEncaminhamento}</p:column>
             </p:dataTable>
         </p:panel>
     </h:form>
