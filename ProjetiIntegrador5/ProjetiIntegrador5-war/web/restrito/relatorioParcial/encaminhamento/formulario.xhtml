@@ -8,17 +8,23 @@
     <h:form id="formCadastro">
         <p:panel header="Cadastro de Paciente" id="painelCadastro">
             <p:growl />
+            <h:inputHidden value="#{encaminhamentoManagedBean.encaminhamento.idEncaminhamento}" />
                 <h:panelGrid columns="2">
-                    <h:outputLabel value="Nome: " />
-                    <p:inputText value="#{postoSaudeManagedBean.posPesq}" />
+                    <h:outputLabel value="Início: " />
+                    <p:calendar id="restricted" value="#{encaminhamentoManagedBean.pesquisaDataInicio}" mindate="4/1/14" maxdate="7/1/14"/>
+ 
+                    <h:outputLabel value="Fim: " />
+                    <p:calendar id="restricted" value="#{encaminhamentoManagedBean.pesquisaDataFim}" mindate="4/1/14" maxdate="7/1/14"/>
                     
                     <p:commandButton
-                        value="Procurar"
+                        value="Salvar"
                         icon="ui-icon-disk"
                         update="painelCadastro,:formTabela:tabela"/>
                     <h:commandLink value="Relatório"
-                                   actionListener="#{postoSaudeManagedBean.gerarRelatorioFiltrado()}"/>
-                </h:panelGrid>                           
+                                   actionListener="#{enderecoManagedBean.gerarRelatorioFiltrado()}"/>
+                </h:panelGrid>
+            
+                           
         </p:panel>
     </h:form>
 </ui:fragment>

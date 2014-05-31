@@ -24,7 +24,6 @@ public class AtribuicaoManagedBean {
     
     @EJB
     private IAtribuicaoService atribuicaoService;
-    s
     private Atribuicao atribuicao;
     private Atribuicao atribuicaoSelecionado;
     private ReportAtribuicao reportAtribuicao;

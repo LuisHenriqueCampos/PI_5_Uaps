@@ -1,10 +1,17 @@
-package br.com.pi.managedbean;
+package managedbean;
 
 import javax.ejb.EJB;
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Named;
 import br.com.pi.entidade.*;
+import br.com.pi.report.ReportEndereco;
 import br.com.pi.service.*;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.util.List;
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
+import javax.servlet.http.HttpServletResponse;
 
 /**
  *
@@ -20,6 +27,8 @@ public class EnderecoCadastroManagedBean
     private String area;
     private String microArea;
     private Endereco enderecoSelecionado;
+    
+    
     
     public EnderecoCadastroManagedBean()
     {
@@ -45,9 +54,6 @@ public class EnderecoCadastroManagedBean
     {
         endereco = new Endereco();
     }
-    
-    
-    
     public Endereco getEndereco() {
         return endereco;
     }
@@ -71,6 +77,5 @@ public class EnderecoCadastroManagedBean
     public void setMicroArea(String microArea) {
         this.microArea = microArea;
     }
-    
     
 }

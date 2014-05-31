@@ -26,7 +26,8 @@
         <welcome-file>index.html</welcome-file>
     </welcome-file-list>
     
-     <context-param>  
+    
+    <context-param>  
         <param-name>primefaces.THEME</param-name>  
         <param-value>redmond</param-value>  
     </context-param> 

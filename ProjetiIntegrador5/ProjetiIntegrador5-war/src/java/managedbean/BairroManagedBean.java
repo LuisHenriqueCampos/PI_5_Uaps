@@ -11,6 +11,8 @@ import br.com.pi.report.ReportBairro;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpServletResponse;
@@ -108,19 +110,24 @@ public class BairroManagedBean
         //pacPesq = pacPesq == null ? "" : pacPesq;
         //if(pacPesq.length() == 1)
         //{
+        
+        
             System.out.println("Entrou no método");
-            listaBairro = bairroService.listarRel(bairroPesq);
+        //    listaBairro = bairroService.listarRel(bairroPesq);
+        bairroService.listar().forEach(x -> x.getBairro().equals("ca"));
+
+            
             //listaPaciente = listaPaciente.stream().filter(x -> x.getPessoa().getNome().contains("An")).map(x -> x).collect(Collectors.toList());
         //}
-        /*
+/*    
         else if(pacPesq.length() > 1)
         {
             return listaPaciente.stream()
                     .filter(x -> x.getPessoa().getNome().contains(pacPesq))
                     .map(x -> x).collect(Collectors.toList());
             //listaPaciente = listaPaciente.stream().filter(x -> x.getPessoa().getNome().contains(pacPesq)).map(x -> x).collect(Collectors.toList());
-        }*/
-        
+        }
+*/
         System.out.println("Passou");
         for(Bairro b : listaBairro)
         {
@@ -128,13 +135,12 @@ public class BairroManagedBean
         }
         return listaBairro;
     }
-
-
-    
     
     public Bairro getBairroSelecionado() {
         return bairroSelecionado;
     }
+    
+    
 
     public void setBairroSelecionado(Bairro bairroSelecionado) {
         this.bairroSelecionado = bairroSelecionado;

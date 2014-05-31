@@ -11,14 +11,15 @@ and open the template in the editor.
       xmlns:p="http://primefaces.org/ui"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
     <h:form id="formTabela">
-        <p:panel header="Posto de saúde Cadastrados" id="painelCliente">
+        <p:panel header="Clientes Cadastrados" id="painelCliente">
             <p:growl />
-            <p:dataTable value="#{postoSaudeManagedBean.listarRel()}"
-                var="pos" id="tabela" 
+            <p:dataTable value="#{encaminhamentoManagedBean.listarRel()}"
+                var="enc" id="tabela" 
                 paginator="true" rows="10" 
-                emptyMessage="Nenhum posto de saúde cadastrado.">
-                <p:column headerText="Código: " style="width: 30%">#{pos.idPostoSaude}</p:column>
-                <p:column headerText="Nome: " style="width: 70%">#{pos.nomePosto}</p:column>
+                emptyMessage="Nenhum encaminhamento cadastrado.">
+                
+                <p:column headerText="Código: " style="width: 5%">#{enc.idEncaminhamento}</p:column>
+                <p:column headerText="Motivo:  " style="width: 30%">#{enc.motivoEncaminhamento}</p:column>
             </p:dataTable>
         </p:panel>
     </h:form>

@@ -9,6 +9,7 @@ import br.com.pi.report.ReportEncaminhamento;
 import br.com.pi.service.IEncaminhamentoService;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.util.Date;
 import java.util.List;
 import javax.ejb.EJB;
 import javax.enterprise.context.RequestScoped;
@@ -32,8 +33,8 @@ public class EncaminhamentoManagedBean
     
     private ReportEncaminhamento reportEncaminhamento;
     private List<Encaminhamento> listaEncaminhamento;
-    private String pesquisaDataInicio;
-    private String pesquisaDataFim;
+    private Date pesquisaDataInicio;
+    private Date pesquisaDataFim;
     
     public EncaminhamentoManagedBean()
     {
@@ -153,7 +154,7 @@ public class EncaminhamentoManagedBean
         //if(pacPesq.length() == 1)
         //{
             System.out.println("Entrou no método");
-            listaEncaminhamento = encaminhamentoService.listarRel(pesquisaDataInicio, pesquisaDataFim);
+            listaEncaminhamento = encaminhamentoService.listarRel(pesquisaDataInicio.toString(), pesquisaDataFim.toString());
             //listaPaciente = listaPaciente.stream().filter(x -> x.getPessoa().getNome().contains("An")).map(x -> x).collect(Collectors.toList());
         //}
         /*
@@ -197,19 +198,19 @@ public class EncaminhamentoManagedBean
         this.listaEncaminhamento = listaEncaminhamento;
     }
 
-    public String getPesquisaDataInicio() {
+    public Date getPesquisaDataInicio() {
         return pesquisaDataInicio;
     }
 
-    public void setPesquisaDataInicio(String pesquisaDataInicio) {
+    public void setPesquisaDataInicio(Date pesquisaDataInicio) {
         this.pesquisaDataInicio = pesquisaDataInicio;
     }
 
-    public String getPesquisaDataFim() {
+    public Date getPesquisaDataFim() {
         return pesquisaDataFim;
     }
 
-    public void setPesquisaDataFim(String pesquisaDataFim) {
+    public void setPesquisaDataFim(Date pesquisaDataFim) {
         this.pesquisaDataFim = pesquisaDataFim;
     }
 }

@@ -8,17 +8,20 @@
     <h:form id="formCadastro">
         <p:panel header="Cadastro de Paciente" id="painelCadastro">
             <p:growl />
+            <h:inputHidden value="#{atribuicaoManagedBean.atribuicao.idAtribuicao}" />
                 <h:panelGrid columns="2">
                     <h:outputLabel value="Nome: " />
-                    <p:inputText value="#{postoSaudeManagedBean.posPesq}" />
+                    <p:inputText value="#{atribuicaoManagedBean.atPesq}" />
                     
                     <p:commandButton
-                        value="Procurar"
+                        value="Salvar"
                         icon="ui-icon-disk"
                         update="painelCadastro,:formTabela:tabela"/>
                     <h:commandLink value="Relatório"
-                                   actionListener="#{postoSaudeManagedBean.gerarRelatorioFiltrado()}"/>
-                </h:panelGrid>                           
+                                   actionListener="#{atribuicaoManagedBean.gerarRelatorioFiltrado()}"/>
+                </h:panelGrid>
+            
+                           
         </p:panel>
     </h:form>
 </ui:fragment>
