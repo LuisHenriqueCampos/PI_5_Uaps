@@ -48,7 +48,7 @@ public class Pessoaa implements Serializable {
     @OneToOne(cascade = CascadeType.ALL, mappedBy = "pessoa",fetch = FetchType.LAZY)
     private Medicoenfermeira medicoenfermeira;
     
-    @OneToOne(cascade = CascadeType.ALL, mappedBy = "pessoa",fetch = FetchType.LAZY)
+    @OneToOne(cascade = CascadeType.ALL, mappedBy = "pessoa")
     private Paciente paciente;
 
     public Pessoaa() {
