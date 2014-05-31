@@ -153,7 +153,7 @@ public class EncaminhamentoManagedBean
         //if(pacPesq.length() == 1)
         //{
             System.out.println("Entrou no método");
-            listaEncaminhamento = encaminhamentoService.listarRel(pesquisaDataInicio);
+            listaEncaminhamento = encaminhamentoService.listarRel(pesquisaDataInicio, pesquisaDataFim);
             //listaPaciente = listaPaciente.stream().filter(x -> x.getPessoa().getNome().contains("An")).map(x -> x).collect(Collectors.toList());
         //}
         /*
@@ -197,12 +197,19 @@ public class EncaminhamentoManagedBean
         this.listaEncaminhamento = listaEncaminhamento;
     }
 
-    public String getEncPesq() {
-        return encPesq;
+    public String getPesquisaDataInicio() {
+        return pesquisaDataInicio;
     }
 
-    public void setEncPesq(String encPesq) {
-        this.encPesq = encPesq;
+    public void setPesquisaDataInicio(String pesquisaDataInicio) {
+        this.pesquisaDataInicio = pesquisaDataInicio;
     }
-    
+
+    public String getPesquisaDataFim() {
+        return pesquisaDataFim;
+    }
+
+    public void setPesquisaDataFim(String pesquisaDataFim) {
+        this.pesquisaDataFim = pesquisaDataFim;
+    }
 }
