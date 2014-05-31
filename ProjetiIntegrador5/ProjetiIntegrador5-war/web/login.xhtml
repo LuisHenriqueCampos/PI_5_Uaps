@@ -11,14 +11,22 @@
 
 <style>
 body{
-background-color:#fcfdfd;
+background-color:white;
 }
 
 #login-box{
-background-color:#D8D8D8;
+background-color:#F0F0F0;
 width:380px;
 height:260px;
-margin:180px auto 0px;
+margin:100px auto 0px;
+border-radius:5px;
+}
+
+#faixa{
+background-color:#336699;
+width:auto;
+height:20px;
+margin:20px auto 0px;
 border-radius:5px;
 }
 
@@ -57,6 +65,50 @@ color:#555555;
 text-shadow: 1px 0px 1px white;
 }
 
+.input-div{
+margin:20px;
+padding:5px;
+background-color:#f2f5f7;
+border-radius:3px;
+}
+.input-div input{
+width:310px;
+height:35px;
+padding-left:5px;
+font:normal 13px sans-serif;
+color:#aeaeae;
+border-radius:3px;
+border:1px solid #bfc4c6;
+outline:none;
+}
+.input-div:hover{
+background-color:#e0f1fc;
+}
+.input-div:hover input{
+border-color:#7d6cdd;
+}
+#input-senha{
+margin-top:-10px;
+}
+#botao{
+float:right;
+}
+#botao input{
+width:100px;
+height:35px;
+padding-left:5px;
+color:#aeaeae;
+border-radius:3px;
+border:1px solid #bfc4c6;
+outline:none;
+}
+#botoes{
+width:310px;
+margin-left:25px;
+}
+#botao:hover input{
+border-color:#7d6cdd;
+}
 </style>
     </h:head>
     <h:body>
@@ -72,6 +124,10 @@ text-shadow: 1px 0px 1px white;
                 </p>         
             </h:messages>
             
+            <img src="imagens/logo.jpg" alt=""/>
+            
+            <div id="faixa"></div>
+            
             <div id="login-box">
    
                 <div id="login-box-interno">
@@ -80,9 +136,17 @@ text-shadow: 1px 0px 1px white;
                         Login
                     </div>
 
-                    <br/><br/>Usuario:<input placeholder="admin" type="text" name="j_username" required="true"/>
-                    <br/><br/>Senha:<input placeholder="admin" type="text" name="j_password" required="true"/><br/><br/>
-                    <input type="submit" value="Entrar"/>
+                    <div class="input-div" id="input-usuario">
+                        <input placeholder="Nome de Usuário" type="text" name="j_username" required="true"/>
+                    </div>
+
+                    <div class="input-div" id="input-senha">
+                        <input placeholder="Senha" type="password" name="j_password" required="true"/>
+                    </div>
+                    
+                    <div id="botoes">
+                        <div id="botao"><input type="submit" value="Login"/></div>
+                    </div>
 
                 </div>
 
