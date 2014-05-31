@@ -19,4 +19,5 @@ public interface IBairroService extends ICrudGeneric<Bairro>
     public String excluir(Bairro Idobj);    
     public Bairro obter(Integer IdObj);
     public List<Bairro> listar();
+    public List<Bairro> listarRel(String pesq);
 }

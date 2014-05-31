@@ -1,6 +1,6 @@
 
 
-package br.com.pi.managedbean;
+package managedbean;
 
 import javax.ejb.EJB;
 import javax.enterprise.context.RequestScoped;

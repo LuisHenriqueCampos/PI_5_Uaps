@@ -1,9 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package br.com.pi.serviceimple;
 
 import br.com.pi.entidade.Area;
@@ -69,5 +63,13 @@ public class BairroService implements IBairroService
     public List<Bairro> listar() {
         TypedQuery<Bairro> bairroQuery = em.createQuery("select a from Bairro a ORDER BY a.bairro", Bairro.class);
         return bairroQuery.getResultList();
+    }
+    
+    @Override
+    public List<Bairro> listarRel(String pesq)
+    {
+        TypedQuery<Bairro> endQuery = em.createQuery("select b from Bairro b where b.bairro like :bairro", Bairro.class);
+        endQuery.setParameter("bairro", "%" + pesq + "%");
+        return endQuery.getResultList();
     }
 }

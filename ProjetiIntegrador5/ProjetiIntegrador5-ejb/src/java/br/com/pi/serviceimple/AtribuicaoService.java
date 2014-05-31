@@ -1,9 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package br.com.pi.serviceimple;
 
 import br.com.pi.entidade.Atribuicao;
@@ -71,6 +65,14 @@ public class AtribuicaoService implements IAtribuicaoService{
     public Atribuicao obter(Integer IdObj) {
         
         return em.find(Atribuicao.class, IdObj);
+    }
+    
+    @Override
+    public List<Atribuicao> listarRel(String pesq)
+    {
+        TypedQuery<Atribuicao> endQuery = em.createQuery("select a from Atribuicao a where a.descricao like :desc", Atribuicao.class);
+        endQuery.setParameter("desc", "%" + pesq + "%");
+        return endQuery.getResultList();
     }
     
 }

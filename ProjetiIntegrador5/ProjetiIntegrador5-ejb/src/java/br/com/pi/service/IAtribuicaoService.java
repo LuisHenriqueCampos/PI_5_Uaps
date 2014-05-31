@@ -19,5 +19,6 @@ public interface IAtribuicaoService extends ICrudGeneric<Atribuicao>{
     public String excluir(Atribuicao Idobj);    
     public Atribuicao obter(Integer IdObj);
     public List<Atribuicao> listar();
+    public List<Atribuicao> listarRel(String pesq);
     
 }
