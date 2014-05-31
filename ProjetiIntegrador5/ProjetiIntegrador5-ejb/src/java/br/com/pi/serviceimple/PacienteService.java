@@ -57,7 +57,7 @@ public class PacienteService implements IPacienteService
     @Override
     public List<Paciente> listar()
     {
-        TypedQuery pacQuery = em.createQuery("select p from Paciente p", Paciente.class);
+        TypedQuery pacQuery = em.createQuery("select p from Paciente p order by p.pessoa.nome", Paciente.class);
         return pacQuery.getResultList();
     }
 

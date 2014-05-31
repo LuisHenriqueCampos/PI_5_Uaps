@@ -1,7 +1,9 @@
 package br.com.pi.serviceimple;
 
 import br.com.pi.entidade.Familia;
+import br.com.pi.entidade.Paciente;
 import br.com.pi.service.IFamiliaService;
+import java.util.ArrayList;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -38,11 +40,31 @@ public class FamiliaService implements IFamiliaService
     {
         try
         {
+            TypedQuery<Paciente> queryPaciente = em.createQuery("select p from Paciente p where p.idFamilia.idFamilia = :idFamilia", Paciente.class);
+            queryPaciente.setParameter("idFamilia", Idobj.getIdFamilia());
+            String erros = "";
+            List<Paciente> pacientes = queryPaciente.getResultList();
+            if(pacientes.size() > 0)
+            {
+               while(pacientes.iterator().hasNext())
+                {
+                    erros += pacientes.iterator().next().getPessoa().getNome() + "\n";
+                }
+                return erros;
+            }
+            
+        }catch(Exception e)
+        {
+            return e.getMessage();
+        }
+        try
+        {
             Familia f = em.find(Familia.class, Idobj.getIdFamilia());
             em.remove(f);
             return null;
         }catch(Exception ex)
         {
+            ex.printStackTrace();
             return ex.getMessage();
         }
     }

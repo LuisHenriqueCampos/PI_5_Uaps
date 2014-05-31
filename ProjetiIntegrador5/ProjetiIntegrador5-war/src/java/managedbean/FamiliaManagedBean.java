@@ -14,6 +14,7 @@ import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpServletResponse;
 import br.com.pi.report.ReportFamilia;
+import util.MenssagemUtil;
 /**
  *
  * @author petrovick
@@ -38,12 +39,25 @@ public class FamiliaManagedBean
     public void salvar()
     {
         System.out.println("Entrou no salvar()");
-        familiaService.salvar(familia);
+        String erro = familiaService.salvar(familia);
+        
+        if (erro == null) {
+            MenssagemUtil.addMensagemInfo("Família cadastrada com sucesso!");
+        } else {
+            MenssagemUtil.addMensagemError(erro);
+        }
     }
     
     public void excluir()
     {
-        familiaService.excluir(familiaSelecionada);
+        String erro = familiaService.excluir(familiaSelecionada);
+        
+        if (erro == null) {
+            MenssagemUtil.addMensagemInfo("Família excluida com sucesso!");
+        } else {
+            MenssagemUtil.addMensagemError(erro);
+        }
+        
     }
     
     public void novo()
