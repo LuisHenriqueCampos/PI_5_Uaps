@@ -1,9 +1,63 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://xmlns.jcp.org/jsf/html">
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
     <h:head>
+        <meta charset="utf-8" />
         <title>Login</title>
+
+<style>
+body{
+background-color:#fcfdfd;
+}
+
+#login-box{
+background-color:#D8D8D8;
+width:380px;
+height:260px;
+margin:180px auto 0px;
+border-radius:5px;
+}
+
+#login-box-interno{
+width:360px;
+height:240px;
+background-color:#fdfdfd;
+position:absolute;
+margin:10px;
+border-radius:5px;
+box-shadow:0px 0px 5px black;
+overflow:hidden;
+}
+
+#login-box-label{
+background-color:red;
+height:45px;
+text-align:center;
+font:bold 14px/45px sans-serif;
+border-top-left-radius:5px;
+border-top-right-radius:5px;
+
+background: #fafbfc;
+background: -moz-linear-gradient(top, #fafbfc 0%, #ecf1f4 100%);
+background: -webkit-gradient(linear, left top, left bottom, color-
+stop(0%, #fafbfc), color-stop(100%, #ecf1f4));
+background: -webkit-linear-gradiente(top, #fafbfc 0%, #ecf1f4 100%);
+background: -o-linear-gradiente(top, #fafbfc 0%, #ecf1f4 100%);
+background: -ms-linear-gradiente(top, #fafbfc 0%, #ecf1f4 100%);
+background: -linear-gradiente(top, #fafbfc 0%, #ecf1f4 100%);
+filter: progid:DXImageTransform.Microsoft.gradient(
+startColorstr="#fafbfc", endColorstr="#ecf1f4", GradientType=0);
+border-bottom: 1px solid white;
+box-shadow: 1px 0px 3px black;
+color:#555555;
+text-shadow: 1px 0px 1px white;
+}
+
+</style>
     </h:head>
     <h:body>
         <form method="post"
@@ -17,11 +71,23 @@
                                'Usuario sem premissao - Entre em contato com o administrador!'}"
                 </p>         
             </h:messages>
+            
+            <div id="login-box">
+   
+                <div id="login-box-interno">
 
-            Usuario:<input placeholder="admin" type="text" name="j_username" required="true"/>
-            Senha:<input placeholder="admin" type="text" name="j_password" required="true"/>
-            <input type="submit" value="Entrar"/>
+                    <div id="login-box-label">
+                        Login
+                    </div>
 
+                    <br/><br/>Usuario:<input placeholder="admin" type="text" name="j_username" required="true"/>
+                    <br/><br/>Senha:<input placeholder="admin" type="text" name="j_password" required="true"/><br/><br/>
+                    <input type="submit" value="Entrar"/>
+
+                </div>
+
+            </div> 
+            
         </form>
     </h:body>
 </html>
