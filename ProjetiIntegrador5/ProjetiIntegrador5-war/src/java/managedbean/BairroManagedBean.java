@@ -7,7 +7,13 @@ import javax.enterprise.context.RequestScoped;
 import javax.inject.Named;
 import br.com.pi.service.*;
 import br.com.pi.entidade.*;
+import br.com.pi.report.ReportBairro;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 import java.util.List;
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
+import javax.servlet.http.HttpServletResponse;
 import util.MenssagemUtil;
 /**
  *
@@ -21,10 +27,14 @@ public class BairroManagedBean
     IBairroService bairroService;
     private Bairro bairroSelecionado;
     private Bairro bairro;
+    private ReportBairro reportBairro;
+    private List<Bairro> listaBairro;
+    private String bairroPesq;
     
     public BairroManagedBean()
     {
         bairro = new Bairro();
+        reportBairro = new ReportBairro();
     }
     
     public void editar()
@@ -66,6 +76,62 @@ public class BairroManagedBean
         
     }
     
+    public void gerarRelatorioFiltrado() throws IOException
+    {
+        String caminho = FacesContext.getCurrentInstance().getExternalContext().getRealPath("/");
+        
+        reportBairro = new ReportBairro();
+        
+        String erro = reportBairro.gerar(caminho,listarRel());
+
+        if (erro == null)
+        {
+            ByteArrayOutputStream bytes = reportBairro.getOutput();
+            HttpServletResponse res = (HttpServletResponse) FacesContext.getCurrentInstance().getExternalContext().getResponse();
+            res.setContentType("application/pdf");
+            res.setHeader("Content-disposition", "inline;filename=relatorio.pdf");
+            res.getOutputStream().write(bytes.toByteArray());
+            res.getCharacterEncoding();
+            FacesContext.getCurrentInstance().responseComplete();
+
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Relatório gerado com sucesso!", null));
+        }
+        else
+        {
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, erro, null));
+        }
+    }
+    
+    public List<Bairro> listarRel()
+    {
+        System.out.println("Entrou");
+        //pacPesq = pacPesq == null ? "" : pacPesq;
+        //if(pacPesq.length() == 1)
+        //{
+            System.out.println("Entrou no método");
+            listaBairro = bairroService.listarRel(bairroPesq);
+            //listaPaciente = listaPaciente.stream().filter(x -> x.getPessoa().getNome().contains("An")).map(x -> x).collect(Collectors.toList());
+        //}
+        /*
+        else if(pacPesq.length() > 1)
+        {
+            return listaPaciente.stream()
+                    .filter(x -> x.getPessoa().getNome().contains(pacPesq))
+                    .map(x -> x).collect(Collectors.toList());
+            //listaPaciente = listaPaciente.stream().filter(x -> x.getPessoa().getNome().contains(pacPesq)).map(x -> x).collect(Collectors.toList());
+        }*/
+        
+        System.out.println("Passou");
+        for(Bairro b : listaBairro)
+        {
+            System.out.println("" + b.getBairro());
+        }
+        return listaBairro;
+    }
+
+
+    
+    
     public Bairro getBairroSelecionado() {
         return bairroSelecionado;
     }
@@ -80,6 +146,22 @@ public class BairroManagedBean
 
     public void setBairro(Bairro bairro) {
         this.bairro = bairro;
+    }
+
+    public List<Bairro> getListaBairro() {
+        return listaBairro;
+    }
+
+    public void setListaBairro(List<Bairro> listaBairro) {
+        this.listaBairro = listaBairro;
+    }
+
+    public String getBairroPesq() {
+        return bairroPesq;
+    }
+
+    public void setBairroPesq(String bairroPesq) {
+        this.bairroPesq = bairroPesq;
     }
     
     

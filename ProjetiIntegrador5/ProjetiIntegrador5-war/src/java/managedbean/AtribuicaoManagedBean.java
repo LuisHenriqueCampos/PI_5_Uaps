@@ -24,7 +24,7 @@ public class AtribuicaoManagedBean {
     
     @EJB
     private IAtribuicaoService atribuicaoService;
-    
+    s
     private Atribuicao atribuicao;
     private Atribuicao atribuicaoSelecionado;
     private ReportAtribuicao reportAtribuicao;
@@ -66,7 +66,6 @@ public class AtribuicaoManagedBean {
     public void atualizar(){
         atribuicao = atribuicaoSelecionado;
     }
-    
     
     public void gerarRelatorioFiltrado() throws IOException
     {
