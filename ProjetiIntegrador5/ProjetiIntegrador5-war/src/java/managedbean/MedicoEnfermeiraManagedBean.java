@@ -68,6 +68,16 @@ public class MedicoEnfermeiraManagedBean
     {
         return medicoEnfermeiraService.listar();
     }
+    
+    public List<Medicoenfermeira> listarMedico()
+    {
+        return medicoEnfermeiraService.listarPorAtribuicao("Medico");
+    }
+    
+    public List<Medicoenfermeira> listarEnfermeira()
+    {
+        return medicoEnfermeiraService.listarPorAtribuicao("Enfermeira");
+    }
 
     public void gerar() throws IOException
     {

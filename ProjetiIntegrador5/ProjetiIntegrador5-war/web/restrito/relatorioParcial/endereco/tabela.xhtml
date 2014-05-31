@@ -11,12 +11,12 @@ and open the template in the editor.
       xmlns:p="http://primefaces.org/ui"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
     <h:form id="formTabela">
-        <p:panel header="Clientes Cadastrados" id="painelCliente">
+        <p:panel header="Endereços Cadastrados" id="painelCliente">
             <p:growl />
             <p:dataTable value="#{enderecoManagedBean.listarRel()}"
                 var="end" id="tabela" 
                 paginator="true" rows="10" 
-                emptyMessage="Nenhum endereco cadastrado.">
+                emptyMessage="Nenhum endereço cadastrado.">
                 
                 <p:column headerText="Código: " style="width: 5%">#{end.idEndereco}</p:column>
                 <p:column headerText="Rua: " style="width: 30%">#{end.rua}</p:column>

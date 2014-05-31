@@ -66,9 +66,11 @@ public class MedicoEnfermeiraService implements IMedicoEnfermeiraService{
     }
 
     @Override
-    public List<Medicoenfermeira> listarPorAtribuicao(String atribuicao) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public List<Medicoenfermeira> listarPorAtribuicao(String atribuicao)
+    {
+        TypedQuery<Medicoenfermeira> mefQuery = em.createQuery("select mef from Medicoenfermeira mef where mef.idAtribuicao.descricao like :descAtribuicao", Medicoenfermeira.class);
+        mefQuery.setParameter("descAtribuicao", "%" + atribuicao + "%");
+        return mefQuery.getResultList();
     }
-
     
 }

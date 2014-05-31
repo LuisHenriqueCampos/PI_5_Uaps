@@ -12,7 +12,7 @@ and open the template in the editor.
       xmlns:f="http://java.sun.com/jsf/core">
     
     <h:form id="formPesquisa">
-        <p:panel header="Endereço" id="painelCadastro">
+        <p:panel header="Área" id="painelCadastro">
             <p:growl />
             
             <h:inputHidden value="#{areaManagedBean.area.idArea}" />
@@ -31,13 +31,13 @@ and open the template in the editor.
                 <h:outputLabel value="Enfermeira: " />
                 <h:selectOneMenu converter="pessoaConverter" value="#{areaManagedBean.area.medicoenfermeiraidEnfermeira.pessoa}">
                     <f:selectItem itemLabel="Selecione a enfermeira:" itemValue="" />
-                    <f:selectItems value="#{medicoEnfermeiraManagedBean.listar()}" var="enf" itemLabel="#{enf.pessoa.nome}" itemValue="#{enf.pessoa}" />
+                    <f:selectItems value="#{medicoEnfermeiraManagedBean.listarEnfermeira()}" var="enf" itemLabel="#{enf.pessoa.nome}" itemValue="#{enf.pessoa}" />
                 </h:selectOneMenu>
 
                 <h:outputLabel value="Medico: " />
                 <h:selectOneMenu converter="pessoaConverter" value="#{areaManagedBean.area.medicoenfermeiraidMedico.pessoa}">
                     <f:selectItem itemLabel="Selecione o medico: " itemValue="" />
-                    <f:selectItems value="#{medicoEnfermeiraManagedBean.listar()}" var="med" itemLabel="#{med.pessoa.nome}" itemValue="#{med.pessoa}" />
+                    <f:selectItems value="#{medicoEnfermeiraManagedBean.listarMedico()}" var="med" itemLabel="#{med.pessoa.nome}" itemValue="#{med.pessoa}" />
                 </h:selectOneMenu>
                 
             </h:panelGrid>

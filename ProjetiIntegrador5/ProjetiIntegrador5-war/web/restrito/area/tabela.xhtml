@@ -10,12 +10,12 @@
             <p:menuitem value="Excluir" icon="ui-icon-close" actionListener="#{areaManagedBean.excluir()}" update="painelEndereco" />
             <p:menuitem value="Editar" icon="ui-icon-pencil" actionListener="#{areaManagedBean.editar()}" update=":formPesquisa:painelCadastro" />
         </p:contextMenu>
-        <p:panel header="Endereco cadastrados" id="painelEndereco">
+        <p:panel header="Área cadastrada" id="painelEndereco">
             <p:growl />
             <p:dataTable value="#{areaManagedBean.todos()}"
                 var="area" id="tabela" 
                 paginator="true" rows="10" 
-                emptyMessage="Nenhum endereço cadastrado" 
+                emptyMessage="Nenhuma Área cadastrado" 
                 rowKey="#{area.idArea}" 
                 selection="#{areaManagedBean.areaSelecionada}"
                 selectionMode="single">
