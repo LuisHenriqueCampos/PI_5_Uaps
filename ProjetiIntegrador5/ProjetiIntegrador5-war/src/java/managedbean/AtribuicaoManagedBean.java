@@ -33,6 +33,7 @@ public class AtribuicaoManagedBean {
     public AtribuicaoManagedBean(){
         atribuicao = new Atribuicao();
         reportAtribuicao = new ReportAtribuicao();
+        atPesq = "";
     }
     
     public List<Atribuicao> todos(){
@@ -115,7 +116,7 @@ public class AtribuicaoManagedBean {
         System.out.println("Passou");
         for(Atribuicao p : listaAtribuicao)
         {
-            System.out.println("" + p.getDescricao());
+            System.out.println("" + p.getIdAtribuicao() + " - " + p.getDescricao());
         }
         return listaAtribuicao;
     }

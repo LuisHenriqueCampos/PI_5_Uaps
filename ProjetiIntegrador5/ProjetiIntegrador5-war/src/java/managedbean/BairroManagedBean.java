@@ -113,8 +113,8 @@ public class BairroManagedBean
         
         
             System.out.println("Entrou no método");
-        //    listaBairro = bairroService.listarRel(bairroPesq);
-        bairroService.listar().forEach(x -> x.getBairro().equals("ca"));
+        listaBairro = bairroService.listarRel(bairroPesq);
+        //bairroService.listar().forEach(x -> x.getBairro().equals("ca"));
 
             
             //listaPaciente = listaPaciente.stream().filter(x -> x.getPessoa().getNome().contains("An")).map(x -> x).collect(Collectors.toList());

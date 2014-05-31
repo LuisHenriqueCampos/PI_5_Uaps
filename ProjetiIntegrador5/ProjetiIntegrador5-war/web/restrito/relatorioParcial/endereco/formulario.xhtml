@@ -6,7 +6,7 @@
       xmlns:p="http://primefaces.org/ui"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
     <h:form id="formCadastro">
-        <p:panel header="Cadastro de Paciente" id="painelCadastro">
+        <p:panel header="Pesquisa de Endereço" id="painelCadastro">
             <p:growl />
             <h:inputHidden value="#{enderecoManagedBean.endereco.idEndereco}" />
                 <h:panelGrid columns="2">
@@ -14,7 +14,7 @@
                     <p:inputText value="#{enderecoManagedBean.endPesq}" />
                     
                     <p:commandButton
-                        value="Salvar"
+                        value="Listar"
                         icon="ui-icon-disk"
                         update="painelCadastro,:formTabela:tabela"/>
                     <h:commandLink value="Relatório"
