@@ -61,5 +61,11 @@ public class EnderecoService implements IEnderecoService
         return enderecoQuery.getResultList(); 
     }
     
-    
+    @Override
+    public List<Endereco> listarRel(String pesq)
+    {
+        TypedQuery<Endereco> endQuery = em.createQuery("select e from Endereco e where e.rua like :rua", Endereco.class);
+        endQuery.setParameter("rua", "%" + pesq + "%");
+        return endQuery.getResultList();
+    }
 }

@@ -13,5 +13,5 @@ public interface IEnderecoService extends ICrudGeneric<Endereco>
     public String excluir(Endereco Idobj);    
     public Endereco obter(Integer IdObj);
     public List<Endereco> listar();
-    
+    public List<Endereco> listarRel(String pesq);
 }

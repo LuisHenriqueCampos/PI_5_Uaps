@@ -57,4 +57,13 @@ public class EncaminhamentoService implements IEncaminhamentoService
         TypedQuery<Encaminhamento> typedQuery = em.createQuery("select e from Encaminhamento e", Encaminhamento.class);
         return typedQuery.getResultList();
     }
+    
+    @Override
+    public List<Encaminhamento> listarRel(String dataInicio, String dataFim)
+    {
+        TypedQuery<Encaminhamento> encQuery = em.createQuery("select e from Encaminhamento e where e.dataEncaminhamento between :dataInicio and :dataFim", Encaminhamento.class);
+        encQuery.setParameter("dataInicio", dataInicio);
+        encQuery.setParameter("dataFim", dataFim);
+        return encQuery.getResultList();
+    }
 }

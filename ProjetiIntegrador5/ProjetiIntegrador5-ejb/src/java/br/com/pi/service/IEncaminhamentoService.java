@@ -13,4 +13,5 @@ public interface IEncaminhamentoService extends ICrudGeneric<Encaminhamento>
     public String excluir(Encaminhamento Idobj);    
     public Encaminhamento obter(Integer IdObj);
     public List<Encaminhamento> listar();
+    public List<Encaminhamento> listarRel(String dataInicio, String dataFim);
 }
