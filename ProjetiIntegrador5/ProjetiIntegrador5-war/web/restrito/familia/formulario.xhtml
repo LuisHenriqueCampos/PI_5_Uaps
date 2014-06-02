@@ -7,27 +7,26 @@
              xmlns:f="http://xmlns.jcp.org/jsf/core">
     
     <h:form id="formCadastro">
-        <p:panel header="Familia" id="painelCadastro">
+        <br/><p:panel header="Cadastro Família" id="painelCadastro">
             <p:growl />
             <h:inputHidden value="#{familiaManagedBean.familia.idFamilia}" />
             
-            <h:panelGrid columns="2">
-                <h:outputLabel value="Nome:" />
-                <p:inputText value="#{familiaManagedBean.familia.descricao}" />
+            <h:panelGrid columns="2" cellpadding="5">
+                <h:outputLabel value="Descrição:*" />
+                <p:inputText value="#{familiaManagedBean.familia.descricao}" size="50"/>
                 
-                <h:outputLabel value="Complemento:" />
-                <p:inputText value="#{familiaManagedBean.familia.complemento}" />
+                <h:outputLabel value="Número da Casa:*" />
+                <p:inputText value="#{familiaManagedBean.familia.numeroCasa}" />
                 
                 <h:outputLabel value="Endereço:*"/>
                 <h:selectOneMenu converter="enderecoConverter" value="#{familiaManagedBean.familia.idEndereco}">
-                    <f:selectItem itemLabel="Selecione um endereço" itemValue="" />
+                    <f:selectItem itemLabel="Selecione um Endereço" itemValue="" />
                     <f:selectItems value="#{enderecoManagedBean.todos()}" var="p" itemValue="#{p}" itemLabel="#{p.rua}" />
                 </h:selectOneMenu>
                 
             </h:panelGrid>
-            <p:commandButton value="Procurar" icon="ui-icon-search" />
             <p:commandButton value="Salvar" icon="ui-icon-disk" actionListener="#{familiaManagedBean.salvar()}" update="painelCadastro,:formTabela:tabela" />
-            <p:commandButton value="Novo" icon="ui-icon.plus" actionListener="#{familiaManagedBean.novo()}" update="painelCadastro"/>
+            <p:button value="Novo" icon="ui-icon.plus" outcome="index.html"/>
         </p:panel>
     </h:form>
 </ui:fragment>

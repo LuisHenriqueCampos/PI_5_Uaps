@@ -1,7 +1,6 @@
 package managedbean;
 
 import br.com.pi.entidade.Area;
-import br.com.pi.entidade.Bairro;
 import br.com.pi.service.IEnderecoService;
 import br.com.pi.entidade.Endereco;
 import br.com.pi.entidade.Microarea;
@@ -19,6 +18,7 @@ import javax.faces.context.FacesContext;
 import javax.faces.view.ViewScoped;
 import javax.inject.Named;
 import javax.servlet.http.HttpServletResponse;
+import util.MenssagemUtil;
 
 /**
  *
@@ -55,10 +55,7 @@ public class EnderecoManagedBean
     {
         endereco = new Endereco();
         reportEndereco = new ReportEndereco();
-//        Microarea ma = new Microarea();
-//        ma.setIdArea(new Area());
-//        endereco.setIdMicroArea(ma);
-//        endereco.setIdBairro(new Bairro());
+
     }
     
     public List<Endereco> todos()
@@ -71,30 +68,33 @@ public class EnderecoManagedBean
     
     public void excluir()
     {
-        enderecoService.excluir(enderecoSelecionado);
+        String erro = enderecoService.excluir(enderecoSelecionado);
+        if(erro==null){
+            MenssagemUtil.addMensagemInfo("Endereço excluído com sucesso!");
+        }else{
+            MenssagemUtil.addMensagemError(erro);
+        }
     }
     
     public void salvar()
     {
-        System.out.println("Endereco Id:" + endereco.getIdEndereco());
-        System.out.println("Endereco Rua:" + endereco.getRua());
-        
-        enderecoService.salvar(endereco);
+        String erro = enderecoService.salvar(endereco);
+        if(erro==null){
+            MenssagemUtil.addMensagemInfo("Endereço salvo com sucesso!");
+            endereco = new Endereco();
+        }else{
+            MenssagemUtil.addMensagemError(erro);
+        }
     }
     
     public void novo()
     {
         this.endereco = new Endereco();
-        Microarea ma = new Microarea();
-        ma.setIdArea(new Area());
-        endereco.setIdMicroArea(ma);
-        endereco.setIdBairro(new Bairro());
     }
     
     public void listarPorPosto(){
         if(postosaude != null){
             areas = areaService.listarPorPosto(postosaude);
-            microareas = microareaService.listarPorArea(areaarea);
         }
     }
     
@@ -114,25 +114,8 @@ public class EnderecoManagedBean
     
     public List<Endereco> listarRel()
     {
-        System.out.println("Entrou");
-        //pacPesq = pacPesq == null ? "" : pacPesq;
-        //if(pacPesq.length() == 1)
-        //{
-            System.out.println("Entrou no método");
-            listaEndereco = enderecoService.listarRel(endPesq);
-            //listaPaciente = listaPaciente.stream().filter(x -> x.getPessoa().getNome().contains("An")).map(x -> x).collect(Collectors.toList());
-        //}
-        /*
-        else if(pacPesq.length() > 1)
-        {
-            return listaPaciente.stream()
-                    .filter(x -> x.getPessoa().getNome().contains(pacPesq))
-                    .map(x -> x).collect(Collectors.toList());
-            //listaPaciente = listaPaciente.stream().filter(x -> x.getPessoa().getNome().contains(pacPesq)).map(x -> x).collect(Collectors.toList());
-        }*/
-
-        
-        System.out.println("Passou");
+        listaEndereco = enderecoService.listarRel(endPesq);
+            
         for(Endereco e : listaEndereco)
         {
             System.out.println("" + e.getRua());
@@ -165,11 +148,7 @@ public class EnderecoManagedBean
         {
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, erro, null));
         }
-    }
-    
-    
-    
-    
+    }   
     
     public Endereco getEndereco() {
         return endereco;

@@ -49,7 +49,12 @@ public class PostosaudeService implements IPostosaudeService
         try
         {
             Postosaude posto = em.find(Postosaude.class, Idobj.getIdPostoSaude());
-            em.remove(posto);
+            
+            if(posto.getAreaCollection().isEmpty()){
+                em.remove(posto);
+            }else{
+                return "Existe Dependências deste Registro. O Registro não poderá ser Excluído.";
+            }
         }
         catch(Exception ex)
         {

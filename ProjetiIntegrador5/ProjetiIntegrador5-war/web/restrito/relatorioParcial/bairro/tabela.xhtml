@@ -11,16 +11,18 @@ and open the template in the editor.
       xmlns:p="http://primefaces.org/ui"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
     <h:form id="formTabela">
-        <p:panel header="Clientes Cadastrados" id="painelCliente">
-            <p:growl />
-            <p:dataTable value="#{bairroManagedBean.listarRel()}"
-                var="b" id="tabela" 
-                paginator="true" rows="10" 
-                emptyMessage="Nenhum bairro cadastrado.">
-                
-                <p:column headerText="Código: " style="width: 5%">#{b.idBairro}</p:column>
-                <p:column headerText="Bairro: " style="width: 30%">#{b.bairro}</p:column>
-            </p:dataTable>
-        </p:panel>
+        <br/>
+        <p:fieldset legend="Bairros Cadastrados" toggleable="true" toggleSpeed="400" collapsed="false">
+            <p:panel id="painelCliente">
+                <p:growl />
+                <p:dataTable value="#{bairroManagedBean.listarRel()}"
+                    var="b" id="tabela" 
+                    emptyMessage="Nenhum Bairro Cadastrado.">
+
+                    <p:column headerText="Código " style="width: 5%">#{b.idBairro}</p:column>
+                    <p:column headerText="Bairro " style="width: 95%">#{b.bairro}</p:column>
+                </p:dataTable>
+            </p:panel>
+        </p:fieldset>    
     </h:form>
 </ui:fragment>

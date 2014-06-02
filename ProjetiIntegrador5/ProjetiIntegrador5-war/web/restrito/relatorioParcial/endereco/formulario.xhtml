@@ -6,19 +6,19 @@
       xmlns:p="http://primefaces.org/ui"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
     <h:form id="formCadastro">
-        <p:panel header="Pesquisa de Endereço" id="painelCadastro">
+        <br/><p:panel header="Relatório Filtrado Endereço" id="painelCadastro">
             <p:growl />
             <h:inputHidden value="#{enderecoManagedBean.endereco.idEndereco}" />
                 <h:panelGrid columns="2">
                     <h:outputLabel value="Rua: " />
-                    <p:inputText value="#{enderecoManagedBean.endPesq}" />
+                    <p:inputText value="#{enderecoManagedBean.endPesq}" size="50"/>
                     
                     <p:commandButton
                         value="Listar"
-                        icon="ui-icon-disk"
+                        icon="ui-icon-search"
                         update="painelCadastro,:formTabela:tabela"/>
                     <h:commandLink value="Relatório"
-                                   actionListener="#{enderecoManagedBean.gerarRelatorioFiltrado()}"/>
+                                   actionListener="#{enderecoManagedBean.gerarRelatorioFiltrado()}" target="_blank"/>
                 </h:panelGrid>
             
                            

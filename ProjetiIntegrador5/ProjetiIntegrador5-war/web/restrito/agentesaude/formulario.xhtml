@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<ui:fragment xmlns="http://www.w3.org/1999/xhtml"
+             xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+             xmlns:p="http://primefaces.org/ui"
+             xmlns:h="http://java.sun.com/jsf/html"
+             xmlns:f="http://xmlns.jcp.org/jsf/core">
+    
+    
+    <h:form id="formCadastro">
+        <br/>
+        <p:panel  id="painelCadastro">
+            
+            <p:growl/>
+            
+            <h:inputHidden value="#{agentesaudeManagedBean.agentesaude.pessoa.idPessoa}"/>
+            
+            <h:panelGrid columns="4" cellpadding="4">
+                
+                <h:outputLabel value="Nome Agente de Saúde:* " />
+                <p:inputText value="#{agentesaudeManagedBean.agentesaude.pessoa.nome}" size="50"/>
+                
+                <h:outputLabel value="Matrícula:*" />
+                <p:inputMask value="#{agentesaudeManagedBean.agentesaude.matricula}" mask="99.999" size="25"/>            
+                             
+                <h:outputLabel value="Micro-Área:*"/>
+                <h:selectOneMenu value="#{agentesaudeManagedBean.agentesaude.idMicroArea}"
+                                         converter="microareaConverter"
+                                         id="comboSexo">
+                            <f:selectItem itemLabel="Selecione a Micro-Área" itemValue=""/>
+                            <f:selectItems value="#{microareaManagedBean.todos()}"
+                                           var="a"
+                                           itemLabel="#{a.descricao}"
+                                           itemValue="#{a}"/>
+                </h:selectOneMenu>
+                
+            </h:panelGrid>
+            
+            <p:commandButton value="Salvar" icon="ui-icon-disk"
+                             actionListener="#{agentesaudeManagedBean.salvar()}"
+                                 update="painelCadastro,:formTabela:tabela"/>
+                
+            <p:button value="Novo" icon="ui-icon-plus" outcome="index.html"/>
+            
+        </p:panel>
+        <br/>
+    </h:form>
+</ui:fragment>

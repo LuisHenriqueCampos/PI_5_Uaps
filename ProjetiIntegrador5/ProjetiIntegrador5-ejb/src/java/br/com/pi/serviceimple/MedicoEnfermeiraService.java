@@ -50,7 +50,11 @@ public class MedicoEnfermeiraService implements IMedicoEnfermeiraService{
         try
         {
             Medicoenfermeira mef = em.find(Medicoenfermeira.class, Idobj.getPessoa().getIdPessoa());
-            em.remove(mef);
+            if(mef.getEncaminhamentoCollection().isEmpty()){
+                em.remove(mef);
+            }else{
+                return "Existe Dependências deste Registro. O Registro não poderá ser Excluído.";
+            }
         }
         catch(Exception ex)
         {

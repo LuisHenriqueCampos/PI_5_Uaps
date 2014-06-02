@@ -17,14 +17,14 @@
                         update=":formCadastro:painelCadastro" />
         </p:contextMenu>
         
-        <p:fieldset legend="Atribuições" toggleable="true" toggleSpeed="400" collapsed="true" >
+        <p:fieldset legend="Atribuições Cadastradas" toggleable="true" toggleSpeed="400" collapsed="false" >
             
         <p:panel  id="painelAtribuicao">
             <p:growl />
             <p:dataTable value="#{atribuicaoManagedBean.todos()}"
                 var="atribuicao" 
                 id="tabela" 
-                paginator="true" rows="10" 
+                paginator="true" rows="10" paginatorPosition="bottom" 
                 emptyMessage="Nenhuma Atribuição Cadastrada" 
                 rowKey="#{atribuicao.idAtribuicao}" 
                 selection="#{atribuicaoManagedBean.atribuicaoSelecionado}" 

@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<ui:fragment xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://xmlns.jcp.org/jsf/html">
+    
+    <h:form id="formTabela">
+        
+        <p:contextMenu for="tabela">
+            
+            <p:menuitem value="Excluir" icon="ui-icon-close"
+                        actionListener="#{agentesaudeManagedBean.excluir()}"
+                        update="painelAgente"/>
+            
+            <p:menuitem value="Alterar" icon="ui-icon-pencil"
+                        actionListener="#{agentesaudeManagedBean.editar()}"
+                        update=":formCadastro:painelCadastro"/>
+            
+        </p:contextMenu>
+        
+        <p:fieldset legend="Agentes de Saúde Cadastrados" toggleable="true" toggleSpeed="400" collapsed="false">
+            
+            <p:panel id="painelAgente">
+                
+                <p:growl/>
+                
+                <p:dataTable emptyMessage="Nenhum Agente de Saúde Cadastrado." 
+                             paginator="true" rows="10" var="agente"
+                             paginatorPosition="bottom"
+                             value="#{agentesaudeManagedBean.todos()}" id="tabela"
+                             rowKey="#{agente.pessoa.idPessoa}"
+                             selection="#{agentesaudeManagedBean.agentesaudeSelecionado}"
+                             selectionMode="single">
+            
+                    <p:column style="width: 5%" headerText="Código">
+                        #{agente.pessoa.idPessoa}
+                    </p:column>
+            
+                    <p:column style="width: 15%" headerText="Agente de Saúde">
+                        #{agente.pessoa.nome}
+                    </p:column>
+                    
+                    <p:column style="width: 15%" headerText="Matrícula">
+                        #{agente.matricula}
+                    </p:column>
+                    
+                    <p:column style="width: 15%" headerText="Micro-Área de Atendimento">
+                        #{agente.idMicroArea.descricao}
+                    </p:column>
+            
+                </p:dataTable>
+            
+            </p:panel>
+        
+        </p:fieldset>    
+            
+    </h:form>
+    
+</ui:fragment>

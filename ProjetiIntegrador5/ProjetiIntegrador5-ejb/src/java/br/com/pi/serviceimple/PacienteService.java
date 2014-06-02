@@ -42,14 +42,18 @@ public class PacienteService implements IPacienteService
         try
         {
             Paciente p = em.find(Paciente.class, Idobj.getPessoa().getIdPessoa());
-            em.remove(p);
-            return null;
+            if(p.getEncaminhamentoCollection().isEmpty()){
+                em.remove(p);
+            }else{
+                return "Existe Dependências deste Registro. O Registro não poderá ser Excluído.";
+            }
         }
         catch(Exception ex)
         {
             ex.printStackTrace();
             return ex.getMessage();
         }
+        return null;
     }
 
     @Override

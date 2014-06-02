@@ -40,13 +40,17 @@ public class EspecialidadeEncaminhamentoService implements IEspecialidadeEncamin
         try
         {
             EspecialidadeEncaminhamento e = obter(idEspecialidade);
-            em.remove(e);
-            return null;
+            if(e.getEncaminhamentoCollection().isEmpty()){
+                em.remove(e);
+            }else{
+                return "Existe Dependências deste Registro. O Registro não poderá ser Excluído.";
+            }
         }catch(Exception ex)
         {
             ex.printStackTrace();
             return ex.getMessage();
         }
+        return null;
     }
 
     @Override

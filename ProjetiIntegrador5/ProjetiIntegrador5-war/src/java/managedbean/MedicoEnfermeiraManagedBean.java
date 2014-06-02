@@ -66,6 +66,7 @@ public class MedicoEnfermeiraManagedBean
         
         if(erro == null){
             MenssagemUtil.addMensagemInfo("Cadastro salvo com sucesso!");
+            medicoEnfermeira = new Medicoenfermeira();
         }else{
             MenssagemUtil.addMensagemError(erro);
         }

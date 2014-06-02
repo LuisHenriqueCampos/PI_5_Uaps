@@ -10,19 +10,18 @@ and open the template in the editor.
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:p="http://primefaces.org/ui"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
-    <br/>
     <h:form id="formCadastro">
-        <p:panel header="Médico Enfermeira" id="painelCadastro">
+        <br/><p:panel header="Cadastro Médico / Enfermeira" id="painelCadastro">
             <p:growl/>
             <h:inputHidden value="#{medicoEnfermeiraManagedBean.medicoEnfermeira.pessoa.idPessoa}" />
             
-            <h:panelGrid columns="4" cellpadding="4">
+            <h:panelGrid columns="2" cellpadding="4">
                 
                  <h:outputLabel value="Médico / Enfermeira:* " />
-                <p:inputText  value="#{medicoEnfermeiraManagedBean.medicoEnfermeira.pessoa.nome}" />
+                 <p:inputText  value="#{medicoEnfermeiraManagedBean.medicoEnfermeira.pessoa.nome}" size="50"/>
                 
                 <h:outputLabel value="CRM:* " />
-                <p:inputText value="#{medicoEnfermeiraManagedBean.medicoEnfermeira.registro}" />
+                <p:inputText  value="#{medicoEnfermeiraManagedBean.medicoEnfermeira.registro}" size="25"/> 
                 
                 <h:outputLabel value="Atribuição:* " />
                 <h:selectOneMenu converter="atribuicaoConverter" 

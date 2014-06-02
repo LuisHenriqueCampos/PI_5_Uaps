@@ -17,28 +17,28 @@
                         update=":formCadastro:painelCadastro" />
         </p:contextMenu>
         
-        <p:fieldset legend="Especialidades" toggleable="true" toggleSpeed="400" collapsed="true" >
+        <p:fieldset legend="Especialidades Cadastradas" toggleable="true" toggleSpeed="400" collapsed="false" >
             
-        <p:panel  id="painelAtribuicao">
-            <p:growl />
-            <p:dataTable value="#{especialidadeEncaminhamentoManagedBean.todos()}"
-                var="esp" 
-                id="tabela" 
-                paginator="true" rows="10" 
-                emptyMessage="Nenhuma Especilidade Cadastrada" 
-                rowKey="#{esp.idEspecialidade}" 
-                selection="#{especialidadeEncaminhamentoManagedBean.especialidadeSelecionado}" 
-                selectionMode="single" >
-                
-                <p:column headerText="Código" style="width: 10%" sortBy="#{esp.descricao}">
-                    #{esp.idEspecialidade}
-                </p:column>
-                
-                <p:column headerText="Especialidade" style="width: 90%" filterBy="#{esp.descricao}" filterMatchMode="contains" sortBy="#{esp.descricao}">
-                    #{esp.descricao}
-                </p:column>
-            </p:dataTable>
-        </p:panel>
+            <p:panel  id="painelAtribuicao">
+                <p:growl />
+                <p:dataTable value="#{especialidadeEncaminhamentoManagedBean.todos()}"
+                    var="esp" 
+                    id="tabela" 
+                    paginator="true" rows="10" paginatorPosition="bottom"
+                    emptyMessage="Nenhuma Especilidade Cadastrada" 
+                    rowKey="#{esp.idEspecialidade}" 
+                    selection="#{especialidadeEncaminhamentoManagedBean.especialidadeSelecionado}" 
+                    selectionMode="single" >
+
+                    <p:column headerText="Código" style="width: 10%" sortBy="#{esp.descricao}">
+                        #{esp.idEspecialidade}
+                    </p:column>
+
+                    <p:column headerText="Especialidade" style="width: 90%" filterBy="#{esp.descricao}" filterMatchMode="contains" sortBy="#{esp.descricao}">
+                        #{esp.descricao}
+                    </p:column>
+                </p:dataTable>
+            </p:panel>
         </p:fieldset>    
     </h:form>
 </ui:fragment>

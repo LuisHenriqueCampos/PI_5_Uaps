@@ -79,7 +79,7 @@ public class ReportBairro
         
         for(Bairro bairro : bairros)
         {
-            PdfPCell cellCodigo = new PdfPCell(new Phrase(bairro.getIdBairro()));
+            PdfPCell cellCodigo = new PdfPCell(new Phrase(bairro.getIdBairro().toString()));
             PdfPCell cellDescricao = new PdfPCell(new Phrase(bairro.getBairro(), fontTexto));
             
             table.addCell(cellCodigo);

@@ -79,7 +79,7 @@ public class ReportAtribuicao
         
         for(Atribuicao atribuicao : atribuicoes)
         {
-            PdfPCell cellCodigo = new PdfPCell(new Phrase(atribuicao.getIdAtribuicao()));
+            PdfPCell cellCodigo = new PdfPCell(new Phrase(atribuicao.getIdAtribuicao().toString()));
             PdfPCell cellDescricao = new PdfPCell(new Phrase(atribuicao.getDescricao(), fontTexto));
             
             table.addCell(cellCodigo);

@@ -53,7 +53,11 @@ public class AtribuicaoService implements IAtribuicaoService{
     public String excluir(Atribuicao IdObj) {
         try{
             Atribuicao atribuicao = em.find(Atribuicao.class, IdObj.getIdAtribuicao());
-            em.remove(atribuicao);
+            if(atribuicao.getMedicoenfermeiraCollection().isEmpty()){
+                em.remove(atribuicao);
+            }else{
+                return "Existe Dependências deste Registro. O Registro não poderá ser Excluído.";
+            }
         }catch(Exception ex){
             ex.printStackTrace();
             return ex.getMessage();

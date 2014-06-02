@@ -7,15 +7,15 @@
       xmlns:f="http://xmlns.jcp.org/jsf/core">
     
     <h:form id="formPesquisa">
-        <p:panel header="Endereço" id="painelCadastro">
+       <br/><p:panel header="Cadastro Endereço" id="painelCadastro">
             <p:growl />
             <h:inputHidden value="#{enderecoManagedBean.endereco.idEndereco}" />
-            <h:panelGrid columns="2">
+            <h:panelGrid columns="2" cellpadding="5">
                 <h:outputLabel value="Rua: " />
-                <p:inputText value="#{enderecoManagedBean.endereco.rua}" />
+                <p:inputText value="#{enderecoManagedBean.endereco.rua}" size="70"/>
                 
-                <h:outputLabel value="CEP"/>
-                <p:inputText value="#{enderecoManagedBean.endereco.cep}" />
+                <h:outputLabel value="CEP:*" />
+                <p:inputMask value="#{enderecoManagedBean.endereco.cep}" mask="99.999-999" size="25"/>
                 
                 <h:outputLabel value="Bairro"/>
                 <h:selectOneMenu converter="bairroConverter" value="#{enderecoManagedBean.endereco.idBairro}">
@@ -23,43 +23,16 @@
                     <f:selectItems value="#{bairroManagedBean.todos()}" var="b" itemValue="#{b}" itemLabel="#{b.bairro}" />
                 </h:selectOneMenu>
                 
-                <h:outputLabel value="Posto de Saúde:* " />
-                <h:selectOneMenu converter="postosaudeConverter" value="#{enderecoManagedBean.postosaude}">
-                    <f:selectItem itemLabel="Selecione o Posto de saúde:" itemValue="" />
-                    <f:selectItems value="#{postoSaudeManagedBean.todos()}" var="posto" 
-                                   itemLabel="#{posto.nomePosto}" itemValue="#{posto}" />
-                    <p:ajax update="comboArea" listener="#{enderecoManagedBean.listarPorPosto()}"/>
-                </h:selectOneMenu>
-                
-                <h:outputLabel value="Área:" />
-                <h:selectOneMenu converter="areaConverter" value="#{enderecoManagedBean.endereco.idMicroArea.idArea}" 
-                                 id="comboArea">
-                    <f:selectItem itemLabel="Selecione uma Área" itemValue=""/>
-                    <f:selectItems value="#{enderecoManagedBean.areas}" var="area" 
+                <h:outputLabel value="Micro-Área:* " />
+                <h:selectOneMenu converter="microareaConverter" value="#{enderecoManagedBean.endereco.idMicroArea}">
+                    <f:selectItem itemLabel="Selecione a Área:" itemValue="" />
+                    <f:selectItems value="#{microareaManagedBean.todos()}" var="area" 
                                    itemLabel="#{area.descricao}" itemValue="#{area}" />
-                    <p:ajax update="comboMicro" listener="#{enderecoManagedBean.listarPorPosto()}"/>
-                </h:selectOneMenu>
-                
-                <h:outputLabel value="Micro-Área:" />
-                <h:selectOneMenu converter="microareaConverter" value="#{enderecoManagedBean.endereco.idMicroArea}" 
-                                 id="comboMicro">
-                    <f:selectItem itemLabel="Selecione uma Micro-Área" itemValue=""/>
-                    <f:selectItems value="#{enderecoManagedBean.microareas}" var="micro" 
-                                   itemLabel="#{micro.descricao}" itemValue="#{micro}" />
-                </h:selectOneMenu>
-                
-                
-                
-                
-                
-                
+                </h:selectOneMenu>                
                 
             </h:panelGrid>
-            
-            <p:commandButton value="Procurar" icon="ui-icon-search" />
             <p:commandButton value="Salvar" icon="ui-icon-save" actionListener="#{enderecoManagedBean.salvar()}" update="painelCadastro,:formTabela:tabela" />
-            <p:button value="Novo" icon="ui-icon-plus" outcome="index.html" />
-            
+            <p:button value="Novo" icon="ui-icon-plus" outcome="index.html" />       
             
             
         </p:panel>

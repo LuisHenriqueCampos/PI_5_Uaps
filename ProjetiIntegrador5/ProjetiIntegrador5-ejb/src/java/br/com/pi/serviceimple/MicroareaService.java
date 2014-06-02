@@ -42,7 +42,11 @@ public class MicroareaService  implements IMicroareaService
         try
         {
             Microarea m = obter(Idobj.getIdMicroArea());
-            em.remove(m);
+            if(m.getEnderecoCollection().isEmpty()&&m.getAgentesaudeCollection().isEmpty()){
+                em.remove(m);
+            }else{
+                return "Existe Dependências deste Registro. O Registro não poderá ser Excluído.";
+            }
         }
         catch(Exception ex)
         {

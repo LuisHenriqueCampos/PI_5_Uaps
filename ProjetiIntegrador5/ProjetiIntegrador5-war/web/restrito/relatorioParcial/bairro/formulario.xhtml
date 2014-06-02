@@ -6,19 +6,19 @@
       xmlns:p="http://primefaces.org/ui"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
     <h:form id="formCadastro">
-        <p:panel header="Pesquisa de Bairro" id="painelCadastro">
+        <br/><p:panel header="Relatório Filtrado Bairro" id="painelCadastro">
             <p:growl />
             <h:inputHidden value="#{bairroManagedBean.bairro.idBairro}" />
                 <h:panelGrid columns="2">
                     <h:outputLabel value="Bairro: " />
-                    <p:inputText value="#{bairroManagedBean.bairroPesq}" />
+                    <p:inputText value="#{bairroManagedBean.bairroPesq}" size="50"/>
                     
                     <p:commandButton
                         value="Listar"
-                        icon="ui-icon-disk"
+                        icon="ui-icon-search"
                         update="painelCadastro,:formTabela:tabela"/>
                     <h:commandLink value="Relatório"
-                                   actionListener="#{bairroManagedBean.gerarRelatorioFiltrado()}"/>
+                                   actionListener="#{bairroManagedBean.gerarRelatorioFiltrado()}" target="_blank"/>
                 </h:panelGrid>
             
                            

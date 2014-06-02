@@ -43,7 +43,11 @@ public class BairroService implements IBairroService
         try
         {
             Bairro bairro = em.find(Bairro.class, Idobj.getIdBairro());
-            em.remove(bairro);
+            if(bairro.getEnderecoCollection().isEmpty()){
+                em.remove(bairro);
+            }else{
+                return "Existe Dependências deste Registro. O Registro não poderá ser Excluído.";
+            }
         }
         catch(Exception ex)
         {

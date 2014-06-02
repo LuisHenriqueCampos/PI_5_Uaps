@@ -2,17 +2,15 @@ package br.com.pi.entidade;
 
 import java.io.Serializable;
 import java.util.Collection;
-import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
@@ -20,37 +18,32 @@ import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
-/**
- *
- * @author petrovick
- */
 @Entity
 @Table(name = "familia")
 @XmlRootElement
-@NamedQueries({
-    @NamedQuery(name = "Familia.findAll", query = "SELECT f FROM Familia f"),
-    @NamedQuery(name = "Familia.findByIdFamilia", query = "SELECT f FROM Familia f WHERE f.idFamilia = :idFamilia"),
-    @NamedQuery(name = "Familia.findByDescricao", query = "SELECT f FROM Familia f WHERE f.descricao = :descricao"),
-    @NamedQuery(name = "Familia.findByComplemento", query = "SELECT f FROM Familia f WHERE f.complemento = :complemento")})
 public class Familia implements Serializable {
     private static final long serialVersionUID = 1L;
+    
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-//    @Basic(optional = false)
-    @Column(name = "IdFamilia")
+    @Column(name = "IdFamilia", nullable = false)
     private Integer idFamilia;
-//    @Basic(optional = false)
-//    @NotNull
-    @Size(min = 1, max = 10)
-    @Column(name = "Descricao")
+    
+    @NotNull(message = "O campo Descrição não pode ser Nulo")
+    @Size(min = 1, max = 10, message = "Mínimo 1, Máximo 10 caracteres")
+    @Column(name = "Descricao", nullable = false, length = 10)
     private String descricao;
-    @Size(max = 40)
-    @Column(name = "Complemento")
-    private String complemento;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idFamilia")
+    
+    @NotNull(message = "O campo Número da Casa não pode ser Nulo")
+    @Column(name = "NumeroCasa", nullable = false)
+    private Integer numeroCasa;
+    
+    @OneToMany( mappedBy = "idFamilia", fetch = FetchType.LAZY)
     private Collection<Paciente> pacienteCollection;
-    @JoinColumn(name = "IdEndereco", referencedColumnName = "IdEndereco")
-    @ManyToOne(optional = false)
+    
+    @NotNull(message = "Selecione um Endereço")
+    @JoinColumn(name = "IdEndereco", referencedColumnName = "IdEndereco", nullable = false)
+    @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private Endereco idEndereco;
 
     public Familia() {
@@ -81,12 +74,12 @@ public class Familia implements Serializable {
         this.descricao = descricao;
     }
 
-    public String getComplemento() {
-        return complemento;
+    public Integer getNumeroCasa() {
+        return numeroCasa;
     }
 
-    public void setComplemento(String complemento) {
-        this.complemento = complemento;
+    public void setNumeroCasa(Integer numeroCasa) {
+        this.numeroCasa = numeroCasa;
     }
 
     @XmlTransient

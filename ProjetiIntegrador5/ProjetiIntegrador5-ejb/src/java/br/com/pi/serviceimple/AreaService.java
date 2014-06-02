@@ -43,7 +43,11 @@ public class AreaService implements IAreaService
         try
         {
             Area a = em.find(Area.class, Idobj.getIdArea());
-            em.remove(a);
+           if(a.getMicroareaCollection().isEmpty()){
+                em.remove(a);
+            }else{
+                return "Existe Dependências deste Registro. O Registro não poderá ser Excluído.";
+            }
         }
         catch(Exception ex)
         {

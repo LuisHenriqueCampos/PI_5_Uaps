@@ -61,7 +61,7 @@ public class ReportFamilia {
         Font fontTexto = FontFactory.getFont("Arial", 12);
         Font fontTitulo = FontFactory.getFont("Arial", 12, Font.BOLD);
 
-        String[] cabecalhos = {"Codigo Familia","Descriçao","Complemento","Endereço"};
+        String[] cabecalhos = {"Codigo Familia","Descriçao","Endereço","Número da Casa"};
 
         PdfPTable table = new PdfPTable(cabecalhos.length);
         table.setWidthPercentage(100);
@@ -80,12 +80,12 @@ public class ReportFamilia {
         {
             PdfPCell cellCodigoFamilia = new PdfPCell(new Phrase(familia.getIdFamilia().toString()));
             PdfPCell cellDescricao = new PdfPCell(new Phrase(familia.getDescricao()));
-            PdfPCell cellComplemento = new PdfPCell(new Phrase(familia.getComplemento()));
+            PdfPCell cellNumeroCasa = new PdfPCell(new Phrase(familia.getNumeroCasa().toString()));
             PdfPCell cellEndereco = new PdfPCell(new Phrase("Rua: " + familia.getIdEndereco().getRua() + ", Cep: " + familia.getIdEndereco().getCep() + ", Bairro: " + familia.getIdEndereco().getIdBairro().getBairro()));
             table.addCell(cellCodigoFamilia);
             table.addCell(cellDescricao);
-            table.addCell(cellComplemento);
             table.addCell(cellEndereco);
+            table.addCell(cellNumeroCasa);
         }
 
         document.add(table);

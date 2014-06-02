@@ -36,6 +36,7 @@ public class Medicoenfermeira implements Serializable {
     @Column(name = "Assinatura", nullable = false)
     private String assinatura;
    
+    @Size(min = 6, max = 8, message = "Mínimo 6, Máximo 8 caracteres")
     @NotNull(message = "O campo Registro não pode ser Nulo")
     @Column(name = "Registro", nullable = false)
     private String registro;

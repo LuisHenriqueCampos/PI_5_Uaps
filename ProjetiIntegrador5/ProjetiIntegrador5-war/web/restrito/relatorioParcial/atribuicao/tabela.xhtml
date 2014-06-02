@@ -11,16 +11,18 @@ and open the template in the editor.
       xmlns:p="http://primefaces.org/ui"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
     <h:form id="formTabela">
-        <p:panel header="Atribuições Cadastradas" id="painelCliente">
-            <p:growl />
-            <p:dataTable value="#{atribuicaoManagedBean.listarRel()}"
-                var="at" id="tabela" 
-                paginator="true" rows="10" 
-                emptyMessage="Nenhuma atribuição cadastrada.">
-                
-                <p:column headerText="Código: " style="width: 5%">#{at.idAtribuicao}</p:column>
-                <p:column headerText="Descrição: " style="width: 30%">#{at.descricao}</p:column>
-            </p:dataTable>
-        </p:panel>
+        <br/>
+        <p:fieldset legend="Atribuições Cadastradas" toggleable="true" toggleSpeed="400" collapsed="false">    
+            <p:panel  id="painelCliente">
+                <p:growl />
+                <p:dataTable value="#{atribuicaoManagedBean.listarRel()}"
+                    var="at" id="tabela" 
+                    emptyMessage="Nenhuma Atribuição Cadastrada.">
+
+                    <p:column headerText="Código " style="width: 5%">#{at.idAtribuicao}</p:column>
+                    <p:column headerText="Atribuição " style="width: 95%">#{at.descricao}</p:column>
+                </p:dataTable>
+            </p:panel>
+        </p:fieldset>    
     </h:form>
 </ui:fragment>

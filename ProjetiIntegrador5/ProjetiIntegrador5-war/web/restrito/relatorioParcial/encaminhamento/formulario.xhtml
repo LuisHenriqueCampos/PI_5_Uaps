@@ -6,22 +6,22 @@
       xmlns:p="http://primefaces.org/ui"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
     <h:form id="formCadastro">
-        <p:panel header="Pesquisa de Encaminhamento" id="painelCadastro">
+        <br/><p:panel header="Relatório Filtrado Encaminhamento" id="painelCadastro">
             <p:growl />
             <h:inputHidden value="#{encaminhamentoManagedBean.encaminhamento.idEncaminhamento}" />
                 <h:panelGrid columns="4">
-                    <h:outputLabel value="Pesquisar entre: " />
+                    <h:outputLabel value="Da data:  " />
                     <p:calendar value="#{encaminhamentoManagedBean.pesquisaDataInicio}" />
                     
-                    <h:outputLabel value=" e " />
+                    <h:outputLabel value=" até " />
                     <p:calendar value="#{encaminhamentoManagedBean.pesquisaDataFim}"/>
                     
                     <p:commandButton
                         value="Listar"
-                        icon="ui-icon-disk"
+                        icon="ui-icon-search"
                         update="painelCadastro,:formTabela:tabela"/>
                     <h:commandLink value="Relatório"
-                                   actionListener="#{encaminhamentoManagedBean.gerarRelatorioFiltrado()}"/>
+                                   actionListener="#{encaminhamentoManagedBean.gerarRelatorioFiltrado()}" target="_blank"/>
                 </h:panelGrid>
             
                            

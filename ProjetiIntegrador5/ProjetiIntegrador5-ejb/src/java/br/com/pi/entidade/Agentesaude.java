@@ -27,13 +27,13 @@ public class Agentesaude implements Serializable {
 
     @NotNull(message = "O campo Matrícula não pode ser Nulo")
     @Column(name = "matricula", nullable = false)
-    private int matricula;
+    private String matricula;
     
     @OneToOne(optional = false, cascade = CascadeType.ALL)
     @JoinColumn(name = "IdPessoaAgenteSaude", referencedColumnName = "IdPessoa")
     private Pessoaa pessoa;
     
-    @Size(min = 1 ,message = "Selecione Micro-Área")
+    @NotNull(message = "Selecione Micro-Área")
     @JoinColumn(name = "IdMicroArea", referencedColumnName = "IdMicroArea", nullable = false)
     @ManyToOne(optional = false)
     private Microarea idMicroArea;
@@ -45,7 +45,7 @@ public class Agentesaude implements Serializable {
         this.idPessoaAgenteSaude = idPessoaAgenteSaude;
     }
 
-    public Agentesaude(Integer idPessoaAgenteSaude, int matricula) {
+    public Agentesaude(Integer idPessoaAgenteSaude, String matricula) {
         this.idPessoaAgenteSaude = idPessoaAgenteSaude;
         this.matricula = matricula;
     }
@@ -58,11 +58,11 @@ public class Agentesaude implements Serializable {
         this.idPessoaAgenteSaude = idPessoaAgenteSaude;
     }
 
-    public int getMatricula() {
+    public String getMatricula() {
         return matricula;
     }
 
-    public void setMatricula(int matricula) {
+    public void setMatricula(String matricula) {
         this.matricula = matricula;
     }
 

@@ -40,7 +40,11 @@ public class EnderecoService implements IEnderecoService
         try
         {
             Endereco end = em.find(Endereco.class, Idobj.getIdEndereco());
-            em.remove(end);
+            if(end.getFamiliaCollection().isEmpty()){
+                em.remove(end);
+            }else{
+                return "Existe Dependências deste Registro. O Registro não poderá ser Excluído.";
+            }
         }
         catch(Exception ex)
         {

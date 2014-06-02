@@ -15,21 +15,26 @@ and open the template in the editor.
             <p:menuitem value="Excluir" icon="ui-icon-close" actionListener="#{familiaManagedBean.excluir()}" update="painelCliente" />
             <p:menuitem value="Editar" icon="ui-icon-pencil" actionListener="#{familiaManagedBean.editar()}" update=":formCadastro:painelCadastro" />
         </p:contextMenu>
-        <p:panel header="Famílias cadastradas" id="painelCliente">
-            <p:growl />
-            <p:dataTable value="#{familiaManagedBean.listar()}"
-                var="familia" id="tabela" 
-                paginator="true" rows="10" 
-                emptyMessage="Nenhuma família cadastrada." 
-                rowKey="#{familia.idFamilia}" 
-                selection="#{familiaManagedBean.familiaSelecionada}" 
-                selectionMode="single">
-                
-                <p:column headerText="Código: " style="width: 20%">#{familia.idFamilia}</p:column>
-                <p:column headerText="Descrição: " style="width: 40%">#{familia.descricao}</p:column>
-                <p:column headerText="Complemento: " style="width: 40%">#{familia.complemento}</p:column>
-                <p:column headerText="Endereço: " style="width: 40%">#{familia.idEndereco.rua}</p:column>>
-            </p:dataTable>
-        </p:panel>
+         <br/>
+        <p:fieldset legend="Famílias cadastradas" toggleable="true" toggleSpeed="400" collapsed="false">
+            <p:panel id="painelCliente">
+                <p:growl />
+                <p:dataTable value="#{familiaManagedBean.listar()}"
+                    var="familia" id="tabela" 
+                    paginator="true" rows="10" paginatorPosition="bottom"
+                    emptyMessage="Nenhuma família cadastrada." 
+                    rowKey="#{familia.idFamilia}" 
+                    selection="#{familiaManagedBean.familiaSelecionada}" 
+                    selectionMode="single">
+
+                    <p:column headerText="Código " style="width: 5%">#{familia.idFamilia}</p:column>
+                    <p:column headerText="Descrição " style="width: 15%">#{familia.descricao}</p:column>
+                    <p:column headerText="Bairro " style="width: 10%">#{familia.idEndereco.idBairro.bairro}</p:column>
+                    <p:column headerText="Endereço " style="width: 25%">#{familia.idEndereco.rua}</p:column>                
+                    <p:column headerText="Número da Casa " style="width: 10%">#{familia.numeroCasa}</p:column>
+
+                </p:dataTable>
+            </p:panel>
+        </p:fieldset>    
     </h:form>
 </ui:fragment>

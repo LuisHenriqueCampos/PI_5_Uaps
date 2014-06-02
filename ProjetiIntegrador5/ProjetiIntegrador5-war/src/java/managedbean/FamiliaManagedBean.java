@@ -38,11 +38,11 @@ public class FamiliaManagedBean
     
     public void salvar()
     {
-        System.out.println("Entrou no salvar()");
         String erro = familiaService.salvar(familia);
         
         if (erro == null) {
             MenssagemUtil.addMensagemInfo("Família cadastrada com sucesso!");
+            familia = new Familia();
         } else {
             MenssagemUtil.addMensagemError(erro);
         }

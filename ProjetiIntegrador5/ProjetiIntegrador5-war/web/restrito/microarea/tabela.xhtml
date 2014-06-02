@@ -12,22 +12,22 @@
         </p:contextMenu>
         <br/>
         <p:fieldset legend="Micro-Área Cadastradas" toggleable="true" toggleSpeed="400" collapsed="false">
-        <p:panel id="painelTabela">
-            <p:growl />
-            <p:dataTable value="#{microareaManagedBean.todos()}"
-                var="microarea" id="tabela" 
-                paginator="true" rows="10" paginatorPosition="bottom"
-                emptyMessage="Nenhuma Micro-Área Cadastrada" 
-                rowKey="#{microarea.idMicroArea}" 
-                selection="#{microareaManagedBean.microareaSelecionada}" 
-                selectionMode="single">
-                
-                <p:column headerText="Código " style="width: 10%">#{microarea.idMicroArea}</p:column>
-                <p:column headerText="Micro-Área " style="width: 25%">#{microarea.descricao}</p:column>
-                <p:column headerText="Área " style="width: 25%">#{microarea.idArea.descricao}</p:column>
-                <p:column headerText="Posto de Saúde " style="width: 40%">#{microarea.idArea.idPostoSaude.nomePosto}</p:column>
-            </p:dataTable>
-        </p:panel>
+            <p:panel id="painelTabela">
+                <p:growl />
+                <p:dataTable value="#{microareaManagedBean.todos()}"
+                    var="microarea" id="tabela" 
+                    paginator="true" rows="10" paginatorPosition="bottom"
+                    emptyMessage="Nenhuma Micro-Área Cadastrada" 
+                    rowKey="#{microarea.idMicroArea}" 
+                    selection="#{microareaManagedBean.microareaSelecionada}" 
+                    selectionMode="single">
+
+                    <p:column headerText="Código " style="width: 10%">#{microarea.idMicroArea}</p:column>
+                    <p:column headerText="Micro-Área " style="width: 25%">#{microarea.descricao}</p:column>
+                    <p:column headerText="Área " style="width: 25%">#{microarea.idArea.descricao}</p:column>
+                    <p:column headerText="Posto de Saúde " style="width: 40%">#{microarea.idArea.idPostoSaude.nomePosto}</p:column>
+                </p:dataTable>
+            </p:panel>
         </p:fieldset>
     </h:form>
 </ui:fragment>

@@ -11,19 +11,22 @@
             <p:menuitem value="Excluir" icon="ui-icon-close" actionListener="#{bairroManagedBean.excluir()}" update="painelCliente" />
             <p:menuitem value="Editar" icon="ui-icon-pencil" actionListener="#{bairroManagedBean.editar()}" update=":formCadastro:painelCadastro" />
         </p:contextMenu>
-        <p:panel header="Bairros cadastrados" id="painelCliente">
-            <p:growl />
-            <p:dataTable value="#{bairroManagedBean.todos()}"
-                var="bairro" id="tabela" 
-                paginator="true" rows="5" 
-                emptyMessage="Nenhum bairro cadastrado" 
-                rowKey="#{bairro.idBairro}" 
-                selection="#{bairroManagedBean.bairroSelecionado}" 
-                selectionMode="single">
-                
-                <p:column headerText="Código: " style="width: 10%">#{bairro.idBairro}</p:column>
-                <p:column headerText="Bairro: " style="width: 90%">#{bairro.bairro}</p:column>
-            </p:dataTable>
-        </p:panel>
+        <br/>
+        <p:fieldset legend="Bairros Cadastrados" toggleable="true" toggleSpeed="400" collapsed="false">
+            <p:panel id="painelCliente">
+                <p:growl />
+                <p:dataTable value="#{bairroManagedBean.todos()}"
+                    var="bairro" id="tabela" 
+                    paginator="true" rows="5" paginatorPosition="bottom"
+                    emptyMessage="Nenhum bairro cadastrado" 
+                    rowKey="#{bairro.idBairro}" 
+                    selection="#{bairroManagedBean.bairroSelecionado}" 
+                    selectionMode="single">
+
+                    <p:column headerText="Código " style="width: 10%">#{bairro.idBairro}</p:column>
+                    <p:column headerText="Bairro " style="width: 90%">#{bairro.bairro}</p:column>
+                </p:dataTable>
+            </p:panel>
+        </p:fieldset>
     </h:form>
 </ui:fragment>

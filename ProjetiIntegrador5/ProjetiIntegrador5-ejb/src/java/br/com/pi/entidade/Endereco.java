@@ -12,6 +12,7 @@ import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -33,35 +34,34 @@ import javax.xml.bind.annotation.XmlTransient;
 @Entity
 @Table(name = "endereco")
 @XmlRootElement
-@NamedQueries({
-    @NamedQuery(name = "Endereco.findAll", query = "SELECT e FROM Endereco e"),
-    @NamedQuery(name = "Endereco.findByIdEndereco", query = "SELECT e FROM Endereco e WHERE e.idEndereco = :idEndereco"),
-    @NamedQuery(name = "Endereco.findByRua", query = "SELECT e FROM Endereco e WHERE e.rua = :rua"),
-    @NamedQuery(name = "Endereco.findByCep", query = "SELECT e FROM Endereco e WHERE e.cep = :cep")})
 public class Endereco implements Serializable {
     private static final long serialVersionUID = 1L;
+    
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Basic(optional = false)
-    @Column(name = "IdEndereco")
+    @Column(name = "IdEndereco", nullable = false)
     private Integer idEndereco;
-    @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 100)
-    @Column(name = "Rua")
+    
+    @NotNull(message = "O campo Rua não pode ser Nulo")
+    @Size(min = 1, max = 100, message = "Mínimo 1, Máximo 100 caracteres")
+    @Column(name = "Rua", nullable = false, length = 100)
     private String rua;
-    @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 9)
-    @Column(name = "Cep")
+    
+    @NotNull(message = "O campo Cep não pode ser Nulo")
+    @Column(name = "Cep", nullable = false)
     private String cep;
-    @JoinColumn(name = "IdBairro", referencedColumnName = "IdBairro")
-    @ManyToOne(optional = false)
+    
+    @NotNull(message = "Selecione o Bairro")
+    @JoinColumn(name = "IdBairro", referencedColumnName = "IdBairro", nullable = false)
+    @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private Bairro idBairro;
-    @JoinColumn(name = "IdMicroArea", referencedColumnName = "IdMicroArea")
-    @ManyToOne(optional = false)
+    
+    @NotNull(message = "Selecione Micro-Área")
+    @JoinColumn(name = "IdMicroArea", referencedColumnName = "IdMicroArea", nullable = false)
+    @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private Microarea idMicroArea;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idEndereco")
+    
+    @OneToMany(mappedBy = "idEndereco", fetch = FetchType.LAZY)
     private Collection<Familia> familiaCollection;
 
     public Endereco() {

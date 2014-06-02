@@ -40,26 +40,26 @@ and open the template in the editor.
                     #{med.pessoa.idPessoa}
                 </p:column>
                 
-                <p:column headerText="Nome" 
+                <p:column headerText="Médico / Enfermeira" 
                           style="width: 35%" filterBy="pessoa.nome" 
                           filterMatchMode="contains">
                     #{med.pessoa.nome}
                 </p:column>
                 
                 <p:column headerText="Atribuição" 
-                          style="width: 25%" filterBy="idAtribuicao.descricao" 
+                          style="width: 15%" filterBy="idAtribuicao.descricao" 
                           filterMatchMode="contains">
                     #{med.idAtribuicao.descricao}
                 </p:column>
                 
                  <p:column headerText="Número do Registro " 
-                          style="width: 30%" filterBy="registro" 
+                          style="width: 15%" filterBy="registro" 
                           filterMatchMode="contains">
                     #{med.registro}
                 </p:column>
                 
                  <p:column headerText="Assinatura" 
-                          style="width: 30%">
+                          style="width: 25%">
                     #{med.assinatura}
                 </p:column>
             

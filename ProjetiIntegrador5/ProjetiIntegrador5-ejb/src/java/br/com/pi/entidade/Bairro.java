@@ -2,15 +2,12 @@ package br.com.pi.entidade;
 
 import java.io.Serializable;
 import java.util.Collection;
-import javax.persistence.Basic;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
@@ -25,25 +22,20 @@ import javax.xml.bind.annotation.XmlTransient;
 @Entity
 @Table(name = "bairro")
 @XmlRootElement
-@NamedQueries({
-    @NamedQuery(name = "Bairro.findAll", query = "SELECT b FROM Bairro b"),
-    @NamedQuery(name = "Bairro.findByIdBairro", query = "SELECT b FROM Bairro b WHERE b.idBairro = :idBairro"),
-    @NamedQuery(name = "Bairro.findByBairro", query = "SELECT b FROM Bairro b WHERE b.bairro = :bairro")})
 public class Bairro implements Serializable {
     private static final long serialVersionUID = 1L;
+    
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-  //  @Basic(optional = false)
-    @Column(name = "IdBairro")
+    @Column(name = "IdBairro", nullable = false)
     private Integer idBairro;
     
-//    @Basic(optional = false)
-//    @NotNull
-//    @Size(min = 1, max = 50)
+    @NotNull(message = "O campo Bairro não pode ser Nulo")
+    @Size(min = 1, max = 50, message = "Mínimo 1, Máximo 50 caracteres")
     @Column(name = "Bairro")
     private String bairro;
     
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idBairro")
+    @OneToMany(mappedBy = "idBairro", fetch = FetchType.LAZY)
     private Collection<Endereco> enderecoCollection;
 
     public Bairro() {

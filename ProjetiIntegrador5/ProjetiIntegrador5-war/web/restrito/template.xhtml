@@ -40,60 +40,68 @@
                     <p:menubar >
                         
                         <p:submenu label="Cadastros">
-                            
-                            <p:menuitem value="Posto de Saúde" url="/restrito/postosaude/index.html"/>
+                           
+                            <p:menuitem value="Agente de Saúde" url="/restrito/agentesaude/index.html"/>
                             <p:menuitem value="Área" url="/restrito/area/index.html"/>
                             <p:menuitem value="Atribuição" url="/restrito/atribuicao/index.html"/>
                             <p:menuitem value="Bairro" url="/restrito/bairro/index.html"/>
-                            <p:menuitem value="Micro-Área" url="/restrito/microarea/index.html"/>
-                            <p:menuitem value="Paciente" url="/restrito/paciente/index.html"/>
-                            <p:menuitem value="Familia" url="/restrito/familia/index.html"/>
                             <p:menuitem value="Endereço" url="/restrito/endereco/index.html"/>
-                            <p:menuitem value="Encaminhamento" url="/restrito/encaminhamento/index.html"/>
+                            <p:menuitem value="Especialidade" url="/restrito/especialidadeEncaminhamento/index.html"/>
+                            <p:menuitem value="Familia" url="/restrito/familia/index.html"/>
                             <p:menuitem value="Médico / Enfermeira" url="/restrito/medicoenf/index.html"/>
-                            <p:menuitem value="Especialidade Encaminhamento" url="/restrito/especialidadeEncaminhamento/index.html"/>
+                            <p:menuitem value="Micro-Área" url="/restrito/microarea/index.html"/>
+                            <p:menuitem value="Posto de Saúde" url="/restrito/postosaude/index.html"/>
                             
+                  </p:submenu>
+                  
+                        <p:submenu label="Paciente">
+                            <p:menuitem value="Cadastro" url="/restrito/paciente/index.html"/>
                         </p:submenu>
-                        
+                  
                         <p:submenu label="Encaminhamento">
-                            <p:menuitem value="Registro" url="/aluno/index.html"/>
-                            <p:menuitem value="Busca" url="/situacaoMatricula/index.html"/>
+                            <p:menuitem value="Registro" url="/restrito/encaminhamento/index.html"/>
                         </p:submenu>
                         
                         <p:submenu label="Relatórios">
-                            <p:menuitem>
-                                <h:commandLink value="Posto de Saúde" actionListener="#{postoSaudeManagedBean.gerar()}" target="_blank"/>
-                            </p:menuitem>
+                            <p:submenu label="Geral">    
+                                <p:menuitem>
+                                    <h:commandLink value="Posto de Saúde" actionListener="#{postoSaudeManagedBean.gerar()}" target="_blank"/>
+                                </p:menuitem>
+
+                                <p:menuitem>
+                                    <h:commandLink value="Encaminhamento" actionListener="#{encaminhamentoManagedBean.gerar()}" target="_blank"/>
+                                </p:menuitem>
+
+                                <p:menuitem>
+                                    <h:commandLink value="Família" actionListener="#{familiaManagedBean.gerar()}" target="_blank"/>
+                                </p:menuitem>
+
+                                <p:menuitem>
+                                    <h:commandLink value="Medico/Enfermeira" actionListener="#{medicoEnfermeiraManagedBean.gerar()}" target="_blank"/>
+                                </p:menuitem>
+
+                                <p:menuitem>
+                                    <h:commandLink value="Microarea" actionListener="#{microareaManagedBean.gerar()}" target="_blank"/>
+                                </p:menuitem>
+
+                                <p:menuitem>
+                                    <h:commandLink value="Paciente" actionListener="#{pacienteManagedBean.gerar()}" target="_blank"/>
+                                </p:menuitem>
+                            </p:submenu>
+                        
+                            <p:submenu label="Por Filtro">
+                                <p:menuitem value="Posto de Saúde" url="/restrito/relatorioParcial/postosaude/index.html"/>
+                                <p:menuitem value="Paciente" url="/restrito/relatorioParcial/paciente/index.html"/>
+                                <p:menuitem value="Atribuicao" url="/restrito/relatorioParcial/atribuicao/index.html"/>
+                                <p:menuitem value="Bairro" url="/restrito/relatorioParcial/bairro/index.html"/>
+                                <p:menuitem value="Encaminhamento" url="/restrito/relatorioParcial/encaminhamento/index.html"/>
+                                <p:menuitem value="Endereco" url="/restrito/relatorioParcial/endereco/index.html"/>
+
+                            </p:submenu>
                             
-                            <p:menuitem>
-                                <h:commandLink value="Encaminhamento" actionListener="#{encaminhamentoManagedBean.gerar()}" target="_blank"/>
-                            </p:menuitem>
                             
-                            <p:menuitem>
-                                <h:commandLink value="Família" actionListener="#{familiaManagedBean.gerar()}" target="_blank"/>
-                            </p:menuitem>
-                            
-                            <p:menuitem>
-                                <h:commandLink value="Medico/Enfermeira" actionListener="#{medicoEnfermeiraManagedBean.gerar()}" target="_blank"/>
-                            </p:menuitem>
-                            
-                            <p:menuitem>
-                                <h:commandLink value="Microarea" actionListener="#{microareaManagedBean.gerar()}" target="_blank"/>
-                            </p:menuitem>
-                            
-                            <p:menuitem>
-                                <h:commandLink value="Paciente" actionListener="#{pacienteManagedBean.gerar()}" target="_blank"/>
-                            </p:menuitem>
                         </p:submenu>
-                        <p:submenu label="Relatório Pesquisa">
-                            <p:menuitem value="Posto de Saúde" url="/restrito/relatorioParcial/postosaude/index.html"/>
-                            <p:menuitem value="Paciente" url="/restrito/relatorioParcial/paciente/index.html"/>
-                            <p:menuitem value="Atribuicao" url="/restrito/relatorioParcial/atribuicao/index.html"/>
-                            <p:menuitem value="Bairro" url="/restrito/relatorioParcial/bairro/index.html"/>
-                            <p:menuitem value="Encaminhamento" url="/restrito/relatorioParcial/encaminhamento/index.html"/>
-                            <p:menuitem value="Endereco" url="/restrito/relatorioParcial/endereco/index.html"/>
-                            
-                        </p:submenu>
+                        
                     </p:menubar>
                     
                     
@@ -104,7 +112,7 @@
             
             <p:layoutUnit position="center">
                 <ui:insert name="container">
-                    Conteudo
+                    
                 </ui:insert>
             </p:layoutUnit>
         </p:layout>

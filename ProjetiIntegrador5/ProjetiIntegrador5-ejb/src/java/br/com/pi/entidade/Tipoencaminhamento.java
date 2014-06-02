@@ -30,23 +30,20 @@ import javax.xml.bind.annotation.XmlTransient;
  */
 @Entity
 @Table(name = "tipoencaminhamento")
-@XmlRootElement
-@NamedQueries({
-    @NamedQuery(name = "Tipoencaminhamento.findAll", query = "SELECT t FROM Tipoencaminhamento t"),
-    @NamedQuery(name = "Tipoencaminhamento.findByIdtipoEncaminhamento", query = "SELECT t FROM Tipoencaminhamento t WHERE t.idtipoEncaminhamento = :idtipoEncaminhamento"),
-    @NamedQuery(name = "Tipoencaminhamento.findByDescricao", query = "SELECT t FROM Tipoencaminhamento t WHERE t.descricao = :descricao")})
-public class Tipoencaminhamento implements Serializable {
+public class Tipoencaminhamento implements Serializable
+{
     private static final long serialVersionUID = 1L;
+    
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Basic(optional = false)
     @Column(name = "IdtipoEncaminhamento")
     private Short idtipoEncaminhamento;
-    @Basic(optional = false)
+    
     @NotNull
     @Size(min = 1, max = 20)
     @Column(name = "Descricao")
     private String descricao;
+    
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idtipoEncaminhamento")
     private Collection<Encaminhamento> encaminhamentoCollection;
 

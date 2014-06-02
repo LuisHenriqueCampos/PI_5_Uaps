@@ -10,19 +10,24 @@
             <p:menuitem value="Excluir" icon="ui-icon-close" actionListener="#{enderecoManagedBean.excluir()}" update="painelEndereco" />
             <p:menuitem value="Editar" icon="ui-icon-pencil" actionListener="#{enderecoManagedBean.editar()}" update=":formPesquisa:painelCadastro" />
         </p:contextMenu>
-        <p:panel header="Endereco cadastrados" id="painelEndereco">
-            <p:growl />
-            <p:dataTable value="#{enderecoManagedBean.todos()}"
-                var="endereco" id="tabela" 
-                paginator="true" rows="10" 
-                emptyMessage="Nenhum endereço cadastrado" 
-                rowKey="#{endereco.idEndereco}" 
-                selection="#{enderecoManagedBean.enderecoSelecionado}" 
-                selectionMode="single">
-                
-                <p:column headerText="Rua: " style="width: 20%">#{endereco.rua}</p:column>
-                <p:column headerText="CEP: " style="width: 20%">#{endereco.cep}</p:column>
-            </p:dataTable>
-        </p:panel>
+        <br/>
+        <p:fieldset legend="Endereços Cadastrados" toggleable="true" toggleSpeed="400" collapsed="false">
+            <p:panel id="painelEndereco">
+                <p:growl />
+                <p:dataTable value="#{enderecoManagedBean.todos()}"
+                    var="endereco" id="tabela" 
+                    paginator="true" rows="10"  paginatorPosition="bottom"
+                    emptyMessage="Nenhum endereço cadastrado" 
+                    rowKey="#{endereco.idEndereco}" 
+                    selection="#{enderecoManagedBean.enderecoSelecionado}" 
+                    selectionMode="single">
+
+                    <p:column headerText="Código " style="width: 10%">#{endereco.idEndereco}</p:column>
+                    <p:column headerText="Rua " style="width: 40%">#{endereco.rua}</p:column>
+                    <p:column headerText="CEP " style="width: 20%">#{endereco.cep}</p:column>
+                    <p:column headerText="Micro-Área " style="width: 30%">#{endereco.idMicroArea.descricao}</p:column>
+                </p:dataTable>
+            </p:panel>
+        </p:fieldset>
     </h:form>
 </ui:fragment>

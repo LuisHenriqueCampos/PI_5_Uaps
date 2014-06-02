@@ -12,24 +12,20 @@ and open the template in the editor.
       xmlns:f="http://xmlns.jcp.org/jsf/core">
     <br/>
     <h:form id="formCadastro">
-        <p:panel header="Atribuição" id="painelCadastro">
+        <p:panel header="Cadastro Atribuição" id="painelCadastro">
             <p:growl />
             <h:inputHidden value="#{atribuicaoManagedBean.atribuicao.idAtribuicao}" />
             
             <h:panelGrid columns="2" cellpadding="8" >
                 <h:outputLabel value="Atribuição*: " />
-                <p:inputText value="#{atribuicaoManagedBean.atribuicao.descricao}" size="40"/>
+                <p:inputText value="#{atribuicaoManagedBean.atribuicao.descricao}" size="60"/>
                 
             </h:panelGrid>
-            <!--<p:commandButton value="Procurar" icon="ui-icon-search" />-->
             <p:commandButton value="Salvar" icon="ui-icon-disk" 
                              actionListener="#{atribuicaoManagedBean.salvar()}" 
                              update="painelCadastro,:formTabela:tabela"/>
             
-            <p:commandButton value="Novo" icon="ui-icon-plus" 
-                             actionListener="#{atribuicaoManagedBean.novo()}"
-                             process="@this"
-                             update="@form" />
+            <p:button value="Novo" icon="ui-icon-plus" outcome="index.html" />
             
         </p:panel>
     </h:form><br/>

@@ -12,13 +12,13 @@ and open the template in the editor.
       xmlns:f="http://xmlns.jcp.org/jsf/core">
     <br/>
     <h:form id="formCadastro">
-        <p:panel header="Especialidade" id="painelCadastro">
+        <p:panel header="Cadastro Especialidade" id="painelCadastro">
             <p:growl />
             <h:inputHidden value="#{especialidadeEncaminhamentoManagedBean.especialidade.idEspecialidade}" />
             
             <h:panelGrid columns="2" cellpadding="8" >
-                <h:outputLabel value="Atribuição*: " />
-                <p:inputText value="#{especialidadeEncaminhamentoManagedBean.especialidade.descricao}" size="40"/>
+                <h:outputLabel value="Especialidade:* " />
+                <p:inputText value="#{especialidadeEncaminhamentoManagedBean.especialidade.descricao}" size="60"/>
                 
             </h:panelGrid>
             

@@ -79,7 +79,7 @@ public class ReportEndereco
         
         for(Endereco endereco : enderecos)
         {
-            PdfPCell cellCodigo = new PdfPCell(new Phrase(endereco.getIdEndereco()));
+            PdfPCell cellCodigo = new PdfPCell(new Phrase(endereco.getIdEndereco().toString()));
             PdfPCell cellDescricao = new PdfPCell(new Phrase(endereco.getRua(), fontTexto));
             PdfPCell cellCep = new PdfPCell(new Phrase(endereco.getCep(), fontTexto));
             PdfPCell cellBairro = new PdfPCell(new Phrase(endereco.getIdBairro().getBairro(), fontTexto));
