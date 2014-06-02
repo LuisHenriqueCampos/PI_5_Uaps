@@ -1,56 +1,73 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE html>
 <ui:fragment xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:ui="http://java.sun.com/jsf/facelets"
-      xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:p="http://primefaces.org/ui"
-      xmlns:f="http://xmlns.jcp.org/jsf/core">
+             xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+             xmlns:p="http://primefaces.org/ui"
+             xmlns:h="http://java.sun.com/jsf/html"
+             xmlns:f="http://xmlns.jcp.org/jsf/core">
+    
+    
     <h:form id="formCadastro">
-        <p:panel header="Cadastro de Paciente" id="painelCadastro">
-            <p:growl />
-            <h:inputHidden value="#{pacienteManagedBean.paciente.idPessoaPaciente}" />
-                <h:panelGrid columns="2">
-                    <h:outputLabel value="Nome: " />
-                    <p:inputText value="#{pacienteManagedBean.paciente.pessoa.nome}" />
-                    <h:outputLabel value="CNS: "/>
-                    <p:inputText value="#{pacienteManagedBean.paciente.cns}" />
-                    <h:outputLabel value="Data de Nascimento: " />
-                    <p:calendar value="#{pacienteManagedBean.paciente.dataNascimento}" pattern="dd/MM/yyyy HH:mm" /> 
+        <br/>
+        <p:panel  id="painelCadastro">
+            
+            <p:growl/>
+            
+            <h:inputHidden value="#{pacienteManagedBean.paciente.pessoa.idPessoa}"/>
+            
+            <h:panelGrid columns="4" cellpadding="4">
+                
+                <h:outputLabel value="Nome:* " />
+                <p:inputText value="#{pacienteManagedBean.paciente.pessoa.nome}" size="50"/>
+                
+                <h:outputLabel value="Data Nascimento:*"/> 
+                <p:calendar locale="pt_BR" navigator="true" pattern="dd/MM/yyyy" 
+                            value="#{pacienteManagedBean.paciente.dataNascimento}"/>
+                
+                <h:outputLabel value="Nome da mãe:*" />
+                <p:inputText value="#{pacienteManagedBean.paciente.nomeMae}" size="50"/>
                     
-                    <h:outputLabel value="Nome da mãe:" />
-                    <p:inputText value="#{pacienteManagedBean.paciente.nomeMae}" />
-                    
-                    <h:outputLabel value="Nome do pai:" />
-                    <p:inputText value="#{pacienteManagedBean.paciente.nomePai}" />
-                    
-                    <h:outputLabel value="Telefone: " />
-                    <p:inputText value="#{pacienteManagedBean.paciente.telefone}" />
-                    
-                    <h:outputLabel value="Sexo*"/>
-                    <h:selectOneMenu converter="sexoConverter" value="#{pacienteManagedBean.paciente.idSexo}">
-                            <f:selectItem itemLabel="Sexo: " itemValue="" />
-                            <f:selectItems value="#{sexoManagedBean.listar()}" var="m" itemValue="#{m}" itemLabel="#{m.descricao}" />
-                    </h:selectOneMenu>
-
-                    <h:outputLabel value="Familia*"/>
-                    <h:selectOneMenu converter="familiaConverter" value="#{pacienteManagedBean.paciente.idFamilia}">
-                            <f:selectItem itemLabel="Seleciona a Familia: " itemValue="" />
-                            <f:selectItems value="#{familiaManagedBean.listar()}" var="f" itemValue="#{f}" itemLabel="#{f.descricao}" />
-                    </h:selectOneMenu>
-
-                    <p:commandButton
-                        value="Salvar"
-                        icon="ui-icon-disk"
-                        actionListener="#{pacienteManagedBean.salvar()}"
-                        update="painelCadastro,:formTabela:tabela"/>
-                    
-                    <p:commandButton
-                        value="Novo"
-                        icon="ui-icon-disk"
-                        actionListener="#{pacienteManagedBean.novo()}"
-                        update="painelCadastro,:formTabela:tabela"/>
-                </h:panelGrid>
-                           
+                <h:outputLabel value="Nome do pai:" />
+                <p:inputText value="#{pacienteManagedBean.paciente.nomePai}" size="50"/>
+                
+                <h:outputLabel value="CNS:*" />
+                <p:inputMask value="#{pacienteManagedBean.paciente.cns}" mask="99.999.999.999.999-9" size="25"/>
+                
+                <h:outputLabel value="Telefone:" />
+                <p:inputMask value="#{pacienteManagedBean.paciente.telefone}" mask="999999-9999" size="25"/>             
+                             
+                <h:outputLabel value="Sexo:*"/>
+                <h:selectOneMenu value="#{pacienteManagedBean.paciente.idSexo}"
+                                         converter="sexoConverter"
+                                         id="comboSexo">
+                            <f:selectItem itemLabel="Selecione o Sexo" itemValue=""/>
+                            <f:selectItems value="#{sexoManagedBean.listar()}"
+                                           var="s"
+                                           itemLabel="#{s.descricao}"
+                                           itemValue="#{s}"/>
+                </h:selectOneMenu>
+                
+                <h:outputLabel value="Família:*"/>
+                <h:selectOneMenu value="#{pacienteManagedBean.paciente.idFamilia}"
+                                         converter="familiaConverter"
+                                         id="comboFamilia">
+                            <f:selectItem itemLabel="Selecione a Familia" itemValue=""/>
+                            <f:selectItems value="#{familiaManagedBean.listar()}"
+                                           var="f"
+                                           itemLabel="#{f.descricao}"
+                                           itemValue="#{f}"/>
+                </h:selectOneMenu>
+                
+                
+            </h:panelGrid>
+            
+            <p:commandButton value="Salvar" icon="ui-icon-disk"
+                             actionListener="#{pacienteManagedBean.salvar()}"
+                                 update="painelCadastro,:formTabela:tabela"/>
+                
+            <p:button value="Novo" icon="ui-icon-plus" outcome="index.html"/>
+            
         </p:panel>
+        <br/>
     </h:form>
 </ui:fragment>

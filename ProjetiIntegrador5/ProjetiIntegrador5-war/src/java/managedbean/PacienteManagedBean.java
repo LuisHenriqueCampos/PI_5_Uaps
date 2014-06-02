@@ -16,6 +16,7 @@ import java.util.List;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpServletResponse;
+import util.MenssagemUtil;
 /**
  *
  * @author petrovick
@@ -46,15 +47,14 @@ public class PacienteManagedBean
     
     public void salvar()
     {
-        try
-        {
-            pacienteService.salvar(paciente);
-            novo();
-        }
-        catch(Exception ex)
-        {
-            throw ex;
-        }
+       String erro = pacienteService.salvar(paciente);
+       
+       if(erro == null){
+           MenssagemUtil.addMensagemInfo("Paciente salvo com sucesso!");
+           paciente = new Paciente();
+       }else{
+           MenssagemUtil.addMensagemError(erro);
+       }
     }
     
     public List<Paciente> listar()
@@ -64,24 +64,8 @@ public class PacienteManagedBean
     
     public List<Paciente> listarRel()
     {
-        System.out.println("Entrou");
-        //pacPesq = pacPesq == null ? "" : pacPesq;
-        //if(pacPesq.length() == 1)
-        //{
-            System.out.println("Entrou no método");
-            listaPaciente = pacienteService.listarRel(pacPesq);
-            //listaPaciente = listaPaciente.stream().filter(x -> x.getPessoa().getNome().contains("An")).map(x -> x).collect(Collectors.toList());
-        //}
-        /*
-        else if(pacPesq.length() > 1)
-        {
-            return listaPaciente.stream()
-                    .filter(x -> x.getPessoa().getNome().contains(pacPesq))
-                    .map(x -> x).collect(Collectors.toList());
-            //listaPaciente = listaPaciente.stream().filter(x -> x.getPessoa().getNome().contains(pacPesq)).map(x -> x).collect(Collectors.toList());
-        }*/
-        
-        System.out.println("Passou");
+        listaPaciente = pacienteService.listarRel(pacPesq);
+
         for(Paciente p : listaPaciente)
         {
             System.out.println("" + p.getPessoa().getNome());
@@ -91,7 +75,13 @@ public class PacienteManagedBean
     
     public void excluir()
     {
-        pacienteService.excluir(pacienteSelecionado);
+        String erro = pacienteService.excluir(pacienteSelecionado);
+        
+        if(erro == null){
+            MenssagemUtil.addMensagemInfo("Paciente excluído com sucesso!");
+        }else{
+            MenssagemUtil.addMensagemError(erro);
+        }
     }
     
     public void editar()

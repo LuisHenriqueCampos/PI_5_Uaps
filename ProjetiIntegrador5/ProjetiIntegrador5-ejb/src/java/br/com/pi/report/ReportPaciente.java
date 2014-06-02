@@ -81,12 +81,12 @@ public class ReportPaciente {
 
         for (Paciente paciente : pacientes)
         {
-            PdfPCell cellCodigo = new PdfPCell(new Phrase(paciente.getIdPessoaPaciente().toString()));
+            PdfPCell cellCodigo = new PdfPCell(new Phrase(paciente.getPessoa().getIdPessoa().toString()));
             PdfPCell cellNomePaciente = new PdfPCell(new Phrase(paciente.getPessoa().getNome()));
             PdfPCell cellDataNascimento = new PdfPCell(new Phrase(DateFormat.getDateInstance(DateFormat.SHORT,ptBr).format(paciente.getDataNascimento()), fontTexto));
-            PdfPCell cellNomeMae = new PdfPCell(new Phrase(paciente.getNomeMae().toString()));
-            PdfPCell cellNomePai = new PdfPCell(new Phrase(paciente.getNomePai().toString()));
-            PdfPCell cellCns = new PdfPCell(new Phrase(String.valueOf(paciente.getCns())));
+            PdfPCell cellNomeMae = new PdfPCell(new Phrase(paciente.getNomeMae()));
+            PdfPCell cellNomePai = new PdfPCell(new Phrase(paciente.getNomePai()));
+            PdfPCell cellCns = new PdfPCell(new Phrase(paciente.getCns()));
             PdfPCell cellTelefone = new PdfPCell(new Phrase(paciente.getTelefone()));
             PdfPCell cellSexo = new PdfPCell(new Phrase(paciente.getIdSexo().getDescricao()));
             PdfPCell cellFamilia = new PdfPCell(new Phrase(paciente.getIdFamilia().getDescricao()));
@@ -99,7 +99,7 @@ public class ReportPaciente {
             table.addCell(cellCns);
             table.addCell(cellTelefone);
             table.addCell(cellSexo);
-            table.addCell(cellCns);
+            table.addCell(cellFamilia);
         }
 
         document.add(table);

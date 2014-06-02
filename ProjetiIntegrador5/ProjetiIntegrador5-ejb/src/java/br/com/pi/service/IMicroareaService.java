@@ -1,5 +1,6 @@
 package br.com.pi.service;
 
+import br.com.pi.entidade.Area;
 import br.com.pi.entidade.Microarea;
 import java.util.List;
 
@@ -14,5 +15,6 @@ public interface IMicroareaService extends ICrudGeneric<Microarea>
     public String excluir(Microarea Idobj);    
     public Microarea obter(Integer IdObj);
     public List<Microarea> listar();
+    public List<Microarea> listarPorArea(Area area);
     
 }

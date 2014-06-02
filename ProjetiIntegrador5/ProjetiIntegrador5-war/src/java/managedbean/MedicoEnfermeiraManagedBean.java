@@ -15,6 +15,7 @@ import javax.faces.context.FacesContext;
 import javax.inject.Named;
 import javax.servlet.http.HttpServletResponse;
 import br.com.pi.report.ReportMedico;
+import util.MenssagemUtil;
 /**
  *
  * @author Luis
@@ -45,23 +46,29 @@ public class MedicoEnfermeiraManagedBean
     
     public void editar()
     {
-        System.out.println("\n\n\n EditarSelecionado:" + medicoenfermeiraSelecionado);
         medicoEnfermeira = medicoenfermeiraSelecionado;
     }
     
     public void excluir()
     {
-        System.out.println("\n\n\n Excluir Selecionado:" + medicoenfermeiraSelecionado);
-        medicoEnfermeiraService.excluir(medicoenfermeiraSelecionado);
+        String erro = medicoEnfermeiraService.excluir(medicoenfermeiraSelecionado);
+        
+        if(erro == null){
+            MenssagemUtil.addMensagemInfo("Cadastro excluído com sucesso!");
+        }else{
+            MenssagemUtil.addMensagemError(erro);
+        }
     }
     
     public void salvar()
     {
-        System.out.println("" + medicoEnfermeira.getAssinatura());
-        System.out.println("" + medicoEnfermeira.getIdAtribuicao().getDescricao());
-        System.out.println("" + medicoEnfermeira.getPessoa().getNome());
-        System.out.println("" + medicoEnfermeira.getIdPessoaMedicoEnfermeira());
-        medicoEnfermeiraService.salvar(medicoEnfermeira);
+        String erro = medicoEnfermeiraService.salvar(medicoEnfermeira);
+        
+        if(erro == null){
+            MenssagemUtil.addMensagemInfo("Cadastro salvo com sucesso!");
+        }else{
+            MenssagemUtil.addMensagemError(erro);
+        }
     }
     
     public List<Medicoenfermeira> listar()

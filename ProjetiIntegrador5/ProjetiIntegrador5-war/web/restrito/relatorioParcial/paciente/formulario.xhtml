@@ -6,19 +6,19 @@
       xmlns:p="http://primefaces.org/ui"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
     <h:form id="formCadastro">
-        <p:panel header="Cadastro de Paciente" id="painelCadastro">
+        <br/><p:panel header="Relatório Filtrado Paciente" id="painelCadastro">
             <p:growl />
             <h:inputHidden value="#{pacienteManagedBean.paciente.idPessoaPaciente}" />
                 <h:panelGrid columns="2">
-                    <h:outputLabel value="Nome: " />
-                    <p:inputText value="#{pacienteManagedBean.pacPesq}" />
+                    <h:outputLabel value="Paciente: "/>
+                    <p:inputText value="#{pacienteManagedBean.pacPesq}" size="30"/>
                     
                     <p:commandButton
-                        value="Salvar"
-                        icon="ui-icon-disk"
+                        value="Listar"
+                        icon="ui-icon-search"
                         update="painelCadastro,:formTabela:tabela"/>
                     <h:commandLink value="Relatório"
-                                   actionListener="#{pacienteManagedBean.gerarRelatorioFiltrado()}"/>
+                                   actionListener="#{pacienteManagedBean.gerarRelatorioFiltrado()}" target="_blank"/>
                 </h:panelGrid>
             
                            

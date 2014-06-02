@@ -3,8 +3,10 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/Luis/Documents/GitHub/PI_5_Uaps/ProjetiIntegrador5/ProjetiIntegrador5-war/web/login.xhtml</file>
-            <file>file:/C:/Users/Luis/Documents/GitHub/PI_5_Uaps/ProjetiIntegrador5/ProjetiIntegrador5-war/web/restrito/especialidadeEncaminhamento/formulario.xhtml</file>
+            <file>file:/C:/Users/Luis/Documents/GitHub/PI_5_Uaps/ProjetiIntegrador5/ProjetiIntegrador5-war/src/java/managedbean/MicroareaManagedbean.java</file>
+            <file>file:/C:/Users/Luis/Documents/GitHub/PI_5_Uaps/ProjetiIntegrador5/ProjetiIntegrador5-war/web/restrito/microarea/formulario.xhtml</file>
+            <file>file:/C:/Users/Luis/Documents/GitHub/PI_5_Uaps/ProjetiIntegrador5/ProjetiIntegrador5-war/src/java/managedbean/EnderecoManagedBean.java</file>
+            <file>file:/C:/Users/Luis/Documents/GitHub/PI_5_Uaps/ProjetiIntegrador5/ProjetiIntegrador5-war/web/restrito/endereco/formulario.xhtml</file>
         </group>
     </open-files>
 </project-private>

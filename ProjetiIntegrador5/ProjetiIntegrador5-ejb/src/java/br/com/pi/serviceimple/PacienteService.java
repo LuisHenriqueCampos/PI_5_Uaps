@@ -22,14 +22,18 @@ public class PacienteService implements IPacienteService
     public String salvar(Paciente entity) {
         try
         {
-            em.merge(entity);
-            return null;
+            if(entity.getPessoa().getIdPessoa()!=null){
+                em.merge(entity);
+            }else{
+                em.persist(entity);
+            }
         }
         catch(Exception ex)
         {
             ex.printStackTrace();
             return ex.getMessage();
         }
+        return null;
     }
 
     @Override
@@ -37,7 +41,7 @@ public class PacienteService implements IPacienteService
     {
         try
         {
-            Paciente p = em.find(Paciente.class, Idobj.getIdPessoaPaciente());
+            Paciente p = em.find(Paciente.class, Idobj.getPessoa().getIdPessoa());
             em.remove(p);
             return null;
         }

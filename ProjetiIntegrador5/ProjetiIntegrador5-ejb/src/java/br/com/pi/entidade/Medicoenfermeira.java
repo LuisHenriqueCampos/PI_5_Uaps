@@ -6,6 +6,7 @@ import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
@@ -13,14 +14,11 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
-/**
- *
- * @author petrovick
- */
 @Entity
 @Table(name = "medicoenfermeira")
 @XmlRootElement
@@ -32,25 +30,28 @@ public class Medicoenfermeira implements Serializable {
     @Column(name = "IdPessoaMedicoEnfermeira", insertable = false, updatable = false)
     private Integer idPessoaMedicoEnfermeira;
     
+    @NotNull(message = "O campo Assinatura não pode ser Nulo")
     @Lob
     @Size(min = 1, max = 16777215)
-    @Column(name = "Assinatura")
+    @Column(name = "Assinatura", nullable = false)
     private String assinatura;
    
-    @Column(name = "Registro")
-    private int registro;
+    @NotNull(message = "O campo Registro não pode ser Nulo")
+    @Column(name = "Registro", nullable = false)
+    private String registro;
    
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "medicoenfermeiraidEnfermeira")
+    @OneToMany(mappedBy = "medicoenfermeiraidEnfermeira")
     private Collection<Area> areaCollection;
     
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "medicoenfermeiraidMedico")
+    @OneToMany(mappedBy = "medicoenfermeiraidMedico")
     private Collection<Area> areaCollection1;
     
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idPessoaMedicoEnfermeira")
+    @OneToMany(mappedBy = "idPessoaMedicoEnfermeira")
     private Collection<Encaminhamento> encaminhamentoCollection;
     
+    @NotNull(message = "O campo Atribuição não pode ser Nulo")
     @JoinColumn(name = "IdAtribuicao", referencedColumnName = "IdAtribuicao")
-    @ManyToOne(optional = false)
+    @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private Atribuicao idAtribuicao;
     
     @JoinColumn(name = "IdPessoaMedicoEnfermeira", referencedColumnName = "IdPessoa")
@@ -78,11 +79,11 @@ public class Medicoenfermeira implements Serializable {
         this.assinatura = assinatura;
     }
 
-    public int getRegistro() {
+    public String getRegistro() {
         return registro;
     }
 
-    public void setRegistro(int registro) {
+    public void setRegistro(String registro) {
         this.registro = registro;
     }
 

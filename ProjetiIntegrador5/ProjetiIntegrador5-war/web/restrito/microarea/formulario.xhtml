@@ -12,24 +12,32 @@ and open the template in the editor.
       xmlns:f="http://xmlns.jcp.org/jsf/core">
     
     <h:form id="formCadastro">
-        <p:panel header="Micro-Área" id="painelCadastro">
+        <br/><p:panel header="Cadastro Micro-Área" id="painelCadastro">
             <p:growl />
             <h:inputHidden value="#{microareaManagedBean.microarea.idMicroArea}" />
             
-            <h:panelGrid columns="2">
+            <h:panelGrid columns="2" cellpadding="5">
                 <h:outputLabel value="Micro-Área: " />
                 <p:inputText value="#{microareaManagedBean.microarea.descricao}" />
                 
+                <h:outputLabel value="Posto de Saúde:* " />
+                <h:selectOneMenu converter="postosaudeConverter" value="#{microareaManagedBean.postosaude}">
+                    <f:selectItem itemLabel="Selecione o Posto de saúde:" itemValue="" />
+                    <f:selectItems value="#{postoSaudeManagedBean.todos()}" var="posto" 
+                                   itemLabel="#{posto.nomePosto}" itemValue="#{posto}" />
+                    <p:ajax update="comboArea" listener="#{microareaManagedBean.listarPorPosto()}"/>
+                </h:selectOneMenu>
+                
                 <h:outputLabel value="Área:" />
-                <h:selectOneMenu converter="areaConverter" value="#{microareaManagedBean.microarea.idArea}" >
-                    <f:selectItem itemLabel="Area..." itemValue=""/>
-                    <f:selectItems value="#{areaManagedBean.todos()}" var="area" itemLabel="#{area.descricao}" itemValue="#{area}" />
+                <h:selectOneMenu converter="areaConverter" value="#{microareaManagedBean.microarea.idArea}" id="comboArea">
+                    <f:selectItem itemLabel="Selecione uma Área" itemValue=""/>
+                    <f:selectItems value="#{microareaManagedBean.areas}" var="area" 
+                                   itemLabel="#{area.descricao}" itemValue="#{area}" />
                 </h:selectOneMenu>
                 
             </h:panelGrid>
-            <p:commandButton value="Procurar" icon="ui-icon-search" />
             <p:commandButton value="Salvar" icon="ui-icon-disk" actionListener="#{microareaManagedBean.salvar()}" update="painelCadastro,:formTabela:tabela"/>
-            <p:commandButton value="Novo" icon="ui-icon-plus" actionListener="#{microareaManagedBean.novo()}" update="painelCadastro" />
+            <p:button value="Novo" icon="ui-icon-plus" outcome="index.html"/>
             
         </p:panel>
     </h:form>

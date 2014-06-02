@@ -5,7 +5,10 @@ import br.com.pi.entidade.Bairro;
 import br.com.pi.service.IEnderecoService;
 import br.com.pi.entidade.Endereco;
 import br.com.pi.entidade.Microarea;
+import br.com.pi.entidade.Postosaude;
 import br.com.pi.report.ReportEndereco;
+import br.com.pi.service.IAreaService;
+import br.com.pi.service.IMicroareaService;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.util.List;
@@ -13,6 +16,7 @@ import javax.ejb.EJB;
 import javax.enterprise.context.RequestScoped;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
+import javax.faces.view.ViewScoped;
 import javax.inject.Named;
 import javax.servlet.http.HttpServletResponse;
 
@@ -21,11 +25,16 @@ import javax.servlet.http.HttpServletResponse;
  * @author petrovick
  */
 @Named(value = "enderecoManagedBean")
-@RequestScoped
+@ViewScoped
 public class EnderecoManagedBean
 {
     @EJB
     IEnderecoService enderecoService;
+    @EJB
+    IAreaService areaService;
+    @EJB
+    IMicroareaService microareaService;
+    
     private Endereco endereco;
     private String area;
     private String microArea;
@@ -35,14 +44,21 @@ public class EnderecoManagedBean
     private List<Endereco> listaEndereco;
     private String endPesq;
     
+    private Postosaude postosaude;
+    private List<Area> areas;
+    
+    private Area areaarea;
+    private List<Microarea> microareas;
+    
+    
     public EnderecoManagedBean()
     {
         endereco = new Endereco();
         reportEndereco = new ReportEndereco();
-        Microarea ma = new Microarea();
-        ma.setIdArea(new Area());
-        endereco.setIdMicroArea(ma);
-        endereco.setIdBairro(new Bairro());
+//        Microarea ma = new Microarea();
+//        ma.setIdArea(new Area());
+//        endereco.setIdMicroArea(ma);
+//        endereco.setIdBairro(new Bairro());
     }
     
     public List<Endereco> todos()
@@ -73,6 +89,19 @@ public class EnderecoManagedBean
         ma.setIdArea(new Area());
         endereco.setIdMicroArea(ma);
         endereco.setIdBairro(new Bairro());
+    }
+    
+    public void listarPorPosto(){
+        if(postosaude != null){
+            areas = areaService.listarPorPosto(postosaude);
+            microareas = microareaService.listarPorArea(areaarea);
+        }
+    }
+    
+    public void listarPorArea(){
+        if(area != null){
+            microareas = microareaService.listarPorArea(areaarea);
+        }
     }
     
     public void editar()
@@ -189,6 +218,38 @@ public class EnderecoManagedBean
 
     public void setEndPesq(String endPesq) {
         this.endPesq = endPesq;
+    }
+
+    public Postosaude getPostosaude() {
+        return postosaude;
+    }
+
+    public void setPostosaude(Postosaude postosaude) {
+        this.postosaude = postosaude;
+    }
+
+    public List<Area> getAreas() {
+        return areas;
+    }
+
+    public void setAreas(List<Area> areas) {
+        this.areas = areas;
+    }
+
+    public Area getAreaarea() {
+        return areaarea;
+    }
+
+    public void setAreaarea(Area areaarea) {
+        this.areaarea = areaarea;
+    }
+
+    public List<Microarea> getMicroareas() {
+        return microareas;
+    }
+
+    public void setMicroareas(List<Microarea> microareas) {
+        this.microareas = microareas;
     }
     
     

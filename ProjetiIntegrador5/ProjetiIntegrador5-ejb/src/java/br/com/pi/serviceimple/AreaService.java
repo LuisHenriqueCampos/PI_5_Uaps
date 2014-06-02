@@ -1,6 +1,7 @@
 package br.com.pi.serviceimple;
 
 import br.com.pi.entidade.Area;
+import br.com.pi.entidade.Postosaude;
 import br.com.pi.service.IAreaService;
 import java.util.List;
 import javax.ejb.Stateless;
@@ -22,7 +23,11 @@ public class AreaService implements IAreaService
     public String salvar(Area entity) {
         try
         {
-            em.merge(entity);
+            if(entity.getIdArea()!=null){
+                em.merge(entity);
+            }else{
+                em.persist(entity);
+            }
         }
         catch(Exception ex)
         {
@@ -57,6 +62,14 @@ public class AreaService implements IAreaService
     @Override
     public Area obter(Integer IdObj) {
         return em.find(Area.class, IdObj);
+    }
+
+    @Override
+    public List<Area> listarPorPosto(Postosaude postosaude) {
+        TypedQuery<Area> areaQuery
+                = em.createQuery("select a from Area a where a.idPostoSaude.idPostoSaude = :id", Area.class);
+        areaQuery.setParameter("id", postosaude.getIdPostoSaude());
+        return areaQuery.getResultList();
     }
     
     

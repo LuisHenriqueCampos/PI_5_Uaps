@@ -16,16 +16,13 @@ and open the template in the editor.
             <p:growl/>
             <h:inputHidden value="#{medicoEnfermeiraManagedBean.medicoEnfermeira.pessoa.idPessoa}" />
             
-            <h:panelGrid columns="2" cellpadding="8">
+            <h:panelGrid columns="4" cellpadding="4">
                 
-                 <h:outputLabel value="Nome: " />
+                 <h:outputLabel value="Médico / Enfermeira:* " />
                 <p:inputText  value="#{medicoEnfermeiraManagedBean.medicoEnfermeira.pessoa.nome}" />
                 
-                <h:outputLabel value="Registro: " />
+                <h:outputLabel value="CRM:* " />
                 <p:inputText value="#{medicoEnfermeiraManagedBean.medicoEnfermeira.registro}" />
-                
-                <h:outputLabel value="Assinatura: " />
-                <p:inputText  value="#{medicoEnfermeiraManagedBean.medicoEnfermeira.assinatura}" />
                 
                 <h:outputLabel value="Atribuição:* " />
                 <h:selectOneMenu converter="atribuicaoConverter" 
@@ -41,10 +38,7 @@ and open the template in the editor.
                                  actionListener="#{medicoEnfermeiraManagedBean.salvar()}"
                                  update="painelCadastro,:formTabela:tabela"/>
 
-                <p:commandButton value="Novo" icon="ui-icon-plus" 
-                                 actionListener="#{medicoEnfermeiraManagedBean.novo()}"
-                                 process="@this"
-                                 update="@form" />
+                <p:button value="Novo" icon="ui-icon-plus" outcome="index.html" />
         </p:panel>
     </h:form>
     <br/>

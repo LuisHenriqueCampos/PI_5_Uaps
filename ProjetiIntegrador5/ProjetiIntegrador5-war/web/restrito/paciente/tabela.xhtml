@@ -6,33 +6,75 @@ and open the template in the editor.
 -->
 <!DOCTYPE html>
 <ui:fragment xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:ui="http://java.sun.com/jsf/facelets"
-      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:p="http://primefaces.org/ui"
-      xmlns:f="http://xmlns.jcp.org/jsf/core">
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://xmlns.jcp.org/jsf/html">
+    
     <h:form id="formTabela">
+        
         <p:contextMenu for="tabela">
-            <p:menuitem value="Excluir" icon="ui-icon-close" actionListener="#{pacienteManagedBean.excluir()}" update="painelCliente" />
-            <p:menuitem value="Editar" icon="ui-icon-pencil" actionListener="#{pacienteManagedBean.editar()}" update=":formCadastro:painelCadastro" />
+            
+            <p:menuitem value="Excluir" icon="ui-icon-close"
+                        actionListener="#{pacienteManagedBean.excluir()}"
+                        update="painelPaciente"/>
+            
+            <p:menuitem value="Alterar" icon="ui-icon-pencil"
+                        actionListener="#{pacienteManagedBean.editar()}"
+                        update=":formCadastro:painelCadastro"/>
+            
         </p:contextMenu>
-        <p:panel header="Pacientes cadastradas" id="painelCliente">
-            <p:growl />
-            <p:dataTable value="#{pacienteManagedBean.listar()}"
-                var="paciente" id="tabela" 
-                paginator="true" rows="10" 
-                emptyMessage="Nenhum Paciente cadastrado." 
-                rowKey="#{paciente.idPessoaPaciente}" 
-                selection="#{pacienteManagedBean.pacienteSelecionado}" 
-                selectionMode="single">
+        
+        <p:fieldset legend="Pacientes Cadastrados" toggleable="true" toggleSpeed="400" collapsed="false">
+            
+            <p:panel id="painelPaciente">
                 
-                <p:column headerText="Código: " style="width: 5%">#{paciente.idPessoaPaciente}</p:column>
-                <p:column headerText="Nome: " style="width: 30%">#{paciente.pessoa.nome}</p:column>
-                <p:column headerText="Familia: " style="width: 30%">#{paciente.idFamilia.descricao}</p:column>
-                <p:column headerText="Nascimento: " style="width: 10%">
-                    <h:outputText value="#{paciente.dataNascimento}"><f:convertDateTime type="date" pattern="dd-MM-yyyy"/></h:outputText>
-                </p:column>
-                <p:column headerText="CNS: " style="width: 25%">#{paciente.cns}</p:column>
-            </p:dataTable>
-        </p:panel>
+                <p:growl/>
+                
+                <p:dataTable emptyMessage="Nenhum Paciente Cadastrado." 
+                             paginator="true" rows="10" var="paciente"
+                             paginatorPosition="bottom"
+                             value="#{pacienteManagedBean.listar()}" id="tabela"
+                             rowKey="#{paciente.pessoa.idPessoa}"
+                             selection="#{pacienteManagedBean.pacienteSelecionado}"
+                             selectionMode="single">
+            
+                    <p:column style="width: 5%" headerText="Código">
+                        #{paciente.pessoa.idPessoa}
+                    </p:column>
+            
+                    <p:column style="width: 15%" headerText="Paciente">
+                        #{paciente.pessoa.nome}
+                    </p:column>
+                    
+                    <p:column headerText="Data de Nascimento" style="width: 10%">
+                        <h:outputText value="#{paciente.dataNascimento}"> 
+                            <f:convertDateTime type="date" pattern="dd/MM/yyyy"/>
+                        </h:outputText> 
+                    </p:column>
+                    
+                    <p:column style="width: 15%" headerText="CNS">
+                        #{paciente.cns}
+                    </p:column>
+                    
+                    <p:column style="width: 15%" headerText="Telefone">
+                        #{paciente.telefone}
+                    </p:column>
+                    
+                    <p:column style="width: 15%" headerText="Sexo">
+                        #{paciente.idSexo.descricao}
+                    </p:column>
+                    
+                    <p:column style="width: 15%" headerText="Familia">
+                        #{paciente.idFamilia.descricao}
+                    </p:column>
+            
+                </p:dataTable>
+            
+            </p:panel>
+        
+        </p:fieldset>    
+            
     </h:form>
+    
 </ui:fragment>

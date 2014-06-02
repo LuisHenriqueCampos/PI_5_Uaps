@@ -12,37 +12,35 @@ and open the template in the editor.
       xmlns:f="http://java.sun.com/jsf/core">
     
     <h:form id="formPesquisa">
-        <p:panel header="Área" id="painelCadastro">
+        <br/><p:panel header="Cadastro Área" id="painelCadastro">
             <p:growl />
             
             <h:inputHidden value="#{areaManagedBean.area.idArea}" />
             
-            <h:panelGrid columns="2">
-                <h:outputLabel value="Descricao: " />
-                <p:inputText value="#{areaManagedBean.area.descricao}" />
+            <h:panelGrid columns="4" cellpadding="5">
+                <h:outputLabel value="Descrição Área:* " />
+                <p:inputText value="#{areaManagedBean.area.descricao}" size="30"/>
             
                 
-                <h:outputLabel value="Posto de Saúde: " />
+                <h:outputLabel value="Posto de Saúde:* " />
                 <h:selectOneMenu converter="postosaudeConverter" value="#{areaManagedBean.area.idPostoSaude}">
                     <f:selectItem itemLabel="Selecione o Posto de saúde:" itemValue="" />
                     <f:selectItems value="#{postoSaudeManagedBean.todos()}" var="posto" itemLabel="#{posto.nomePosto}" itemValue="#{posto}" />
                 </h:selectOneMenu>
 
-                <h:outputLabel value="Enfermeira: " />
+                <h:outputLabel value="Enfermeira:* " />
                 <h:selectOneMenu converter="pessoaConverter" value="#{areaManagedBean.area.medicoenfermeiraidEnfermeira.pessoa}">
-                    <f:selectItem itemLabel="Selecione a enfermeira:" itemValue="" />
+                    <f:selectItem itemLabel="Selecione Enfermeira:" itemValue="" />
                     <f:selectItems value="#{medicoEnfermeiraManagedBean.listarEnfermeira()}" var="enf" itemLabel="#{enf.pessoa.nome}" itemValue="#{enf.pessoa}" />
                 </h:selectOneMenu>
 
-                <h:outputLabel value="Medico: " />
+                <h:outputLabel value="Médico:* " />
                 <h:selectOneMenu converter="pessoaConverter" value="#{areaManagedBean.area.medicoenfermeiraidMedico.pessoa}">
-                    <f:selectItem itemLabel="Selecione o medico: " itemValue="" />
+                    <f:selectItem itemLabel="Selecione Médico: " itemValue="" />
                     <f:selectItems value="#{medicoEnfermeiraManagedBean.listarMedico()}" var="med" itemLabel="#{med.pessoa.nome}" itemValue="#{med.pessoa}" />
                 </h:selectOneMenu>
                 
             </h:panelGrid>
-
-            <p:commandButton value="Procurar" icon="ui-icon-search" />
             
             <p:commandButton
                         value="Salvar"
@@ -50,8 +48,7 @@ and open the template in the editor.
                         actionListener="#{areaManagedBean.salvar()}"
                         update="painelCadastro,:formTabela:tabela"/>
             
-            <p:commandButton value="Novo" icon="ui-icon-search" actionListener="#{areaManagedBean.novo()}"
-                        update="painelCadastro,:formTabela:tabela"/>
+            <p:button value="Novo" icon="ui-icon-search" outcome="index.html"/>
             
         </p:panel>
     </h:form>

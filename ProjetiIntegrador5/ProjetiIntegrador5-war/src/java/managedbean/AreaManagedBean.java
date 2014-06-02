@@ -8,6 +8,7 @@ import br.com.pi.entidade.Medicoenfermeira;
 import br.com.pi.entidade.Postosaude;
 import br.com.pi.service.IAreaService;
 import java.util.List;
+import util.MenssagemUtil;
 
 @Named(value = "areaManagedBean")
 @RequestScoped
@@ -40,7 +41,14 @@ public class AreaManagedBean
     
     public void salvar()
     {
-        areaService.salvar(area);
+        String erro = areaService.salvar(area);
+        
+        if(erro == null){
+            MenssagemUtil.addMensagemInfo("Área salva com sucesso!");
+            area = new Area();
+        }else{
+            MenssagemUtil.addMensagemError(erro);
+        }
     }
     
     public void novo()
@@ -55,7 +63,13 @@ public class AreaManagedBean
 
     public void excluir()
     {
-        areaService.excluir(areaSelecionada);
+        String erro = areaService.excluir(areaSelecionada);
+        
+        if(erro == null){
+            MenssagemUtil.addMensagemInfo("Área excluída com sucesso!");
+        }else{
+            MenssagemUtil.addMensagemError(erro);
+        }
     }
 
     public Area getArea() {

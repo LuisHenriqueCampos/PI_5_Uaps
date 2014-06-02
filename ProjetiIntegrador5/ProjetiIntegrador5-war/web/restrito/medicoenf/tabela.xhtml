@@ -23,7 +23,7 @@ and open the template in the editor.
                         update=":formCadastro:painelCadastro"/>
         </p:contextMenu>
         
-        <p:fieldset legend="Médicos / Enfermeiras" toggleable="true" toggleSpeed="400" collapsed="true" >
+        <p:fieldset legend="Médicos / Enfermeiras" toggleable="true" toggleSpeed="400" collapsed="false" >
         
         <p:panel  id="painelTabela">
             <p:growl />
@@ -56,6 +56,11 @@ and open the template in the editor.
                           style="width: 30%" filterBy="registro" 
                           filterMatchMode="contains">
                     #{med.registro}
+                </p:column>
+                
+                 <p:column headerText="Assinatura" 
+                          style="width: 30%">
+                    #{med.assinatura}
                 </p:column>
             
             </p:dataTable>

@@ -2,49 +2,39 @@ package br.com.pi.entidade;
 
 import java.io.Serializable;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 
-/**
- *
- * @author petrovick
- */
 @Entity
 @Table(name = "agentesaude")
 @XmlRootElement
-@NamedQueries({
-    @NamedQuery(name = "Agentesaude.findAll", query = "SELECT a FROM Agentesaude a"),
-    @NamedQuery(name = "Agentesaude.findByIdPessoaAgenteSaude", query = "SELECT a FROM Agentesaude a WHERE a.idPessoaAgenteSaude = :idPessoaAgenteSaude"),
-    @NamedQuery(name = "Agentesaude.findByMatricula", query = "SELECT a FROM Agentesaude a WHERE a.matricula = :matricula")})
 public class Agentesaude implements Serializable {
     private static final long serialVersionUID = 1L;
+    
     @Id
-    //@Basic(optional = false)
-    //@NotNull
+    @Basic(optional = false)
     @Column(name = "IdPessoaAgenteSaude", insertable = false, updatable = false)
     private Integer idPessoaAgenteSaude;
-    //@Basic(optional = false)
-    //@NotNull
-    @Column(name = "matricula")
+
+    @NotNull(message = "O campo Matrícula não pode ser Nulo")
+    @Column(name = "matricula", nullable = false)
     private int matricula;
     
-/*    @JoinColumn(name = "IdPessoaAgenteSaude", referencedColumnName = "IdPessoa", insertable = false, updatable = false)
-    @OneToOne(optional = false)
-*/
-    @OneToOne
-    @JoinColumn(name = "IdPessoaAgenteSaude")
+    @OneToOne(optional = false, cascade = CascadeType.ALL)
+    @JoinColumn(name = "IdPessoaAgenteSaude", referencedColumnName = "IdPessoa")
     private Pessoaa pessoa;
     
-    @JoinColumn(name = "IdMicroArea", referencedColumnName = "IdMicroArea")
+    @Size(min = 1 ,message = "Selecione Micro-Área")
+    @JoinColumn(name = "IdMicroArea", referencedColumnName = "IdMicroArea", nullable = false)
     @ManyToOne(optional = false)
     private Microarea idMicroArea;
 

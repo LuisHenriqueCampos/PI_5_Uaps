@@ -10,21 +10,25 @@
             <p:menuitem value="Excluir" icon="ui-icon-close" actionListener="#{areaManagedBean.excluir()}" update="painelEndereco" />
             <p:menuitem value="Editar" icon="ui-icon-pencil" actionListener="#{areaManagedBean.editar()}" update=":formPesquisa:painelCadastro" />
         </p:contextMenu>
-        <p:panel header="Área cadastrada" id="painelEndereco">
+        <br/>
+        <p:fieldset legend="Áreas Cadastradas" toggleable="true" toggleSpeed="400" collapsed="false">
+        <p:panel id="painelEndereco">
             <p:growl />
             <p:dataTable value="#{areaManagedBean.todos()}"
                 var="area" id="tabela" 
-                paginator="true" rows="10" 
+                paginator="true" rows="10" paginatorPosition="bottom"
                 emptyMessage="Nenhuma Área cadastrado" 
                 rowKey="#{area.idArea}" 
                 selection="#{areaManagedBean.areaSelecionada}"
                 selectionMode="single">
                 
-                <p:column headerText="Área: " style="width: 20%">#{area.descricao}</p:column>
-                <p:column headerText="Posto de Saúde: " style="width: 20%">#{area.idPostoSaude.nomePosto}</p:column>
-                <p:column headerText="Médico: " style="width: 20%">#{area.medicoenfermeiraidMedico.pessoa.nome}</p:column>
-                <p:column headerText="Enfermeira: " style="width: 20%">#{area.medicoenfermeiraidEnfermeira.pessoa.nome}</p:column>
+                <p:column headerText="Código " style="width: 5%">#{area.idArea}</p:column>
+                <p:column headerText="Área " style="width: 15%">#{area.descricao}</p:column>
+                <p:column headerText="Posto de Saúde " style="width: 20%">#{area.idPostoSaude.nomePosto}</p:column>
+                <p:column headerText="Médico " style="width: 20%">#{area.medicoenfermeiraidMedico.pessoa.nome}</p:column>
+                <p:column headerText="Enfermeira " style="width: 20%">#{area.medicoenfermeiraidEnfermeira.pessoa.nome}</p:column>
             </p:dataTable>
         </p:panel>
+        </p:fieldset>
     </h:form>
 </ui:fragment>

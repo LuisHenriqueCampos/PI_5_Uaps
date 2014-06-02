@@ -1,9 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package br.com.pi.entidade;
 
 import java.io.Serializable;
@@ -13,13 +7,10 @@ import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
@@ -30,58 +21,53 @@ import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
-/**
- *
- * @author petrovick
- */
 @Entity
 @Table(name = "paciente")
 @XmlRootElement
-@NamedQueries({
-    @NamedQuery(name = "Paciente.findAll", query = "SELECT p FROM Paciente p"),
-    @NamedQuery(name = "Paciente.findByIdPessoaPaciente", query = "SELECT p FROM Paciente p WHERE p.idPessoaPaciente = :idPessoaPaciente"),
-    @NamedQuery(name = "Paciente.findByDataNascimento", query = "SELECT p FROM Paciente p WHERE p.dataNascimento = :dataNascimento"),
-    @NamedQuery(name = "Paciente.findByNomeMae", query = "SELECT p FROM Paciente p WHERE p.nomeMae = :nomeMae"),
-    @NamedQuery(name = "Paciente.findByNomePai", query = "SELECT p FROM Paciente p WHERE p.nomePai = :nomePai"),
-    @NamedQuery(name = "Paciente.findByCns", query = "SELECT p FROM Paciente p WHERE p.cns = :cns"),
-    @NamedQuery(name = "Paciente.findByTelefone", query = "SELECT p FROM Paciente p WHERE p.telefone = :telefone")})
 public class Paciente implements Serializable {
     private static final long serialVersionUID = 1L;
+    
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-//    @Basic(optional = false)
-    @Column(name = "IdPessoaPaciente")
+    @Basic(optional = false)
+    @Column(name = "IdPessoaPaciente",insertable = false, updatable = false)
     private Integer idPessoaPaciente;
-//    @Basic(optional = false)
-//    @NotNull
+
+    @NotNull(message = "O campo Data de Nascimento não pode ser Nulo")
     @Column(name = "DataNascimento")
     @Temporal(TemporalType.DATE)
     private Date dataNascimento;
-    @Basic(optional = false)
-//    @NotNull
-    @Size(min = 1, max = 80)
-    @Column(name = "NomeMae")
+
+    @NotNull(message = "O campo Nome da Mãe não pode ser Nulo")
+    @Size(min = 1,max = 80, message = "Mínimo 1, Máximo 80 caracteres")
+    @Column(name = "NomeMae", nullable = false)
     private String nomeMae;
-    @Size(max = 80)
-    @Column(name = "NomePai")
+    
+    @Size(max = 80, message = "Máximo 80 caracteres")
+    @Column(name = "NomePai",nullable = true)
     private String nomePai;
-//    @Basic(optional = false)
-//    @NotNull
-    @Column(name = "Cns")
-    private long cns;
-    @Size(max = 11)
-    @Column(name = "Telefone")
+
+    @NotNull(message = "O campo CNS não pode ser Nulo")
+    @Column(name = "Cns", nullable = false)
+    private String cns;
+    
+    @Column(name = "Telefone", nullable = true)
     private String telefone;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idPessoaPaciente")
+    
+    @OneToMany(mappedBy = "idPessoaPaciente")
     private Collection<Encaminhamento> encaminhamentoCollection;
-    @JoinColumn(name = "IdPessoaPaciente", referencedColumnName = "IdPessoa", insertable = false, updatable = false)
-    @OneToOne(optional = false)
+    
+    @JoinColumn(name = "IdPessoaPaciente", referencedColumnName = "IdPessoa")
+    @OneToOne(optional = false, cascade = CascadeType.ALL)
     private Pessoaa pessoa;
-    @JoinColumn(name = "IdSexo", referencedColumnName = "IdSexo")
-    @ManyToOne(optional = false)
+    
+    @NotNull(message = "O campo Sexo não pode ser Nulo")
+    @JoinColumn(name = "IdSexo", referencedColumnName = "IdSexo", nullable = false)
+    @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private Sexo idSexo;
-    @JoinColumn(name = "IdFamilia", referencedColumnName = "IdFamilia")
-    @ManyToOne(optional = false)
+    
+    @NotNull(message = "O campo Família não pode ser Nulo")
+    @JoinColumn(name = "IdFamilia", referencedColumnName = "IdFamilia", nullable = false)
+    @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private Familia idFamilia;
 
     public Paciente() {
@@ -91,7 +77,7 @@ public class Paciente implements Serializable {
         this.idPessoaPaciente = idPessoaPaciente;
     }
 
-    public Paciente(Integer idPessoaPaciente, Date dataNascimento, String nomeMae, long cns) {
+    public Paciente(Integer idPessoaPaciente, Date dataNascimento, String nomeMae, String cns) {
         this.idPessoaPaciente = idPessoaPaciente;
         this.dataNascimento = dataNascimento;
         this.nomeMae = nomeMae;
@@ -130,11 +116,11 @@ public class Paciente implements Serializable {
         this.nomePai = nomePai;
     }
 
-    public long getCns() {
+    public String getCns() {
         return cns;
     }
 
-    public void setCns(long cns) {
+    public void setCns(String cns) {
         this.cns = cns;
     }
 

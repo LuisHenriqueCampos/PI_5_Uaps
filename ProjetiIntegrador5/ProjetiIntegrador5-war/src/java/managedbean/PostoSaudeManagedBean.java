@@ -14,10 +14,6 @@ import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpServletResponse;
 import util.MenssagemUtil;
 
-/**
- *
- * @author petrovick
- */
 @Named(value = "postoSaudeManagedBean")
 @RequestScoped
 public class PostoSaudeManagedBean {
@@ -75,34 +71,10 @@ public class PostoSaudeManagedBean {
         return postoService.listar();
     }
     
-    public List<Postosaude> listarRel() {
-        System.out.println("Entrou:"+ posPesq.length());
-        
-//        if(posPesq.length() == 1)
- //       {
-            System.out.println("Entrou no método:" + posPesq);
-            listaPostosaude = postoService.listarRel(posPesq);
-//        }
-/*        else if(posPesq.length() > 1)
-        {
-            System.out.println("Antes do lambda" + listaPostosaude.size());
-            System.out.println("posPesq" + posPesq);
-            System.out.println("+++"+ postoService.listar().stream().filter(x -> x.getNomePosto().contains(posPesq)).count());
-            System.out.println("Fez o lambda" + pp.size());
-            for(Postosaude s : pp)
-                System.out.println("lol:" + s.getNomePosto());
-            return pp;
-        }
- */       /*
-        else if(pacPesq.length() > 1)
-        {
-            return listaPaciente.stream()
-                    .filter(x -> x.getPessoa().getNome().contains(pacPesq))
-                    .map(x -> x).collect(Collectors.toList());
-            //listaPaciente = listaPaciente.stream().filter(x -> x.getPessoa().getNome().contains(pacPesq)).map(x -> x).collect(Collectors.toList());
-        }*/
-        
-        System.out.println("Passou");
+    public List<Postosaude> listarRel() 
+    {        
+        listaPostosaude = postoService.listarRel(posPesq);
+
         for(Postosaude p : listaPostosaude)
         {
             System.out.println("" + p.getNomePosto());

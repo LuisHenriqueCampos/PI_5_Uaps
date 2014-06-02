@@ -10,19 +10,24 @@
             <p:menuitem value="Excluir" icon="ui-icon-close" actionListener="#{microareaManagedBean.excluir()}" update="painelTabela" />
             <p:menuitem value="Editar" icon="ui-icon-pencil" actionListener="#{microareaManagedBean.editar()}" update=":formCadastro:painelCadastro" />
         </p:contextMenu>
-        <p:panel header="Micro-Área cadastrados" id="painelTabela">
+        <br/>
+        <p:fieldset legend="Micro-Área Cadastradas" toggleable="true" toggleSpeed="400" collapsed="false">
+        <p:panel id="painelTabela">
             <p:growl />
             <p:dataTable value="#{microareaManagedBean.todos()}"
                 var="microarea" id="tabela" 
-                paginator="true" rows="10" 
-                emptyMessage="Nenhum micro-área cadastrado" 
+                paginator="true" rows="10" paginatorPosition="bottom"
+                emptyMessage="Nenhuma Micro-Área Cadastrada" 
                 rowKey="#{microarea.idMicroArea}" 
                 selection="#{microareaManagedBean.microareaSelecionada}" 
                 selectionMode="single">
                 
-                <p:column headerText="Código: " style="width: 20%">#{microarea.idMicroArea}</p:column>
-                <p:column headerText="Micro-Área: " style="width: 80%">#{microarea.descricao}</p:column>
+                <p:column headerText="Código " style="width: 10%">#{microarea.idMicroArea}</p:column>
+                <p:column headerText="Micro-Área " style="width: 25%">#{microarea.descricao}</p:column>
+                <p:column headerText="Área " style="width: 25%">#{microarea.idArea.descricao}</p:column>
+                <p:column headerText="Posto de Saúde " style="width: 40%">#{microarea.idArea.idPostoSaude.nomePosto}</p:column>
             </p:dataTable>
         </p:panel>
+        </p:fieldset>
     </h:form>
 </ui:fragment>

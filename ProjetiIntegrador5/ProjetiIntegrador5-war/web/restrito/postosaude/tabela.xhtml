@@ -11,20 +11,20 @@
             <p:menuitem value="Editar" icon="ui-icon-pencil" actionListener="#{postoSaudeManagedBean.editar()}" update=":formCadastro:painelCadastro" />
         </p:contextMenu>
         
-        <p:fieldset legend="Postos de Saúde" toggleable="true" toggleSpeed="400" collapsed="true">
+        <p:fieldset legend="Postos de Saúde" toggleable="true" toggleSpeed="400" collapsed="false">
         
-        <p:panel header="Posto de saúde cadastrados" id="painelCliente">
+        <p:panel id="painelCliente">
             <p:growl />
             <p:dataTable value="#{postoSaudeManagedBean.todos()}"
                 var="postosaude" id="tabela" 
-                paginator="true" rows="10" 
+                paginator="true" rows="10" paginatorPosition="bottom"
                 emptyMessage="Nenhum posto de saúde cadastrado" 
                 rowKey="#{postosaude.idPostoSaude}" 
                 selection="#{postoSaudeManagedBean.postosaudeSelecionado}" 
                 selectionMode="single">
                 
-                <p:column headerText="Código: " style="width: 20%">#{postosaude.idPostoSaude}</p:column>
-                <p:column headerText="Nome: " style="width: 80%">#{postosaude.nomePosto}</p:column>
+                <p:column headerText="Código " style="width: 20%">#{postosaude.idPostoSaude}</p:column>
+                <p:column headerText="Nome Posto de Saúde " style="width: 80%">#{postosaude.nomePosto}</p:column>
             </p:dataTable>
         </p:panel>
         </p:fieldset>    

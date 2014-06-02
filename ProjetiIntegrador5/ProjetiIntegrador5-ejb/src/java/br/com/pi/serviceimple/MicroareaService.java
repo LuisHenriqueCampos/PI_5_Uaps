@@ -1,9 +1,10 @@
 package br.com.pi.serviceimple;
 
+import br.com.pi.entidade.Area;
 import br.com.pi.entidade.Microarea;
 import br.com.pi.service.IMicroareaService;
 import java.util.List;
-import javax.ejb.Stateless;
+import javax.ejb.Stateful;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
@@ -12,7 +13,7 @@ import javax.persistence.TypedQuery;
  *
  * @author petrovick
  */
-@Stateless
+@Stateful
 public class MicroareaService  implements IMicroareaService
 {
 
@@ -61,5 +62,13 @@ public class MicroareaService  implements IMicroareaService
     public List<Microarea> listar() {
         TypedQuery<Microarea> bairroQuery = em.createQuery("select a from Microarea a", Microarea.class);
         return bairroQuery.getResultList();
+    }
+
+    @Override
+    public List<Microarea> listarPorArea(Area area) {
+        TypedQuery<Microarea> microQuery
+                = em.createQuery("select a from Microarea a where a.idArea.idArea = :id", Microarea.class);
+        microQuery.setParameter("id", area.getIdArea());
+        return microQuery.getResultList();
     }
 }

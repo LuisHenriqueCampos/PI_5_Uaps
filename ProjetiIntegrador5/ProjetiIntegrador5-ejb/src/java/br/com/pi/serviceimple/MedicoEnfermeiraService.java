@@ -13,7 +13,6 @@ import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
-import javax.validation.ConstraintViolationException;
 
 /**
  *
@@ -27,31 +26,37 @@ public class MedicoEnfermeiraService implements IMedicoEnfermeiraService{
 
     @Override
     public String salvar(Medicoenfermeira entity) {
+        entity.setAssinatura(entity.getPessoa().getNome()+" - "+entity.getRegistro());
+        
         try
         {
-            entity.getPessoa().setMedicoenfermeira(entity);
-            em.merge(entity);
-            return null;
+            if(entity.getPessoa().getIdPessoa()!=null){
+                em.merge(entity);
+            }else{
+                em.persist(entity);
+            }
         }
         catch(Exception ex)
         {
-            throw ex;
+           ex.printStackTrace();
+           return ex.getMessage();
         }
+        return null;
     }
 
     @Override
     public String excluir(Medicoenfermeira Idobj)
-    {
+    {        
         try
         {
-            Medicoenfermeira mef = em.find(Medicoenfermeira.class, Idobj.getIdPessoaMedicoEnfermeira());
+            Medicoenfermeira mef = em.find(Medicoenfermeira.class, Idobj.getPessoa().getIdPessoa());
             em.remove(mef);
-            return null;
         }
         catch(Exception ex)
         {
             throw ex;
         }
+        return null;
     }
 
     @Override

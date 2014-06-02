@@ -21,9 +21,20 @@ public class PostosaudeService implements IPostosaudeService
 
     @Override
     public String salvar(Postosaude entity) {
+        
+        TypedQuery<Postosaude> pquery = em
+                .createQuery("SELECT p FROM Postosaude p where p.nomePosto = :nome",Postosaude.class);
+        pquery.setParameter("nome", entity.getNomePosto());
+        
         try
         {
-            em.merge(entity);
+            if(entity.getIdPostoSaude()!=null){
+                em.merge(entity);
+            }else if(entity.getIdPostoSaude()==null && pquery.getResultList().isEmpty()){
+                em.persist(entity);
+            }else{
+                return "Posto de Saúde já Cadastrado.";
+            }
         }
         catch(Exception ex)
         {
@@ -34,8 +45,7 @@ public class PostosaudeService implements IPostosaudeService
     }
 
     @Override
-    public String excluir(Postosaude Idobj) {
-        
+    public String excluir(Postosaude Idobj) {        
         try
         {
             Postosaude posto = em.find(Postosaude.class, Idobj.getIdPostoSaude());

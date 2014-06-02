@@ -1,24 +1,15 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package br.com.pi.entidade;
 
 import java.io.Serializable;
 import java.util.Collection;
-import javax.persistence.Basic;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
@@ -26,39 +17,38 @@ import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
-/**
- *
- * @author petrovick
- */
 @Entity
 @Table(name = "area")
 @XmlRootElement
-@NamedQueries({
-    @NamedQuery(name = "Area.findAll", query = "SELECT a FROM Area a"),
-    @NamedQuery(name = "Area.findByIdArea", query = "SELECT a FROM Area a WHERE a.idArea = :idArea"),
-    @NamedQuery(name = "Area.findByDescricao", query = "SELECT a FROM Area a WHERE a.descricao = :descricao")})
 public class Area implements Serializable {
     private static final long serialVersionUID = 1L;
+    
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Basic(optional = false)
-    @Column(name = "IdArea")
+    @Column(name = "IdArea",nullable = false)
     private Short idArea;
-    @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 10)
-    @Column(name = "Descricao")
+    
+    @NotNull(message = "O campo Área não pode ser Nulo")
+    @Size(min = 1, max = 10,message = "Mínimo 1, Máximo 10 caracteres")
+    @Column(name = "Descricao", nullable = false)
     private String descricao;
-    @JoinColumn(name = "IdPostoSaude", referencedColumnName = "IdPostoSaude")
-    @ManyToOne(optional = false)
+    
+    @NotNull(message = "Selecione o Posto de Saúde")
+    @JoinColumn(name = "IdPostoSaude", referencedColumnName = "IdPostoSaude", nullable = false)
+    @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private Postosaude idPostoSaude;
-    @JoinColumn(name = "medicoenfermeira_idEnfermeira", referencedColumnName = "IdPessoaMedicoEnfermeira")
-    @ManyToOne(optional = false)
+    
+    @NotNull(message = "Selecione Enfermeira")
+    @JoinColumn(name = "medicoenfermeira_idEnfermeira", referencedColumnName = "IdPessoaMedicoEnfermeira", nullable = false)
+    @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private Medicoenfermeira medicoenfermeiraidEnfermeira;
-    @JoinColumn(name = "medicoenfermeira_idMedico", referencedColumnName = "IdPessoaMedicoEnfermeira")
-    @ManyToOne(optional = false)
+    
+    @NotNull(message = "Selecione Médico")
+    @JoinColumn(name = "medicoenfermeira_idMedico", referencedColumnName = "IdPessoaMedicoEnfermeira", nullable = false)
+    @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private Medicoenfermeira medicoenfermeiraidMedico;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idArea")
+    
+    @OneToMany(mappedBy = "idArea", fetch = FetchType.LAZY)
     private Collection<Microarea> microareaCollection;
 
     public Area() {

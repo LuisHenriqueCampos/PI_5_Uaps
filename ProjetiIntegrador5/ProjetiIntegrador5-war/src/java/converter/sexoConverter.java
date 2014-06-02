@@ -19,16 +19,16 @@ public class sexoConverter implements Converter
     {
         if(value == null || value.isEmpty())
             return null;
-        
         try
         {
             Short id = Short.parseShort(value);
-            Sexo s = new Sexo();
-            s.setIdSexo(id);
-            return s;
+            Sexo sexo = new Sexo();
+            sexo.setIdSexo(id);
+            return sexo;
         }
         catch(NumberFormatException ex)
         {
+            ex.printStackTrace();
             return null;
         }
     }
@@ -38,7 +38,8 @@ public class sexoConverter implements Converter
     {
         if(value == null || value.getClass() != Sexo.class)
             return null;
-        Sexo s = (Sexo) value;
-        return s.getIdSexo().toString();
-    } 
+        Sexo sexo = (Sexo) value;
+        return sexo.getIdSexo().toString();
+        
+    }
 }

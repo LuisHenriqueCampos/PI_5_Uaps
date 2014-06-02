@@ -11,21 +11,23 @@ and open the template in the editor.
       xmlns:p="http://primefaces.org/ui"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
     <h:form id="formTabela">
-        <p:panel header="Clientes Cadastrados" id="painelCliente">
+        <br/>
+        <p:fieldset legend="Pacientes Cadastrados" toggleable="true" toggleSpeed="400" collapsed="false">
+            <p:panel  id="painelPaciente">
             <p:growl />
             <p:dataTable value="#{pacienteManagedBean.listarRel()}"
                 var="paciente" id="tabela" 
-                paginator="true" rows="10" 
-                emptyMessage="Nenhum paciente cadastrado.">
+                emptyMessage="Nenhum Paciente Cadastrado.">
                 
-                <p:column headerText="Código: " style="width: 5%">#{paciente.idPessoaPaciente}</p:column>
-                <p:column headerText="Nome: " style="width: 30%">#{paciente.pessoa.nome}</p:column>
-                <p:column headerText="Familia: " style="width: 30%">#{paciente.idFamilia.descricao}</p:column>
-                <p:column headerText="Nascimento: " style="width: 10%">
+                <p:column headerText="Código " style="width: 5%">#{paciente.pessoa.idPessoa}</p:column>
+                <p:column headerText="Paciente " style="width: 30%">#{paciente.pessoa.nome}</p:column>
+                <p:column headerText="Família " style="width: 30%">#{paciente.idFamilia.descricao}</p:column>
+                <p:column headerText="Data de Nascimento: " style="width: 10%">
                     <h:outputText value="#{paciente.dataNascimento}"><f:convertDateTime type="date" pattern="dd-MM-yyyy"/></h:outputText>
                 </p:column>
                 <p:column headerText="CNS: " style="width: 25%">#{paciente.cns}</p:column>
             </p:dataTable>
-        </p:panel>
+            </p:panel>
+        </p:fieldset>    
     </h:form>
 </ui:fragment>

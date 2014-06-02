@@ -7,25 +7,21 @@
       xmlns:f="http://xmlns.jcp.org/jsf/core">
     <br/>
     <h:form id="formCadastro">
-        <p:panel header="Posto de saúde" id="painelCadastro">
+        <p:panel header="Posto de Saúde" id="painelCadastro">
             <p:growl/>
             <h:inputHidden value="#{postoSaudeManagedBean.postoSaude.idPostoSaude}" />
             
             <h:panelGrid columns="2" cellpadding="8">
-                <h:outputLabel value="Nome: " />
-                <p:inputText value="#{postoSaudeManagedBean.postoSaude.nomePosto}" />
+                <h:outputLabel value="Nome Posto de Saúde:* " />
+                <p:inputText value="#{postoSaudeManagedBean.postoSaude.nomePosto}" size="70"/>
                 
             </h:panelGrid>
-            <p:commandButton value="Procurar" icon="ui-icon-search" />
             
             <p:commandButton value="Salvar" icon="ui-icon-disk" 
                              actionListener="#{postoSaudeManagedBean.salvar()}"
                              update="painelCadastro,:formTabela:tabela"/>
             
-            <p:commandButton value="Novo" icon="ui-icon-plus" 
-                             actionListener="#{postoSaudeManagedBean.novo()}"
-                             process="@this"
-                             update="@form" />
+            <p:button value="Novo" icon="ui-icon-plus" outcome="index.html"/>
         </p:panel>
     </h:form>
     <br/>
