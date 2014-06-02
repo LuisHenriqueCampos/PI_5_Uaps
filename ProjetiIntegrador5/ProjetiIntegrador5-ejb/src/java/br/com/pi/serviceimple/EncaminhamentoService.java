@@ -20,14 +20,18 @@ public class EncaminhamentoService implements IEncaminhamentoService
     {
         try
         {
-            em.merge(entity);
-            return null;
+            if(entity.getIdEncaminhamento()!= null){
+                em.merge(entity);
+            }else{
+                em.persist(entity);
+            }
         }
         catch(Exception ex)
         {
             ex.printStackTrace();
             return ex.getMessage();
         }
+        return null;
     }
 
     @Override
@@ -37,13 +41,13 @@ public class EncaminhamentoService implements IEncaminhamentoService
         {
             Encaminhamento en = em.find(Encaminhamento.class, Idobj.getIdEncaminhamento());
             em.remove(en);
-            return null;
         }
         catch(Exception ex)
         {
             ex.printStackTrace();
             return ex.getMessage();
         }
+        return null;
     }
 
     @Override
@@ -55,7 +59,7 @@ public class EncaminhamentoService implements IEncaminhamentoService
     @Override
     public List<Encaminhamento> listar()
     {
-        TypedQuery<Encaminhamento> typedQuery = em.createQuery("select e from Encaminhamento e", Encaminhamento.class);
+        TypedQuery<Encaminhamento> typedQuery = em.createQuery("select e from Encaminhamento e ORDER BY e.dataEncaminhamento", Encaminhamento.class);
         return typedQuery.getResultList();
     }
     

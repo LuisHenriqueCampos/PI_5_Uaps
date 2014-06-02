@@ -6,12 +6,15 @@
 
 package managedbean;
 
+import br.com.pi.entidade.Tipoencaminhamento;
+import br.com.pi.model.GraficoTipoEncaminhamentoModel;
+import br.com.pi.service.ITipoEncaminhamentoService;
+import java.util.List;
 import javax.ejb.EJB;
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Named;
-import br.com.pi.entidade.Tipoencaminhamento;
-import br.com.pi.service.ITipoEncaminhamentoService;
-import java.util.List;
+import org.primefaces.model.chart.CartesianChartModel;
+import org.primefaces.model.chart.ChartSeries;
 /**
  *
  * @author petrovick
@@ -37,6 +40,21 @@ public class TipoEncaminhamentoManagedBean
 
     public Tipoencaminhamento getTipoEncaminhamento() {
         return tipoEncaminhamento;
+    }
+    
+     public CartesianChartModel gerarGrafico(){
+        CartesianChartModel cartesian =  new CartesianChartModel();
+        
+        List<GraficoTipoEncaminhamentoModel> models =
+                tipoEncaminhamentoService.consultaGrafico();            
+        
+        for(GraficoTipoEncaminhamentoModel model : models){
+            ChartSeries cs = new ChartSeries();
+            cs.setLabel(model.getNomeTipo());
+            cs.set(model.getNomeTipo(), model.getQuantidade());
+            cartesian.addSeries(cs);
+        }        
+        return cartesian;
     }
 
     public void setTipoEncaminhamento(Tipoencaminhamento tipoEncaminhamento) {

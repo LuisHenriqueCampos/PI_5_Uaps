@@ -15,24 +15,51 @@ and open the template in the editor.
             <p:menuitem value="Excluir" icon="ui-icon-close" actionListener="#{encaminhamentoManagedBean.excluir()}" update="painelEncaminhamento" />
             <p:menuitem value="Editar" icon="ui-icon-pencil" actionListener="#{encaminhamentoManagedBean.editar()}" update=":formCadastro:painelCadastro"/>
         </p:contextMenu>
-        <p:panel header="Encaminhamentos cadastrados" id="painelEncaminhamento">
-            <p:growl />
-            <p:dataTable value="#{encaminhamentoManagedBean.listar()}"
-                         var="enc" id="tabela"
-                         paginator="true" rows="10"
-                         emptyMessage="Nenhum Encaminhamento Cadastrado"
-                         rowKey="#{enc.idEncaminhamento}"
-                         selection="#{encaminhamentoManagedBean.encaminhamentoSelecionado}"
-                         selectionMode="single">
-                <p:column headerText="Código" style="width: 5%">#{enc.idEncaminhamento}</p:column>
-                <p:column headerText="Data Enc.:" style="width: 5%">#{enc.dataEncaminhamento}</p:column>
-                <p:column headerText="Especialidade:" style="width: 5%">#{enc.idEspecialidade.descricao}</p:column>
-                <p:column headerText="Med/Enf:" style="width: 5%">#{enc.idPessoaMedicoEnfermeira.pessoa.nome}</p:column>
-                <p:column headerText="Paciente:" style="width: 5%">#{enc.idPessoaPaciente.pessoa.nome}</p:column>
-                <p:column headerText="Tipo Enc.:" style="width: 5%">#{enc.idtipoEncaminhamento.descricao}</p:column>
+        <br/>
+        <p:fieldset legend="Encaminhamentos Cadastrados" toggleable="true" toggleSpeed="400" collapsed="false">
+            <p:panel id="painelEncaminhamento">
+                <p:growl />
+                <p:dataTable value="#{encaminhamentoManagedBean.listar()}"
+                             var="enc" id="tabela"
+                             paginator="true" rows="10" paginatorPosition="bottom"
+                             emptyMessage="Nenhum Encaminhamento Cadastrado"
+                             rowKey="#{enc.idEncaminhamento}"
+                             selection="#{encaminhamentoManagedBean.encaminhamentoSelecionado}"
+                             selectionMode="single">
+                    
+                    <p:column headerText="Código" style="width: 5%">
+                        #{enc.idEncaminhamento}
+                    </p:column>
+                    
+                    <p:column headerText="Data Enc" style="width: 10%">
+                        <h:outputText value="#{enc.dataEncaminhamento}"> 
+                            <f:convertDateTime type="date" pattern="dd/MM/yyyy hh:mm:ss"/>
+                        </h:outputText> 
+                    </p:column>
+                    
+                    <p:column headerText="Especialidade" style="width: 10%">
+                        #{enc.idEspecialidade.descricao}
+                    </p:column>
+                    
+                    <p:column headerText="Med/Enf" style="width: 10%">
+                        #{enc.idPessoaMedicoEnfermeira.pessoa.nome}
+                    </p:column>
+                    
+                    <p:column headerText="Paciente" style="width: 10%">
+                        #{enc.idPessoaPaciente.pessoa.nome}
+                    </p:column>
+                    
+                    <p:column headerText="Tipo Enc" style="width: 10%">
+                        #{enc.idtipoEncaminhamento.descricao}
+                    </p:column>
+                    
+                    <p:column headerText="Motivo Encaminhamento" style="width: 45%">
+                        <h:outputText value="#{enc.motivoEncaminhamento}" escape="false" />
+                    </p:column>
 
-            </p:dataTable>
-        </p:panel>
+                </p:dataTable>
+            </p:panel>
+        </p:fieldset>    
     </h:form>
     
 </ui:fragment>

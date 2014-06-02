@@ -11,7 +11,7 @@
             <p:growl />
             <h:inputHidden value="#{encaminhamentoManagedBean.encaminhamento.idEncaminhamento}"/>
 
-            <h:panelGrid columns="2">
+            <h:panelGrid columns="2" cellpadding="6">
                 <h:outputLabel value="Data Encaminhamento" />
                 <p:calendar value="#{encaminhamentoManagedBean.encaminhamento.dataEncaminhamento}" pattern="dd/MM/yyyy HH:mm" /> 
 
@@ -38,20 +38,22 @@
                     <f:selectItem itemLabel="Selecione o Medico ou Enfermeira" itemValue="" />
                     <f:selectItems value="#{medicoEnfermeiraManagedBean.listar()}" var="med" itemLabel="#{med.pessoa.nome}" itemValue="#{med.pessoa}" />
                 </h:selectOneMenu>
+                
+                <h:outputLabel value="Motivo Encaminhamento:" />
+                <p:editor id="editor" widgetVar="editorWidget" value="#{encaminhamentoManagedBean.encaminhamento.motivoEncaminhamento}" width="600" />
 
-                <p:commandButton
+            </h:panelGrid>
+            
+            <p:commandButton
                     value="Salvar"
                     icon="ui-icon-disk"
                     actionListener="#{encaminhamentoManagedBean.salvar()}"
-                    update="painelCadastro,:formTabela:tabela"/>
+                    update="painelCadastro,:formTabela:tabela"
+                    />
 
-                <p:commandButton
+                <p:button
                     value="Novo"
-                    icon="ui-icon-disk"
-                    actionListener="#{encaminhamentoManagedBean.novo()}"
-                    update="painelCadastro,:formTabela:tabela"/>
-
-            </h:panelGrid>
+                    icon="ui-icon-plus" outcome="index.html"/>
 
         </p:panel>
     </h:form>

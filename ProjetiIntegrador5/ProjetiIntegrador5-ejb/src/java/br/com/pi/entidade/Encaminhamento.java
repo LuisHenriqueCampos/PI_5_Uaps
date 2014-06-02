@@ -2,62 +2,60 @@ package br.com.pi.entidade;
 
 import java.io.Serializable;
 import java.util.Date;
-import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-import javax.xml.bind.annotation.XmlRootElement;
 
-/**
- *
- * @author petrovick
- */
 @Entity
 @Table(name = "encaminhamento")
-@XmlRootElement
-@NamedQueries({
-    @NamedQuery(name = "Encaminhamento.findAll", query = "SELECT e FROM Encaminhamento e"),
-    @NamedQuery(name = "Encaminhamento.findByIdEncaminhamento", query = "SELECT e FROM Encaminhamento e WHERE e.idEncaminhamento = :idEncaminhamento"),
-    @NamedQuery(name = "Encaminhamento.findByDataEncaminhamento", query = "SELECT e FROM Encaminhamento e WHERE e.dataEncaminhamento = :dataEncaminhamento")})
 public class Encaminhamento implements Serializable {
     private static final long serialVersionUID = 1L;
+    
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Basic(optional = false)
-    @Column(name = "IdEncaminhamento")
+    @Column(name = "IdEncaminhamento", nullable = false)
     private Integer idEncaminhamento;
-    @Basic(optional = false)
-    @NotNull
-    @Column(name = "DataEncaminhamento")
+
+    @NotNull(message = "O campo Data Encaminhamento não pode ser Nulo")
+    @Column(name = "DataEncaminhamento", nullable = false)
     @Temporal(TemporalType.DATE)
     private Date dataEncaminhamento;
+    
     @Lob
-    @Size(max = 65535)
+    @Size(max = 65535,message = "Máximo 65.535 caracteres")
+    @NotNull(message = "O campo Motivo do Encaminhamento não pode ser Nulo")
     @Column(name = "MotivoEncaminhamento")
     private String motivoEncaminhamento;
-    @JoinColumn(name = "IdtipoEncaminhamento", referencedColumnName = "IdtipoEncaminhamento")
-    @ManyToOne(optional = false)
+    
+    @NotNull(message = "Selecione o Tipo de Encaminhamento")
+    @JoinColumn(name = "IdtipoEncaminhamento", referencedColumnName = "IdtipoEncaminhamento", nullable = false)
+    @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private Tipoencaminhamento idtipoEncaminhamento;
+    
+    @NotNull(message = "Selecione o Paciente")
     @JoinColumn(name = "IdPessoaPaciente", referencedColumnName = "IdPessoaPaciente")
-    @ManyToOne(optional = false)
+    @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private Paciente idPessoaPaciente;
+    
+    @NotNull(message = "Selecione a Especialidade")
     @JoinColumn(name = "IdEspecialidade", referencedColumnName = "IdEspecialidade")
-    @ManyToOne(optional = false)
+    @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private EspecialidadeEncaminhamento idEspecialidade;
+    
+    @NotNull(message = "Selecione o Médico / Enfermeira Responsável pelo Encaminhamento")
     @JoinColumn(name = "IdPessoaMedicoEnfermeira", referencedColumnName = "IdPessoaMedicoEnfermeira")
-    @ManyToOne(optional = false)
+    @ManyToOne(optional = false,fetch = FetchType.LAZY)
     private Medicoenfermeira idPessoaMedicoEnfermeira;
 
     public Encaminhamento() {
@@ -147,10 +145,4 @@ public class Encaminhamento implements Serializable {
         }
         return true;
     }
-
-    @Override
-    public String toString() {
-        return "br.com.pi.entidade.Encaminhamento[ idEncaminhamento=" + idEncaminhamento + " ]";
-    }
-    
 }

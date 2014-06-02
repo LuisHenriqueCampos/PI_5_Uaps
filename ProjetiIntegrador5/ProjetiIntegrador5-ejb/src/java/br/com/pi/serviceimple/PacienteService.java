@@ -20,19 +20,35 @@ public class PacienteService implements IPacienteService
 
     @Override
     public String salvar(Paciente entity) {
-        try
+        if(entity.getPessoa().getIdPessoa() == null)
         {
-            if(entity.getPessoa().getIdPessoa()!=null){
+            TypedQuery<Paciente> pacienteQuery = em.createQuery("Select p from Paciente p WHERE p.cns = :param",Paciente.class);
+            pacienteQuery.setParameter("param", entity.getCns());
+            
+            if(pacienteQuery.getResultList().size() > 0)
+            {
+                return "Não é possível cadastrar dois pacientes com um mesmo cns";
+            }
+            
+            else
+            {
                 em.merge(entity);
-            }else{
-                em.persist(entity);
             }
         }
-        catch(Exception ex)
+        
+        else
         {
-            ex.printStackTrace();
-            return ex.getMessage();
+            try
+            {
+                em.merge(entity);
+            }
+            catch(Exception ex)
+            {
+                ex.printStackTrace();
+                return ex.getMessage();
+            }
         }
+        
         return null;
     }
 

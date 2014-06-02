@@ -7,6 +7,7 @@
 package converter;
 
 import br.com.pi.entidade.Paciente;
+import br.com.pi.entidade.Pessoaa;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
@@ -29,7 +30,10 @@ public class pacienteConverter implements Converter
         {
             Integer id = Integer.parseInt(value);
             Paciente pac = new Paciente();
+            Pessoaa pessoa = new Pessoaa();
+            pessoa.setIdPessoa(id);
             pac.setIdPessoaPaciente(id);
+            pac.setPessoa(pessoa);
             return pac;
         }
         catch(NumberFormatException ex)
@@ -44,7 +48,7 @@ public class pacienteConverter implements Converter
         if(value == null || value.getClass() != Paciente.class)
             return null;
         Paciente pac = (Paciente) value;
-        return pac.getIdPessoaPaciente().toString();
+        return pac.getPessoa().getIdPessoa().toString();
         
     }
 }

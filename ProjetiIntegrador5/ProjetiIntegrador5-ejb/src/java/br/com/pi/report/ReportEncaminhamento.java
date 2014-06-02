@@ -12,9 +12,11 @@ import com.itextpdf.text.FontFactory;
 import com.itextpdf.text.PageSize;
 import com.itextpdf.text.Paragraph;
 import com.itextpdf.text.Phrase;
+import com.itextpdf.text.html.simpleparser.HTMLWorker;
 import com.itextpdf.text.pdf.PdfPCell;
 import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfWriter;
+import java.io.StringReader;
 import java.text.DateFormat;
 import java.util.Date;
 import java.util.Locale;
@@ -80,7 +82,12 @@ public class ReportEncaminhamento
         for(Encaminhamento encaminhamento : encaminhamentos)
         {
             PdfPCell cellCodigoEncaminhamento = new PdfPCell(new Phrase(encaminhamento.getIdEncaminhamento().toString()));
-            PdfPCell cellMotivoEncaminhamento = new PdfPCell(new Phrase(encaminhamento.getMotivoEncaminhamento(), fontTexto));
+            List<Element> elements = HTMLWorker.parseToList(new StringReader(encaminhamento.getMotivoEncaminhamento()), null);
+            PdfPCell cellMotivoEncaminhamento = new PdfPCell();
+            for (Element element : elements) {
+                cellMotivoEncaminhamento.addElement(element);
+            }
+            
             PdfPCell cellDataEncaminhamento = new PdfPCell(new Phrase(DateFormat.getDateInstance(DateFormat.SHORT,ptBr).format(encaminhamento.getDataEncaminhamento()), fontTexto));
             PdfPCell cellEspecialidadencaminhamento = new PdfPCell(new Phrase(encaminhamento.getIdEspecialidade().getDescricao(), fontTexto));
             PdfPCell cellPacienteEncaminhamento = new PdfPCell(new Phrase(encaminhamento.getIdPessoaPaciente().getPessoa().getNome(), fontTexto));

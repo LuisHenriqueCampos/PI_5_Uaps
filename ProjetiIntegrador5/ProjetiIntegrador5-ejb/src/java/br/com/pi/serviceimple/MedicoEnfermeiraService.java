@@ -7,6 +7,7 @@
 package br.com.pi.serviceimple;
 
 import br.com.pi.entidade.Medicoenfermeira;
+import br.com.pi.entidade.Paciente;
 import br.com.pi.service.IMedicoEnfermeiraService;
 import java.util.List;
 import javax.ejb.Stateless;
@@ -28,19 +29,35 @@ public class MedicoEnfermeiraService implements IMedicoEnfermeiraService{
     public String salvar(Medicoenfermeira entity) {
         entity.setAssinatura(entity.getPessoa().getNome()+" - "+entity.getRegistro());
         
-        try
+        if(entity.getPessoa().getIdPessoa() == null)
         {
-            if(entity.getPessoa().getIdPessoa()!=null){
+            TypedQuery<Medicoenfermeira> medicoEnfermeiraQuery = em.createQuery("Select m from Medicoenfermeira m WHERE m.registro = :param",Medicoenfermeira.class);
+            medicoEnfermeiraQuery.setParameter("param", entity.getRegistro());
+            
+            if(medicoEnfermeiraQuery.getResultList().size() > 0)
+            {
+                return "Não é possível cadastrar dois médicos com um mesmo crm";
+            }
+            
+            else
+            {
                 em.merge(entity);
-            }else{
-                em.persist(entity);
             }
         }
-        catch(Exception ex)
+        
+        else
         {
-           ex.printStackTrace();
-           return ex.getMessage();
+            try
+            {
+                em.merge(entity);
+            }
+            catch(Exception ex)
+            {
+               ex.printStackTrace();
+               return ex.getMessage();
+            }
         }
+        
         return null;
     }
 

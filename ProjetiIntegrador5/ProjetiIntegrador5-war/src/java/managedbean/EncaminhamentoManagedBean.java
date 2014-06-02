@@ -5,6 +5,7 @@ import br.com.pi.entidade.EspecialidadeEncaminhamento;
 import br.com.pi.entidade.Medicoenfermeira;
 import br.com.pi.entidade.Tipoencaminhamento;
 import br.com.pi.entidade.Paciente;
+import br.com.pi.entidade.Pessoaa;
 import br.com.pi.report.ReportEncaminhamento;
 import br.com.pi.service.IEncaminhamentoService;
 import java.io.ByteArrayOutputStream;
@@ -17,6 +18,7 @@ import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.inject.Named;
 import javax.servlet.http.HttpServletResponse;
+import util.MenssagemUtil;
 
 /**
  *
@@ -38,35 +40,34 @@ public class EncaminhamentoManagedBean
     
     public EncaminhamentoManagedBean()
     {
-        novo();
-        reportEncaminhamento = new ReportEncaminhamento();
+        encaminhamento = new Encaminhamento();
+        encaminhamento.setDataEncaminhamento(new Date());
+        encaminhamento.setIdEspecialidade(new EspecialidadeEncaminhamento());
+        encaminhamento.setIdPessoaMedicoEnfermeira(new Medicoenfermeira());
+        Paciente p = new Paciente();
+        p.setPessoa(new Pessoaa());
+        encaminhamento.setIdPessoaPaciente(p);
+        encaminhamento.setIdtipoEncaminhamento(new Tipoencaminhamento());
         
+        reportEncaminhamento = new ReportEncaminhamento();
     }
     
     public void salvar()
     {
-        try
-        {
-            encaminhamentoService.salvar(encaminhamento);
-            novo();
-        }
-        catch(Exception ex)
-        {
-            System.out.println("" + ex.getMessage());
-        }
-    }
-    
-    public void save()
-    {
-        try
-        {
-            System.out.println("Salvar no controller");
-            
-            System.out.println("Salvou");
-        }
-        catch(Exception ex)
-        {
-            System.out.println("" + ex.getMessage());
+        System.out.println("Entrou no salvar.");
+        System.out.println("" + encaminhamento);
+        System.out.println(encaminhamento.getIdPessoaPaciente());
+        System.out.println(encaminhamento.getIdPessoaPaciente().getIdPessoaPaciente());
+        //System.out.println(encaminhamento.getIdPessoaPaciente().getPessoa().getNome());
+        System.out.println(encaminhamento.getIdPessoaPaciente().getPessoa());
+        System.out.println(encaminhamento.getMotivoEncaminhamento());
+        
+        String erro = encaminhamentoService.salvar(encaminhamento);
+        if(erro == null){
+            MenssagemUtil.addMensagemInfo("Encaminhamento Registrado com Sucesso!");
+            encaminhamento = new Encaminhamento();
+        }else{
+            MenssagemUtil.addMensagemError(erro);
         }
     }
     
@@ -77,16 +78,12 @@ public class EncaminhamentoManagedBean
     
     public void excluir()
     {
-        encaminhamentoService.excluir(encaminhamentoSelecionado);
-    }
-    
-    public void novo()
-    {
-        encaminhamento = new Encaminhamento();
-        encaminhamento.setIdEspecialidade(new EspecialidadeEncaminhamento());
-        encaminhamento.setIdPessoaMedicoEnfermeira(new Medicoenfermeira());
-        encaminhamento.setIdPessoaPaciente(new Paciente());
-        encaminhamento.setIdtipoEncaminhamento(new Tipoencaminhamento());
+        String erro = encaminhamentoService.excluir(encaminhamentoSelecionado);
+        if(erro == null){
+            MenssagemUtil.addMensagemInfo("Encaminhamento Excluído com Sucesso!");
+        }else{
+            MenssagemUtil.addMensagemError(erro);
+        }
     }
     
     public void editar()
@@ -150,25 +147,11 @@ public class EncaminhamentoManagedBean
     
     public List<Encaminhamento> listarRel()
     {
-        System.out.println("Entrou");
-        //pacPesq = pacPesq == null ? "" : pacPesq;
-        //if(pacPesq.length() == 1)
-        //{
-            System.out.println("Entrou no método");
-            System.out.println("Data Inicio:" + pesquisaDataInicio);
-            System.out.println("Data Fim   :" + pesquisaDataFim);
-            listaEncaminhamento = encaminhamentoService.listarRel(pesquisaDataInicio, pesquisaDataFim);
+        System.out.println("Entrou no método");
+        System.out.println("Data Inicio:" + pesquisaDataInicio);
+        System.out.println("Data Fim   :" + pesquisaDataFim);
+        listaEncaminhamento = encaminhamentoService.listarRel(pesquisaDataInicio, pesquisaDataFim);
             
-        //}
-        /*
-        else if(pacPesq.length() > 1)
-        {
-            return listaPaciente.stream()
-                    .filter(x -> x.getPessoa().getNome().contains(pacPesq))
-                    .map(x -> x).collect(Collectors.toList());
-            //listaPaciente = listaPaciente.stream().filter(x -> x.getPessoa().getNome().contains(pacPesq)).map(x -> x).collect(Collectors.toList());
-        }*/
-        
         System.out.println("Passou");
         for(Encaminhamento e : listaEncaminhamento)
         {

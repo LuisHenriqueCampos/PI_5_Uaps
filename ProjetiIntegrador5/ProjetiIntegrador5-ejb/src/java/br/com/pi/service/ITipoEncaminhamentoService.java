@@ -7,6 +7,7 @@
 package br.com.pi.service;
 
 import br.com.pi.entidade.Tipoencaminhamento;
+import br.com.pi.model.GraficoTipoEncaminhamentoModel;
 import java.util.List;
 
 /**
@@ -25,4 +26,6 @@ public interface ITipoEncaminhamentoService extends ICrudGeneric<Tipoencaminhame
         return null;
     }
     public List<Tipoencaminhamento> listar();
+    
+    public List<GraficoTipoEncaminhamentoModel> consultaGrafico();
 }

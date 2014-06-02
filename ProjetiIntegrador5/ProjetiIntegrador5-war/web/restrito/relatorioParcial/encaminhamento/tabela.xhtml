@@ -19,13 +19,36 @@ and open the template in the editor.
                     var="enc" id="tabela" 
                     emptyMessage="Nenhum Encaminhamento Cadastrado.">
 
-                    <p:column headerText="Código " style="width: 5%">#{enc.idEncaminhamento}</p:column>
-                    <p:column headerText="Data Encaminhamento " style="width: 10%">#{enc.dataEncaminhamento}</p:column>
-                    <p:column headerText="Especialidade " style="width: 15%">#{enc.idEspecialidade.descricao}</p:column>
-                    <p:column headerText="Médico " style="width: 15%">#{enc.idPessoaMedicoEnfermeira.assinatura}</p:column>
-                    <p:column headerText="Paciente " style="width: 15%">#{enc.idPessoaPaciente.pessoa.nome}</p:column>
-                    <p:column headerText="Tipo " style="width: 10%">#{enc.idtipoEncaminhamento.descricao}</p:column>
-                    <p:column headerText="Motivo " style="width: 30%">#{enc.motivoEncaminhamento}</p:column>
+                    <p:column headerText="Código" style="width: 5%">
+                        #{enc.idEncaminhamento}
+                    </p:column>
+                    
+                    <p:column headerText="Data Enc" style="width: 10%">
+                        <h:outputText value="#{enc.dataEncaminhamento}"> 
+                            <f:convertDateTime type="date" pattern="dd/MM/yyyy hh:mm:ss"/>
+                        </h:outputText> 
+                    </p:column>
+                    
+                    <p:column headerText="Especialidade" style="width: 10%">
+                        #{enc.idEspecialidade.descricao}
+                    </p:column>
+                    
+                    <p:column headerText="Med/Enf" style="width: 10%">
+                        #{enc.idPessoaMedicoEnfermeira.pessoa.nome}
+                    </p:column>
+                    
+                    <p:column headerText="Paciente" style="width: 10%">
+                        #{enc.idPessoaPaciente.pessoa.nome}
+                    </p:column>
+                    
+                    <p:column headerText="Tipo Enc" style="width: 10%">
+                        #{enc.idtipoEncaminhamento.descricao}
+                    </p:column>
+                    
+                    <p:column headerText="Motivo Encaminhamento" style="width: 45%">
+                        <h:outputText value="#{enc.motivoEncaminhamento}" escape="false" />
+                    </p:column>
+                    
                 </p:dataTable>
             </p:panel>
         </p:fieldset>    
